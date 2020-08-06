@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e7a9e7935534e57a9a49d716ff3338a)](https://app.codacy.com/manual/subwaymatch/gold-is?utm_source=github.com&utm_medium=referral&utm_content=subwaymatch/gold-is&utm_campaign=Badge_Grade_Dashboard)
+
 First, run the development server:
 
 ```bash
