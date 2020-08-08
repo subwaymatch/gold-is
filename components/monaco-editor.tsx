@@ -3,8 +3,10 @@ import dynamic from 'next/dynamic';
 
 const Editor = dynamic(import('@monaco-editor/react'), { ssr: false });
 
-const MonacoEditorComponent = (_) => (
-  <Editor height="90vh" language="javascript" />
-);
-
-export default MonacoEditorComponent;
+export default function MonacoEditorComponent(_) {
+  return (
+    <div style={{ backgroundColor: '#fc3' }}>
+      <Editor height="30vh" language="python" />
+    </div>
+  );
+}
