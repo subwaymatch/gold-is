@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import styles from './monaco-editor.module.scss';
+import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+
 const ControlledEditor = dynamic(
   import('@monaco-editor/react').then((mod) => mod.ControlledEditor),
   {
     ssr: false,
   }
 );
-import styles from './monaco-editor.module.scss';
-
-console.log(styles);
 
 type MonacoEditorComponentProps = {
   defaultCode: string;
@@ -18,6 +18,15 @@ export default function MonacoEditorComponent({
   defaultCode,
 }: MonacoEditorComponentProps) {
   const [editorValue, setEditorValue] = useState(defaultCode);
+  const editorRef = useRef();
+
+  const handleEditorDidMount = (_, editor) => {
+    console.log(`handleEditorDidMount`);
+
+    console.log(editor);
+
+    editorRef.current = editor;
+  };
 
   const handleEditorChange = (ev, value) => {
     console.log(`handleEditorChange`);
@@ -32,6 +41,7 @@ export default function MonacoEditorComponent({
       <ControlledEditor
         height="40vh"
         value={editorValue}
+        editorDidMount={handleEditorDidMount}
         onChange={handleEditorChange}
         language="python"
         options={{
