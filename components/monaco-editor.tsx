@@ -6,6 +6,9 @@ const ControlledEditor = dynamic(
     ssr: false,
   }
 );
+import styles from './monaco-editor.module.scss';
+
+console.log(styles);
 
 type MonacoEditorComponentProps = {
   defaultCode: string;
@@ -25,7 +28,7 @@ export default function MonacoEditorComponent({
   };
 
   return (
-    <div style={{ backgroundColor: '#fc3' }}>
+    <div className={styles.codeEditorWrapper}>
       <ControlledEditor
         height="40vh"
         value={editorValue}
@@ -38,8 +41,7 @@ export default function MonacoEditorComponent({
           minimap: {
             enabled: false,
           },
-          className: 'gold-editor',
-          wrapperClassName: 'gold-editor-wrapper',
+          extraEditorClassName: styles.codeEditor,
         }}
       />
     </div>
