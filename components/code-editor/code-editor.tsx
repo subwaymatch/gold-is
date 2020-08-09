@@ -1,8 +1,12 @@
 import React, { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import styles from './monaco-editor.module.scss';
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
-import { EditorDidMount } from '@monaco-editor/react';
+import styles from './code-editor.module.scss';
+import {
+  editor,
+  KeyMod,
+  KeyCode,
+} from 'monaco-editor/esm/vs/editor/editor.api';
+import { EditorDidMount, ControlledEditorOnChange } from '@monaco-editor/react';
 
 const ControlledEditor = dynamic(
   import('@monaco-editor/react').then((mod) => mod.ControlledEditor),
@@ -11,15 +15,17 @@ const ControlledEditor = dynamic(
   }
 );
 
-type MonacoEditorComponentProps = {
+type CodeEditorComponentProps = {
   defaultCode: string;
+  language: string;
 };
 
-export default function MonacoEditorComponent({
+export default function CodeEditorComponent({
   defaultCode,
-}: MonacoEditorComponentProps) {
-  const [editorValue, setEditorValue] = useState(defaultCode);
-  const editorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor>();
+  language,
+}: CodeEditorComponentProps) {
+  const [editorValue, setEditorValue] = useState<string>(defaultCode);
+  const editorRef = useRef<editor.IStandaloneCodeEditor>();
 
   const handleEditorDidMount: EditorDidMount = (_, editor) => {
     console.log(`handleEditorDidMount`);
@@ -29,11 +35,7 @@ export default function MonacoEditorComponent({
     editorRef.current = editor;
   };
 
-  const handleEditorChange = (ev, value) => {
-    console.log(`handleEditorChange`);
-    console.log(ev);
-    console.log(value);
-
+  const handleEditorChange: ControlledEditorOnChange = (ev, value) => {
     setEditorValue(value);
   };
 
@@ -44,7 +46,7 @@ export default function MonacoEditorComponent({
         value={editorValue}
         editorDidMount={handleEditorDidMount}
         onChange={handleEditorChange}
-        language="python"
+        language={language}
         options={{
           folding: false,
           fontSize: 19,

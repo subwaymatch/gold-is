@@ -1,4 +1,4 @@
-import MonacoEditorComponent from 'components/monaco-editor';
+import CodeEditorComponent from 'components/code-editor/code-editor';
 import Layout from 'components/layout';
 
 const defaultCode = `# Program to display the Fibonacci sequence up to n-th term
@@ -31,7 +31,7 @@ export default function MonacoEditorPage() {
       <div className="row">
         <div className="col-3">Monaco</div>
         <div className="col-9">
-          <MonacoEditorComponent defaultCode={defaultCode} />
+          <CodeEditorComponent defaultCode={defaultCode} language="python" />
         </div>
       </div>
     </Layout>
