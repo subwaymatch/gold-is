@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './monaco-editor.module.scss';
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import { EditorDidMount } from '@monaco-editor/react';
 
 const ControlledEditor = dynamic(
   import('@monaco-editor/react').then((mod) => mod.ControlledEditor),
@@ -18,9 +19,9 @@ export default function MonacoEditorComponent({
   defaultCode,
 }: MonacoEditorComponentProps) {
   const [editorValue, setEditorValue] = useState(defaultCode);
-  const editorRef = useRef();
+  const editorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor>();
 
-  const handleEditorDidMount = (_, editor) => {
+  const handleEditorDidMount: EditorDidMount = (_, editor) => {
     console.log(`handleEditorDidMount`);
 
     console.log(editor);
