@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './code-editor.module.scss';
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
@@ -11,23 +11,19 @@ const ControlledEditor = dynamic(
   }
 );
 
-type MonacoEditorComponentProps = {
+type CodeEditorComponentProps = {
   defaultCode: string;
   language: string;
 };
 
-export default function MonacoEditorComponent({
+export default function CodeEditorComponent({
   defaultCode,
   language,
-}: MonacoEditorComponentProps) {
+}: CodeEditorComponentProps) {
   const [editorValue, setEditorValue] = useState<string>(defaultCode);
   const editorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor>();
 
   const handleEditorDidMount: EditorDidMount = (_, editor) => {
-    console.log(`handleEditorDidMount`);
-
-    console.log(editor);
-
     editorRef.current = editor;
 
     // 3 == KeyCode.Enter, 2048 == KeyMod.CtrlCmd
