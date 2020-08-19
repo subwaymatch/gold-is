@@ -1,5 +1,5 @@
 import CodeEditorComponent from 'components/code-editor/code-editor';
-import Layout from 'components/Layout';
+import Layout from 'components/LayoutTemp';
 
 const defaultCode = `# Program to display the Fibonacci sequence up to n-th term
 
