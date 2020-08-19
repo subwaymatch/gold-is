@@ -10,13 +10,19 @@
   "dependencies": {
     "@monaco-editor/react": "^3.5.6",
     "classname": "^0.0.0",
+    "classnames": "^2.2.6",
+    "framer-motion": "^2.5.1",
     "monaco-editor": "^0.20.0",
     "next": "9.5.1",
-    "node-sass": "^4.14.1",
+    "next-images": "^1.4.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-icons": "^3.10.0",
+    "sass": "^1.26.10",
+    "worker-plugin": "^5.0.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.10",
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.44",
     "typescript": "^3.9.7"
