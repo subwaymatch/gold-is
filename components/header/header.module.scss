@@ -1,0 +1,26 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.headerWrapper {
+  position: relative;
+  border-bottom: 1px solid #ebebeb;
+
+  .logoImageWrapper {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    width: 3.5rem;
+    line-height: 0;
+  }
+
+  .menuItem {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    color: $color-secondary;
+
+    &:hover {
+      color: color.scale($color-secondary, $lightness: -30%);
+    }
+  }
+}

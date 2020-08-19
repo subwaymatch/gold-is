@@ -11,7 +11,9 @@ export default function Header() {
     <header className={cx('headerWrapper')}>
       <div className={cx('logoImageWrapper')}>
         <Link href="/">
-          <img src={LogoImage} className={cx('logoImage')} />
+          <a>
+            <img src={LogoImage} className={cx('logoImage')} />
+          </a>
         </Link>
       </div>
 
@@ -19,13 +21,13 @@ export default function Header() {
         <div className="row">
           <div className="col-2">
             <Link href="/">
-              <a>Datasets</a>
+              <a className={cx('menuItem')}>Datasets</a>
             </Link>
           </div>
 
           <div className="col-2">
             <Link href="/">
-              <a>Process Data</a>
+              <a className={cx('menuItem')}>Process Data</a>
             </Link>
           </div>
         </div>
