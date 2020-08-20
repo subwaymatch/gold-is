@@ -27,7 +27,10 @@ export default function Header() {
                   y: 0,
                   rotate: [0, 360],
                   transition: {
+                    delay: 0.5,
+                    duration: 1,
                     rotate: {
+                      delay: 1,
                       loop: Infinity,
                       duration: 4,
                       ease: 'linear',
