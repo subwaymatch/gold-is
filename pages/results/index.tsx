@@ -1,7 +1,10 @@
 import styles from './ResultsPage.module.scss';
 import classNames from 'classnames/bind';
 import Layout from 'components/Layout';
-import { AiOutlineFileDone } from 'react-icons/ai';
+import { AiOutlineFileDone, AiOutlineFieldNumber } from 'react-icons/ai';
+// @ts-ignore
+import { VscSymbolBoolean } from 'react-icons/vsc';
+import { BsGridFill } from 'react-icons/bs';
 
 const cx = classNames.bind(styles);
 
@@ -69,10 +72,54 @@ export default function ResultsPage() {
                         <span>Number of Rows</span>
                         <span>891</span>
                       </div>
+
+                      <div className={cx('item')}>
+                        <span>Missing Cells</span>
+                        <span>866</span>
+                      </div>
+
+                      <div className={cx('item')}>
+                        <span>Missing Cells (%)</span>
+                        <span>8.1%</span>
+                      </div>
+
+                      <div className={cx('item')}>
+                        <span>Duplicate Rows</span>
+                        <span>0</span>
+                      </div>
+
+                      <div className={cx('item')}>
+                        <span>Duplicate Rows (%)</span>
+                        <span>0.0%</span>
+                      </div>
                     </div>
 
                     <div className="col-6">
                       <h3>Variable Types</h3>
+
+                      <div className={cx('item')}>
+                        <span>
+                          <BsGridFill className={cx('icon')} />
+                          Categorical
+                        </span>
+
+                        <span>6</span>
+                      </div>
+                      <div className={cx('item')}>
+                        <span>
+                          <AiOutlineFieldNumber className={cx('icon')} />{' '}
+                          Numeric
+                        </span>
+
+                        <span>5</span>
+                      </div>
+                      <div className={cx('item')}>
+                        <span>
+                          <VscSymbolBoolean className={cx('icon')} /> Boolean
+                        </span>
+
+                        <span>1</span>
+                      </div>
                     </div>
                   </div>
                 </div>
