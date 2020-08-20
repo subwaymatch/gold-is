@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import LogoImage from 'images/gold-logo-001@2x.png';
 import classNames from 'classnames/bind';
+import { motion } from 'framer-motion';
 
 import styles from './header.module.scss';
 
@@ -12,7 +13,31 @@ export default function Header() {
       <div className={cx('logoImageWrapper')}>
         <Link href="/">
           <a>
-            <img src={LogoImage} className={cx('logoImage')} />
+            <motion.img
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 30,
+                },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  rotate: [0, 360],
+                  transition: {
+                    rotate: {
+                      loop: Infinity,
+                      duration: 4,
+                      ease: 'linear',
+                    },
+                  },
+                },
+              }}
+              src={LogoImage}
+              className={cx('logoImage')}
+            />
           </a>
         </Link>
       </div>

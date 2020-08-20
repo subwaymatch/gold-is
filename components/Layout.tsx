@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Header from 'components/header';
 
-type LayoutProps = { children: React.ReactNode };
+type LayoutProps = { children: React.ReactNode; fluid?: boolean };
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, fluid }: LayoutProps) {
   return (
     <div className="wrapper">
       <Head>
@@ -13,9 +13,13 @@ export default function Layout({ children }: LayoutProps) {
 
       <Header />
 
-      <main>
-        <div className="container">{children}</div>
-      </main>
+      {fluid ? (
+        children
+      ) : (
+        <main>
+          <div className="container">{children}</div>
+        </main>
+      )}
     </div>
   );
 }

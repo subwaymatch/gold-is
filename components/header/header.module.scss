@@ -20,7 +20,7 @@
     color: $color-secondary;
 
     &:hover {
-      color: color.scale($color-secondary, $lightness: -30%);
+      color: color.scale($color-secondary, $lightness: -50%);
     }
   }
 }

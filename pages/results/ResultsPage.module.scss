@@ -1,0 +1,20 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.resultsPage {
+  .resultsHeader {
+    padding: 2rem 0;
+
+    h1 {
+      color: $color-primary;
+      font-size: 3.6rem;
+      line-height: 1.4;
+      font-weight: 300;
+      letter-spacing: -0.03rem;
+    }
+
+    .sourceName {
+      color: $color-secondary;
+    }
+  }
+}
