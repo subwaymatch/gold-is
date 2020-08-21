@@ -7,16 +7,16 @@
 
   .logoImageWrapper {
     position: absolute;
-    top: 0.4rem;
+    top: 1rem;
     left: 1.5rem;
-    width: 3.5rem;
+    width: 5rem;
     line-height: 0;
   }
 
   .menuItem {
     display: block;
     padding: 1rem 0;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: $color-secondary;
 
     &:hover {
