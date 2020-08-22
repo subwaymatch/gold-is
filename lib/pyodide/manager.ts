@@ -1,4 +1,11 @@
+import { PyodideEnabledWindow } from 'typings/pyodide';
+
+declare let window: PyodideEnabledWindow;
+
 class PyodideManager {
+  isLoaded: boolean;
+  loadedPackages: string[];
+
   constructor() {
     this.isLoaded = false;
     this.loadedPackages = [];
@@ -20,7 +27,7 @@ class PyodideManager {
     console.log('now loading pyodide');
 
     return new Promise((resolve, reject) => {
-      languagePluginLoader.then(() => {
+      window.languagePluginLoader.then(() => {
         this.isLoaded = true;
 
         resolve();
@@ -33,7 +40,7 @@ class PyodideManager {
   async runCode(codeStr) {
     if (!this.isLoaded) await this.loadPyodide();
 
-    console.log(pyodide.runPython(codeStr));
+    console.log(window.pyodide.runPython(codeStr));
   }
 }
 
