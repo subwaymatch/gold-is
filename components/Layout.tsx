@@ -9,6 +9,8 @@ export default function Layout({ children, fluid }: LayoutProps) {
       <Head>
         <title>Gold.is</title>
         <link rel="icon" href="/favicon.ico" />
+
+        <script src="https://pyodide-cdn2.iodide.io/v0.15.0/full/pyodide.js"></script>
       </Head>
 
       <Header />
