@@ -11,12 +11,14 @@ export default function PyodideTestPage() {
 
   return (
     <Layout>
-      <div>
-        <h1>Pyodide Test</h1>
+      <div className="row">
+        <div className="col-12">
+          <h1>Pyodide Test</h1>
 
-        <textarea value={code} onChange={(e) => setCode(e.target.value)} />
+          <textarea value={code} onChange={(e) => setCode(e.target.value)} />
 
-        <button onClick={() => pyodideManager.runCode(code)}>Run Code</button>
+          <button onClick={() => pyodideManager.runCode(code)}>Run Code</button>
+        </div>
       </div>
     </Layout>
   );
