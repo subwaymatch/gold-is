@@ -33,6 +33,8 @@ sys.stderr = io.StringIO()`);
 
           this.isLoaded = true;
 
+          this.loadPackages(['pandas']);
+
           resolve();
         })
         .catch((err) => {
