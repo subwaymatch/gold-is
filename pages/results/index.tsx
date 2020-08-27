@@ -1,7 +1,7 @@
 import styles from './ResultsPage.module.scss';
 import classNames from 'classnames/bind';
 import Layout from 'components/Layout';
-import { AiOutlineFileDone, AiOutlineFieldNumber } from 'react-icons/ai';
+import { AiOutlineFileDone } from 'react-icons/ai';
 // @ts-ignore
 import { VscSymbolBoolean } from 'react-icons/vsc';
 import { BsGridFill } from 'react-icons/bs';
@@ -107,7 +107,7 @@ export default function ResultsPage() {
                       </div>
                       <div className={cx('item')}>
                         <span>
-                          <AiOutlineFieldNumber className={cx('icon')} />{' '}
+                          <span className={cx('icon')}>123</span>
                           Numeric
                         </span>
 
