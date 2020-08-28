@@ -1,42 +1,27 @@
 import { Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import classNames from 'classnames/bind';
-import pyodideManager from 'lib/pyodide/manager';
+
 import styles from './load-source.module.scss';
+import { useStore } from 'store';
 
 const cx = classNames.bind(styles);
 
-declare let pyodide: any;
-
 export default function LoadSource() {
+  const router = useRouter();
   const [csvUrl, setCsvUrl] = useState(
     'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
   );
-  const [dfHtml, setDfHtml] = useState('');
-
-  const [isPyodideReady, setIsPyodideReady] = useState(false);
+  const setSourceUrl = useStore((state) => state.setSourceUrl);
 
   useEffect(() => {
-    pyodideManager.loadPyodide().then(() => {
-      setIsPyodideReady(true);
-    });
-  }, []);
+    router.prefetch('/transform');
+  });
 
-  const loadCsv = async () => {
-    await pyodideManager.loadCsvFromUrl(csvUrl);
-
-    const df = pyodide.pyimport('df');
-
-    setDfHtml(df.head().to_html());
-
-    const summary = {
-      numColumns: 0,
-      numRows: 0,
-      numMissingCells: 0,
-    };
-
-    summary.numRows = df.shape[0];
-    summary.numColumns = df.shape[1];
+  const moveToNext = () => {
+    setSourceUrl(csvUrl);
+    router.push('/transform');
   };
 
   return (
@@ -52,15 +37,9 @@ export default function LoadSource() {
 
           <div className={styles.dropBox}>Select or Drag your file here</div>
 
-          <button
-            className={cx('nextButton')}
-            onClick={loadCsv}
-            disabled={!isPyodideReady}
-          >
+          <button className={cx('nextButton')} onClick={moveToNext}>
             Start Digging →
           </button>
-
-          <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
         </Col>
       </Row>
     </>
