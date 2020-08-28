@@ -55,8 +55,8 @@ export default function Header() {
           </Col>
 
           <Col md={3}>
-            <Link href="/">
-              <a className={cx('menuItem')}>Process Data</a>
+            <Link href="/monaco-example">
+              <a className={cx('menuItem')}>Monaco Example</a>
             </Link>
           </Col>
         </Row>

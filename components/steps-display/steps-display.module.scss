@@ -1,0 +1,36 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+
+  .numberCircle {
+    display: flex;
+    color: $color-secondary;
+    background-color: $color-light-beige;
+    align-items: center;
+    justify-content: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 3.6rem;
+    font-size: 1.5rem;
+  }
+
+  .label {
+    color: color.scale($color-secondary, $lightness: 30%);
+    margin-top: 0.5rem;
+  }
+
+  &.active {
+    .numberCircle {
+      background-color: $color-gold;
+    }
+
+    .label {
+      color: $color-dark-brown;
+    }
+  }
+}
