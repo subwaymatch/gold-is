@@ -2,6 +2,7 @@ import Link from 'next/link';
 import LogoImage from 'images/gold-logo-001@2x.png';
 import classNames from 'classnames/bind';
 import { motion } from 'framer-motion';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import styles from './header.module.scss';
 
@@ -45,21 +46,21 @@ export default function Header() {
         </Link>
       </div>
 
-      <div className="container">
-        <div className="row">
-          <div className="col-2">
-            <Link href="/">
-              <a className={cx('menuItem')}>Datasets</a>
+      <Container>
+        <Row>
+          <Col md={3}>
+            <Link href="/load">
+              <a className={cx('menuItem')}>Load File Test</a>
             </Link>
-          </div>
+          </Col>
 
-          <div className="col-2">
+          <Col md={3}>
             <Link href="/">
               <a className={cx('menuItem')}>Process Data</a>
             </Link>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </header>
   );
 }

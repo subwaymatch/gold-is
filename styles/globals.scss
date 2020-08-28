@@ -1,6 +1,7 @@
 @use 'sass:color';
 @import './variables';
-@import './grid';
+@import '~bootstrap/scss/bootstrap-grid';
+
 @import url('https://rsms.me/inter/inter.css');
 html {
   font-family: $font-sans-serif;
@@ -55,4 +56,8 @@ img {
 
 * {
   box-sizing: border-box;
+}
+
+.container {
+  background-color: seashell;
 }

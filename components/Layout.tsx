@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Header from 'components/header';
+import { Container } from 'react-bootstrap';
 
 type LayoutProps = { children: React.ReactNode; fluid?: boolean };
 
@@ -41,7 +42,7 @@ export default function Layout({ children, fluid }: LayoutProps) {
         children
       ) : (
         <main>
-          <div className="container">{children}</div>
+          <Container>{children}</Container>
         </main>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { PyodideEnabledWindow } from 'typings/pyodide';
+import qs from 'qs';
 
 declare let window: PyodideEnabledWindow;
 
@@ -25,7 +26,7 @@ class PyodideManager {
 
     return new Promise((resolve, reject) => {
       window.languagePluginLoader
-        .then(() => {
+        .then(async () => {
           // Intercept Python stdout & stderr to StringIO
           window.pyodide.runPython(`import io, sys
 sys.stdout = io.StringIO()
@@ -33,7 +34,7 @@ sys.stderr = io.StringIO()`);
 
           this.isLoaded = true;
 
-          this.loadPackages(['pandas']);
+          await this.loadPackages(['pandas', 'numpy']);
 
           resolve();
         })
@@ -45,6 +46,28 @@ sys.stderr = io.StringIO()`);
 
   async loadPackages(packages) {
     await window.pyodide.loadPackage(packages);
+  }
+
+  async loadCsvFromUrl(url) {
+    if (!this.isLoaded) {
+      await this.loadPyodide();
+    }
+
+    const urlQueryString = qs.stringify({
+      url,
+    });
+
+    const proxiedUrl = `/api/sample?${urlQueryString}`;
+
+    const codeResult = await this.runCode(`import pandas as pd
+import pyodide
+df = pd.read_csv(pyodide.open_url('${proxiedUrl}'))
+
+df.head(10)
+`);
+
+    (window as any).codeResult = codeResult;
+    console.log(codeResult);
   }
 
   async runCode(code: string, options?: RunCodeOptions) {
