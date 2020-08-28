@@ -1,0 +1,31 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: color.scale($color-gold, $lightness: 60%, $saturation: 80%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .loadMessageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img.waitImage {
+      width: 12rem;
+    }
+
+    p {
+      color: color.mix($color-dark-brown, #f3c700, 5%);
+      font-weight: 300;
+      margin-top: 1.5rem;
+      font-size: 2rem;
+    }
+  }
+}
