@@ -9,40 +9,31 @@ export default function TransformOptions() {
   const [dfHtml, setDfHtml] = useState('');
   const [summary, setSummary] = useState<any>({});
 
-  const [isPyodideReady, setIsPyodideReady] = useState(false);
-  const sourceUrl = useStore((state) => state.sourceUrl);
-
   useEffect(() => {
-    pyodideManager.loadPyodide().then(async () => {
-      setIsPyodideReady(true);
+    const df = pyodide.pyimport('df');
 
-      await pyodideManager.loadCsvFromUrl(sourceUrl);
+    setDfHtml(df.head().to_html());
 
-      const df = pyodide.pyimport('df');
+    const summary = {
+      numColumns: 0,
+      numRows: 0,
+      numMissingCells: 0,
+      missingCellsPercentage: 0,
+    };
 
-      setDfHtml(df.head().to_html());
+    summary.numRows = df.shape[0];
+    summary.numColumns = df.shape[1];
+    summary.numMissingCells = df
+      .isna()
+      .sum()
+      .reduce((a, b) => a + b);
+    summary.missingCellsPercentage =
+      summary.numMissingCells / (summary.numColumns * summary.numRows);
 
-      const summary = {
-        numColumns: 0,
-        numRows: 0,
-        numMissingCells: 0,
-        missingCellsPercentage: 0,
-      };
+    console.log(summary);
+    setSummary(summary);
 
-      summary.numRows = df.shape[0];
-      summary.numColumns = df.shape[1];
-      summary.numMissingCells = df
-        .isna()
-        .sum()
-        .reduce((a, b) => a + b);
-      summary.missingCellsPercentage =
-        summary.numMissingCells / (summary.numColumns * summary.numRows);
-
-      console.log(summary);
-      setSummary(summary);
-
-      (window as any).df = df;
-    });
+    (window as any).df = df;
   }, []);
 
   return (

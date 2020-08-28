@@ -4,11 +4,7 @@ import { useState } from 'react';
 import LoadingOverlay from 'components/loading-overlay';
 
 export default function TransformPage() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  return isLoading ? (
-    <LoadingOverlay />
-  ) : (
+  return (
     <Layout>
       <TransformOptions />
     </Layout>

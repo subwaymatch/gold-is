@@ -1,5 +1,5 @@
 import styles from './loading-overlay.module.scss';
-import WaitImage from 'images/gold-bars-yellow.png';
+import WaitImage from 'images/gold-bars-no-shades-01@2x.png';
 
 export default function LoadingOverlay() {
   return (

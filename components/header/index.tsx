@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import LogoImage from 'images/logo-image.png';
+import LogoImage from 'images/gold-logo-02@2x.png';
 import classNames from 'classnames/bind';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';

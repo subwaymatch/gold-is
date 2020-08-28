@@ -56,5 +56,11 @@
 
       box-shadow: 0 0.5rem 1rem rgba($color-secondary, 30%);
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #eee;
+      box-shadow: none;
+    }
   }
 }

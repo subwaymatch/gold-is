@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: color.scale($color-gold, $lightness: 60%, $saturation: 80%);
+  background-color: #fcf5c9;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -22,10 +22,11 @@
     }
 
     p {
-      color: color.mix($color-dark-brown, #f3c700, 5%);
-      font-weight: 300;
-      margin-top: 1.5rem;
-      font-size: 2rem;
+      color: color.scale(#fcf5c9, $lightness: -40%, $saturation: -70%);
+      font-weight: 400;
+      letter-spacing: -0.01;
+      margin-top: 1rem;
+      font-size: 1.6rem;
     }
   }
 }
