@@ -1,0 +1,60 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.loadSourceComponent {
+  .urlInput,
+  .dropBox,
+  .nextButton {
+    font-family: $font-sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: -0.03rem;
+    text-align: center;
+    padding: 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+  }
+
+  .urlInput {
+    width: 100%;
+    font-weight: 500;
+    color: color.scale($color-tertiary, $lightness: 50%);
+    box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 12%);
+
+    &:focus,
+    &:hover {
+      color: color.scale($color-tertiary, $lightness: 20%);
+      box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 32%);
+    }
+  }
+
+  .dropBox {
+    font-weight: 500;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    color: $color-tertiary;
+    background: color.scale($color-tertiary, $lightness: 80%);
+    margin-top: 3rem;
+  }
+
+  .nextButton {
+    font-weight: 700;
+    color: $color-dark-brown;
+    display: block;
+    margin-top: 3rem;
+    width: 100%;
+    cursor: pointer;
+    background-color: $color-gold;
+    box-shadow: 0 0.5rem 1rem rgba($color-secondary, 15%);
+
+    &:hover {
+      background-color: color.scale(
+        $color-gold,
+        $lightness: -4%,
+        $saturation: -4%
+      );
+
+      box-shadow: 0 0.5rem 1rem rgba($color-secondary, 30%);
+    }
+  }
+}

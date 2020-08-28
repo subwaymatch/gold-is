@@ -14,21 +14,23 @@ export default function StepsDisplay({
   currentIndex,
 }: StepsDisplayProps) {
   return (
-    <Row>
-      {steps.map((step, index) => (
-        <Col key={index}>
-          <div
-            className={cx(styles.stepItem, {
-              active: index === currentIndex,
-            })}
-          >
-            <div className={styles.numberCircle}>
-              <span className={styles.numberLabel}>{index + 1}</span>
+    <div className={styles.stepsDisplay}>
+      <Row>
+        {steps.map((step, index) => (
+          <Col key={index}>
+            <div
+              className={cx(styles.stepItem, {
+                active: index === currentIndex,
+              })}
+            >
+              <div className={styles.numberCircle}>
+                <span className={styles.numberLabel}>{index + 1}</span>
+              </div>
+              <span className={styles.label}>{step}</span>
             </div>
-            <span className={styles.label}>{step}</span>
-          </div>
-        </Col>
-      ))}
-    </Row>
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 }

@@ -1,6 +1,11 @@
 @use 'sass:color';
 @import 'styles/variables';
 
+.stepsDisplay {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
 .stepItem {
   display: flex;
   flex-direction: column;
