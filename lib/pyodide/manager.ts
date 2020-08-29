@@ -20,7 +20,10 @@ class PyodideManager {
   }
 
   async loadPyodide() {
+    console.log('pyodideManager.loadPyodide()');
+
     if (this.isLoaded) {
+      console.log('pyodide already loaded');
       return;
     }
 
@@ -81,6 +84,8 @@ except:
       await this.loadPyodide();
     }
 
+    console.log(window.pyodide.loadedPackages);
+
     // Assign default options
     options = Object.assign(
       {
@@ -114,6 +119,4 @@ sys.stderr = io.StringIO()`);
   }
 }
 
-const instance = new PyodideManager();
-
-export default instance;
+export default PyodideManager;

@@ -7,3 +7,5 @@ summary['missingCellsPercentage'] = summary['numMissingCells'] / (summary['numRo
 summary['numDuplicateRows'] = df.shape[0] - len(df.drop_duplicates())
 summary['duplicateRowsPercentage'] = summary['numDuplicateRows'] / df.shape[0]
 summary['memoryUsage'] = df.memory_usage(deep=True).sum()
+
+summary

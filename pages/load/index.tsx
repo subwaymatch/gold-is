@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
-import pyodideManager from 'lib/pyodide/manager';
+import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import { useStore } from 'store';
 
@@ -15,8 +15,18 @@ const cx = classNames.bind(styles);
 
 export default function LoadPage() {
   const router = useRouter();
+  const pyodideManager = useStore((state) => state.pyodideManager);
   const setDataFrame = useStore((state) => state.setDataFrame);
   const setSourceUrl = useStore((state) => state.setSourceUrl);
+  const setPyodideManager = useStore((state) => state.setPyodideManager);
+
+  useEffect(() => {
+    // Setting pyodide manager
+    setPyodideManager(new PyodideManager());
+  }, []);
+
+  console.log(`pyodideManager`);
+  console.log(pyodideManager);
 
   const [csvUrl, setCsvUrl] = useState(
     'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
@@ -58,6 +68,7 @@ export default function LoadPage() {
 
           <button
             className={cx('nextButton')}
+            disabled={!pyodideManager}
             onClick={() => {
               setIsWaiting(true);
             }}

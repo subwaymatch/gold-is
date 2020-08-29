@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import pyodideManager from 'lib/pyodide/manager';
 import { useStore } from 'store';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
@@ -14,6 +13,7 @@ const dfSelector = (state) => state.dataFrame;
 export default function TransformPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [summary, setSummary] = useState<any>(null);
+  const pyodideManager = useStore((state) => state.pyodideManager);
   const df = useStore(dfSelector);
   const router = useRouter();
 
@@ -23,28 +23,15 @@ export default function TransformPage() {
       return;
     }
 
+    (async () => {
+      const codeResult = await pyodideManager.runCode(generateSummaryCode);
+
+      console.log(codeResult);
+
+      setSummary(codeResult.output);
+    })();
+
     setDfHtml(df.head().to_html());
-
-    const summary = {
-      numColumns: 0,
-      numRows: 0,
-      numMissingCells: 0,
-      missingCellsPercentage: 0,
-    };
-
-    summary.numRows = df.shape[0];
-    summary.numColumns = df.shape[1];
-    summary.numMissingCells = df
-      .isna()
-      .sum()
-      .reduce((a, b) => a + b);
-    summary.missingCellsPercentage =
-      summary.numMissingCells / (summary.numColumns * summary.numRows);
-
-    console.log(summary);
-    setSummary(summary);
-
-    (window as any).df = df;
   }, []);
 
   return (
@@ -69,7 +56,6 @@ export default function TransformPage() {
           )}
         </Col>
       </Row>
-      <Row>{generateSummaryCode}</Row>
     </Layout>
   );
 }
