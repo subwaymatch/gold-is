@@ -12,6 +12,12 @@ module.exports = withImages({
         })
       );
     }
+
+    config.module.rules.push({
+      test: /\.py$/i,
+      use: 'raw-loader',
+    });
+
     return config;
   },
 });

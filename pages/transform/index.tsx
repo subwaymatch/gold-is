@@ -5,6 +5,7 @@ import pyodideManager from 'lib/pyodide/manager';
 import { useStore } from 'store';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
+import generateSummaryCode from 'python/generate-summary.py';
 
 declare let pyodide: any;
 
@@ -68,6 +69,7 @@ export default function TransformPage() {
           )}
         </Col>
       </Row>
+      <Row>{generateSummaryCode}</Row>
     </Layout>
   );
 }
