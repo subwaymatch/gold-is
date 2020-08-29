@@ -60,7 +60,7 @@ sys.stderr = io.StringIO()`);
       url,
     });
 
-    const proxiedUrl = `/api/sample?${urlQueryString}`;
+    const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
 
     const codeResult = await this.runCode(`import pandas as pd
 import pyodide

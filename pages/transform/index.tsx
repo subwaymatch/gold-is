@@ -40,6 +40,15 @@ export default function TransformPage() {
 
       <Row>
         <Col>
+          <p>
+            If you see any columns you don't want on your result set, please
+            drop them here.
+          </p>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
           <h2>First 10 Rows</h2>
           <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
         </Col>
