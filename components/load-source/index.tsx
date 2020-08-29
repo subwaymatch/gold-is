@@ -26,23 +26,19 @@ export default function LoadSource() {
   }, []);
 
   const loadCsvFromUrl = async () => {
-    setIsWaiting(true);
+    await pyodideManager.loadCsvFromUrl(csvUrl);
 
-    setTimeout(async () => {
-      await pyodideManager.loadCsvFromUrl(csvUrl);
+    const df = pyodide.pyimport('df');
 
-      const df = pyodide.pyimport('df');
+    (window as any).df = df;
 
-      (window as any).df = df;
+    console.log(df);
 
-      console.log(df);
-
-      router.push('/transform');
-    }, 100);
+    router.push('/transform');
   };
 
   return isWaiting ? (
-    <LoadingOverlay />
+    <LoadingOverlay callback={loadCsvFromUrl} />
   ) : (
     <>
       <Row className={styles.loadSourceComponent}>
@@ -59,7 +55,9 @@ export default function LoadSource() {
           <button
             className={cx('nextButton')}
             disabled={!isPyodideReady}
-            onClick={loadCsvFromUrl}
+            onClick={() => {
+              setIsWaiting(true);
+            }}
           >
             Start Digging →
           </button>
