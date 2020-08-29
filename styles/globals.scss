@@ -57,3 +57,43 @@ img {
 * {
   box-sizing: border-box;
 }
+
+table {
+  font-size: 0.92rem;
+  letter-spacing: -0.01rem;
+  font-family: $font-sans-serif;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  display: block;
+  border: none;
+
+  th {
+    font-weight: 600;
+  }
+
+  th,
+  td {
+    border: none;
+    padding: 0.3rem 0.6rem;
+    text-align: left;
+  }
+
+  thead {
+    th,
+    td {
+      border-bottom: 1px solid $color-gold;
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      th,
+      td {
+        background-color: color.scale($color-gold, $lightness: 80%);
+      }
+
+      &:hover {
+      }
+    }
+  }
+}

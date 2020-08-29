@@ -45,16 +45,16 @@
     width: 100%;
     cursor: pointer;
     background-color: $color-gold;
-    box-shadow: 0 0.5rem 1rem rgba($color-secondary, 15%);
+    box-shadow: 0 0.5rem 1rem rgba($color-secondary, 8%);
 
     &:hover {
       background-color: color.scale(
         $color-gold,
-        $lightness: -4%,
-        $saturation: -4%
+        $lightness: -3%,
+        $saturation: -3%
       );
 
-      box-shadow: 0 0.5rem 1rem rgba($color-secondary, 30%);
+      box-shadow: 0 0.5rem 1rem rgba($color-secondary, 12%);
     }
 
     &:disabled {

@@ -14,7 +14,7 @@ export default function LoadingOverlay({ callback }: LoadingOverlayProps) {
           onLoad={() => setTimeout(callback, 100)}
           className={styles.waitImage}
         />
-        <p>Rushing for gold...</p>
+        <p>Mining...</p>
       </div>
     </div>
   );

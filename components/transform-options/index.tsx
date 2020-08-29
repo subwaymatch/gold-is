@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import pyodideManager from 'lib/pyodide/manager';
@@ -5,12 +6,20 @@ import { useStore } from 'store';
 
 declare let pyodide: any;
 
+const dfSelector = (state) => state.dataFrame;
+
 export default function TransformOptions() {
   const [dfHtml, setDfHtml] = useState('');
   const [summary, setSummary] = useState<any>({});
+  const df = useStore(dfSelector);
+  const router = useRouter();
 
   useEffect(() => {
-    const df = pyodide.pyimport('df');
+    console.log(df);
+    // if (!df) {
+    //   router.push('/load');
+    //   return;
+    // }
 
     setDfHtml(df.head().to_html());
 
@@ -40,12 +49,13 @@ export default function TransformOptions() {
     <>
       <Row>
         <Col>
+          <h2>First 10 Rows</h2>
           <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
         </Col>
       </Row>
       <Row>
         <Col>
-          <h2>Summary</h2># Columns: {summary.numColumns}
+          <h2>Overview</h2># Columns: {summary.numColumns}
           <br /># Rows: {summary.numRows}
           <br /># Missing Cells: {summary.numMissingCells}
           <br /># Missing Cells Percentage: {summary.missingCellsPercentage}
