@@ -4,15 +4,13 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
+const steps = ['Load File', 'Transform', 'Analyze'];
+
 type StepsDisplayProps = {
-  steps: string[];
   currentIndex: number;
 };
 
-export default function StepsDisplay({
-  steps,
-  currentIndex,
-}: StepsDisplayProps) {
+export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
   return (
     <div className={styles.stepsDisplay}>
       <Row>

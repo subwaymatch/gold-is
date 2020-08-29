@@ -50,7 +50,7 @@ export default function TransformPage() {
 
   return (
     <Layout>
-      <StepsDisplay steps={steps} currentIndex={1} />
+      <StepsDisplay currentIndex={1} />
 
       <Row>
         <Col>

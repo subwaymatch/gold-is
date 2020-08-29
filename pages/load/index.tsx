@@ -5,7 +5,6 @@ import { Row, Col } from 'react-bootstrap';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
-import steps from 'constants/steps';
 import pyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import { useStore } from 'store';
@@ -51,7 +50,7 @@ export default function LoadPage() {
     <LoadingOverlay callback={loadCsvFromUrl} />
   ) : (
     <Layout>
-      <StepsDisplay steps={steps} currentIndex={0} />
+      <StepsDisplay currentIndex={0} />
 
       <Row className={styles.loadSourceComponent}>
         <Col>
