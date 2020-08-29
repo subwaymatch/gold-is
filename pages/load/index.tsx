@@ -18,8 +18,6 @@ export default function LoadPage() {
   const router = useRouter();
   const setDataFrame = useStore((state) => state.setDataFrame);
   const setSourceUrl = useStore((state) => state.setSourceUrl);
-  const sourceUrl = useStore((state) => state.sourceUrl);
-  const dataFrame = useStore((state) => state.dataFrame);
 
   const [isPyodideReady, setIsPyodideReady] = useState(false);
   const [csvUrl, setCsvUrl] = useState(
@@ -46,12 +44,7 @@ export default function LoadPage() {
     // For debugging purposes only
     (window as any).df = df;
 
-    setTimeout(() => {
-      console.log(`sourceUrl=${sourceUrl}`);
-      console.log(dataFrame);
-    }, 1000);
-
-    // router.push('/transform');
+    router.push('/transform');
   };
 
   return isWaiting ? (

@@ -14,11 +14,11 @@ function Controls() {
 export default function BearPage() {
   return (
     <>
-      <h1>Bear 1</h1>
+      <h1>Bear 2</h1>
       <BearCounter />
       <Controls />
-      <Link href="/bear2">
-        <a>To Bear 2</a>
+      <Link href="/bear">
+        <a>To Bear 1</a>
       </Link>
     </>
   );
