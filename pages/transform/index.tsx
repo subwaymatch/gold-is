@@ -1,11 +1,9 @@
-import TransformOptions from 'components/transform-options';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import pyodideManager from 'lib/pyodide/manager';
 import { useStore } from 'store';
 import Layout from 'components/Layout';
-import steps from 'constants/steps';
 import StepsDisplay from 'components/steps-display';
 
 declare let pyodide: any;

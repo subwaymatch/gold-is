@@ -61,9 +61,15 @@ sys.stderr = io.StringIO()`);
 
     const codeResult = await this.runCode(`import pandas as pd
 import pyodide
-df = pd.read_csv(pyodide.open_url('${proxiedUrl}'))
 
-df.head(10)
+df_original = None
+df = None
+
+try:
+  df_original = pd.read_csv(pyodide.open_url('${proxiedUrl}'))
+  df = df_original.copy()
+except:
+  print('Error opening URL')
 `);
 
     (window as any).codeResult = codeResult;

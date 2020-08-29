@@ -18,17 +18,10 @@ export default function LoadPage() {
   const setDataFrame = useStore((state) => state.setDataFrame);
   const setSourceUrl = useStore((state) => state.setSourceUrl);
 
-  const [isPyodideReady, setIsPyodideReady] = useState(false);
   const [csvUrl, setCsvUrl] = useState(
     'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
   );
   const [isWaiting, setIsWaiting] = useState(false);
-
-  useEffect(() => {
-    pyodideManager.loadPyodide().then(async () => {
-      setIsPyodideReady(true);
-    });
-  }, []);
 
   const loadCsvFromUrl = async () => {
     await pyodideManager.loadCsvFromUrl(csvUrl);
@@ -65,7 +58,6 @@ export default function LoadPage() {
 
           <button
             className={cx('nextButton')}
-            disabled={!isPyodideReady}
             onClick={() => {
               setIsWaiting(true);
             }}
