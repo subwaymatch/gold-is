@@ -10,6 +10,7 @@ import styles from './transform.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
 import ColumnSummary from 'components/data-summary/column-summary';
+import { toPercentage, toKiloBytes } from 'lib/utils';
 
 const cx = classNames.bind(styles);
 
@@ -58,15 +59,6 @@ export default function TransformPage() {
         <Container>
           <Row>
             <Col>
-              <p>
-                If you see any columns you don't want on your result set, please
-                drop them here.
-              </p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
               <h2>First 10 Rows</h2>
               <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
             </Col>
@@ -90,9 +82,7 @@ export default function TransformPage() {
                   />
                   <DipslayItem
                     label="Missing Cells (%)"
-                    value={
-                      (overview.missingCellsPercentage * 100).toFixed(2) + '%'
-                    }
+                    value={toPercentage(overview.missingCellsPercentage)}
                   />
                   <DipslayItem
                     label="Duplicate Rows"
@@ -100,13 +90,11 @@ export default function TransformPage() {
                   />
                   <DipslayItem
                     label="Duplicate Rows (%)"
-                    value={
-                      (overview.duplicateRowsPercentage * 100).toFixed(2) + '%'
-                    }
+                    value={toPercentage(overview.duplicateRowsPercentage)}
                   />
                   <DipslayItem
                     label="Memory Usage"
-                    value={(overview.memoryUsage / 1024).toFixed(2) + ' KB'}
+                    value={toKiloBytes(overview.memoryUsage)}
                   />
                 </>
               )}
