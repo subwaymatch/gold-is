@@ -22,6 +22,8 @@ export default function TransformPage() {
   const [columnsSummary, setColumnsSummary] = useState(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
+  const dropColumns = usePyodideStore((state) => state.dropColumns);
+  const addDropColumn = usePyodideStore((state) => state.addDropColumn);
   const router = useRouter();
 
   useEffect(() => {
@@ -57,6 +59,12 @@ export default function TransformPage() {
 
       <div className={cx('fluidWrapper')}>
         <Container>
+          <Row>
+            <Col md={3}>Columns to drop</Col>
+
+            <Col md={9}>{String(dropColumns)}</Col>
+          </Row>
+
           <Row>
             <Col>
               <h2>First 10 Rows</h2>
@@ -112,11 +120,19 @@ export default function TransformPage() {
               const columnSummary = columnsSummary[columnName];
 
               return (
-                <ColumnSummary
-                  columnName={columnName}
-                  key={columnName}
-                  summary={columnSummary}
-                />
+                <div key={columnName}>
+                  <button
+                    onClick={() => {
+                      addDropColumn(columnName);
+                    }}
+                  >
+                    Drop {columnName}
+                  </button>
+                  <ColumnSummary
+                    columnName={columnName}
+                    summary={columnSummary}
+                  />
+                </div>
               );
             })}
         </Container>
