@@ -2,35 +2,40 @@ import { Row, Col } from 'react-bootstrap';
 import DisplayItem from './display-item';
 import styles from './column-summary.module.scss';
 import classNames from 'classnames/bind';
+import { TColumnSummary } from 'typings/pyodide';
 
 const cx = classNames.bind(styles);
 
 type ColumnSummaryProps = {
-  summary: {
-    distinct_count: number;
-    unique_percentage: number;
-    missing_count: number;
-    missing_percentage: number;
-    infinite_count: number;
-    infinite_percentage: number;
-    mean: number;
-    min: number;
-    max: number;
-    zero_count: number;
-    zero_percentage: number;
-    memory_usage: number;
-  };
+  columnName: string;
+  summary: TColumnSummary;
 };
 
-export default function ColumnSummary({ summary }) {
+export default function ColumnSummary({
+  columnName,
+  summary,
+}: ColumnSummaryProps) {
   return (
-    <Row>
-      <Col md={6}>
-        <DisplayItem
-          label="Number of unique values"
-          value={summary.distinct_count}
-        />
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col md={4}>
+          <h3>{columnName}</h3>
+        </Col>
+
+        <Col md={4}>
+          <DisplayItem
+            label="Number of unique values"
+            value={summary.distinct_count}
+          />
+
+          <DisplayItem
+            label="Number of unique values"
+            value={summary.distinct_count}
+          />
+        </Col>
+
+        <Col md={4}></Col>
+      </Row>
+    </>
   );
 }

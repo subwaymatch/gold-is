@@ -9,6 +9,7 @@ import generateColumnsSummary from 'python/generate-columns-summary.py';
 import styles from './transform.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
+import ColumnSummary from 'components/data-summary/column-summary';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ const dfSelector = (state) => state.dataFrame;
 export default function TransformPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
+  const [columnsSummary, setColumnsSummary] = useState(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
   const router = useRouter();
@@ -36,11 +38,13 @@ export default function TransformPage() {
 
       setOverview(overviewCodeResult.output);
 
-      const columnsInfoCodeResult = await pyodideManager.runCode(
+      const columnsSummaryCodeResult = await pyodideManager.runCode(
         generateColumnsSummary
       );
 
-      console.log(columnsInfoCodeResult);
+      setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
+
+      console.log(columnsSummaryCodeResult);
     })();
 
     setDfHtml(df.head(10).to_html());
@@ -108,6 +112,25 @@ export default function TransformPage() {
               )}
             </Col>
           </Row>
+
+          <Row>
+            <Col>
+              <h2>Columns Information</h2>
+            </Col>
+          </Row>
+
+          {columnsSummary &&
+            Object.keys(columnsSummary).map((columnName) => {
+              const columnSummary = columnsSummary[columnName];
+
+              return (
+                <ColumnSummary
+                  columnName={columnName}
+                  key={columnName}
+                  summary={columnSummary}
+                />
+              );
+            })}
         </Container>
       </div>
     </Layout>
