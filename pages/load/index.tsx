@@ -21,14 +21,10 @@ export default function LoadPage() {
   const setPyodideManager = usePyodideStore((state) => state.setPyodideManager);
 
   useEffect(() => {
-    console.log(`LoadPage.useEffect() -> pyodideManager`);
-    console.log(pyodideManager);
-
     // Setting pyodide manager
     if (!pyodideManager) {
       let newManager = new PyodideManager();
 
-      console.log('Setting new pyodideManager');
       setPyodideManager(newManager);
 
       (window as any).pyodideManager = newManager;
@@ -56,7 +52,7 @@ export default function LoadPage() {
       // For debugging purposes only
       (window as any).df = df;
     } catch (ex) {
-      console.log('Errow while using pyimport');
+      console.log('Errow while importing existing dataframe');
       console.error(ex);
     }
 

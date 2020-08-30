@@ -497,7 +497,8 @@ var languagePluginLoader = new Promise((resolve, reject) => {
   }
 });
 
-if (!self.isPyodideLoaded) {
-  languagePluginLoader;
-  self.isPyodideLoaded = true;
+languagePluginLoader;
+
+if (!self.pythonLanguagePluginLoaded) {
+  self.pythonLanguagePluginLoaded = true;
 }
