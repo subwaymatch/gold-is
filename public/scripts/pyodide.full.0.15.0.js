@@ -3,8 +3,6 @@
  */
 
 var languagePluginLoader = new Promise((resolve, reject) => {
-  console.log('Running languagePluginLoader');
-
   // This is filled in by the Makefile to be either a local file or the
   // deployed location. TODO: This should be done in a less hacky
   // way.
@@ -498,8 +496,6 @@ var languagePluginLoader = new Promise((resolve, reject) => {
     });
   }
 });
-
-console.log(`self.isPyodideLoaded=${self.isPyodideLoaded}`);
 
 if (!self.isPyodideLoaded) {
   languagePluginLoader;
