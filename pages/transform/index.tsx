@@ -1,10 +1,15 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
 import generateSummaryCode from 'python/generate-summary.py';
+import styles from './transform.module.scss';
+import classNames from 'classnames/bind';
+import DipslayItem from 'components/data-summary/display-item';
+
+const cx = classNames.bind(styles);
 
 const dfSelector = (state) => state.dataFrame;
 
@@ -29,40 +34,70 @@ export default function TransformPage() {
       setSummary(codeResult.output);
     })();
 
-    setDfHtml(df.head().to_html());
+    setDfHtml(df.head(10).to_html());
   }, []);
 
   return (
-    <Layout>
+    <Layout fluid>
       <StepsDisplay currentIndex={1} />
 
-      <Row>
-        <Col>
-          <p>
-            If you see any columns you don't want on your result set, please
-            drop them here.
-          </p>
-        </Col>
-      </Row>
+      <div className={cx('fluidWrapper')}>
+        <Container>
+          <Row>
+            <Col>
+              <p>
+                If you see any columns you don't want on your result set, please
+                drop them here.
+              </p>
+            </Col>
+          </Row>
 
-      <Row>
-        <Col>
-          <h2>First 10 Rows</h2>
-          <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          {summary && (
-            <>
-              <h2>Overview</h2># Columns: {summary.numColumns}
-              <br /># Rows: {summary.numRows}
-              <br /># Missing Cells: {summary.numMissingCells}
-              <br /># Missing Cells Percentage: {summary.missingCellsPercentage}
-            </>
-          )}
-        </Col>
-      </Row>
+          <Row>
+            <Col>
+              <h2>First 10 Rows</h2>
+              <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={6}>
+              {summary && (
+                <>
+                  <DipslayItem label="Number of Rows" value={summary.numRows} />
+                  <DipslayItem
+                    label="Number of Columns"
+                    value={summary.numCols}
+                  />
+                  <DipslayItem
+                    label="Missing Cells"
+                    value={summary.numMissingCells}
+                  />
+                  <DipslayItem
+                    label="Missing Cells (%)"
+                    value={
+                      (summary.missingCellsPercentage * 100).toFixed(2) + '%'
+                    }
+                  />
+                  <DipslayItem
+                    label="Duplicate Rows"
+                    value={summary.numDuplicateRows}
+                  />
+                  <DipslayItem
+                    label="Duplicate Rows (%)"
+                    value={
+                      (summary.duplicateRowsPercentage * 100).toFixed(2) + '%'
+                    }
+                  />
+                  <DipslayItem
+                    label="Memory Usage"
+                    value={(summary.memoryUsage / 1000).toFixed(2) + ' KB'}
+                  />
+                </>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </Layout>
   );
 }

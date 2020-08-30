@@ -81,7 +81,7 @@ table {
   thead {
     th,
     td {
-      border-bottom: 1px solid $color-gold;
+      border-bottom: 1px solid rgba(black, 6%);
     }
   }
 
@@ -89,7 +89,7 @@ table {
     tr:nth-child(odd) {
       th,
       td {
-        background-color: color.scale($color-gold, $lightness: 80%);
+        background-color: rgba(black, 2%);
       }
 
       &:hover {

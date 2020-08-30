@@ -1,12 +1,17 @@
 import Head from 'next/head';
 import Header from 'components/header';
 import { Container } from 'react-bootstrap';
+import classNames from 'classnames';
 
-type LayoutProps = { children: React.ReactNode; fluid?: boolean };
+type LayoutProps = {
+  children: React.ReactNode;
+  className?: string;
+  fluid?: boolean;
+};
 
-export default function Layout({ children, fluid }: LayoutProps) {
+export default function Layout({ children, className, fluid }: LayoutProps) {
   return (
-    <div className="wrapper">
+    <div className={classNames('wrapper', className)}>
       <Head>
         <title>Gold.is</title>
         <link rel="icon" href="/favicon.ico" />
