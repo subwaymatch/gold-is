@@ -1,10 +1,14 @@
 import create from 'zustand';
 
-export const useStore = create((set) => ({
+const usePyodideStore = create((set) => ({
+  isBootstrapped: false,
+  setIsBootstrapped: () => set({ isBoostrapped: true }),
   pyodideManager: null,
-  sourceUrl: '',
-  dataFrame: null,
   setPyodideManager: (pyodideManager) => set({ pyodideManager }),
+  sourceUrl: '',
   setSourceUrl: (url) => set({ sourceUrl: url }),
+  dataFrame: null,
   setDataFrame: (dataFrame) => set({ dataFrame }),
 }));
+
+export default usePyodideStore;

@@ -7,7 +7,7 @@ import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
 import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
-import { useStore } from 'store';
+import usePyodideStore from 'stores/pyodide';
 
 declare let pyodide: any;
 
@@ -15,18 +15,25 @@ const cx = classNames.bind(styles);
 
 export default function LoadPage() {
   const router = useRouter();
-  const pyodideManager = useStore((state) => state.pyodideManager);
-  const setDataFrame = useStore((state) => state.setDataFrame);
-  const setSourceUrl = useStore((state) => state.setSourceUrl);
-  const setPyodideManager = useStore((state) => state.setPyodideManager);
+  const pyodideManager = usePyodideStore((state) => state.pyodideManager);
+  const setDataFrame = usePyodideStore((state) => state.setDataFrame);
+  const setSourceUrl = usePyodideStore((state) => state.setSourceUrl);
+  const setPyodideManager = usePyodideStore((state) => state.setPyodideManager);
 
   useEffect(() => {
-    // Setting pyodide manager
-    setPyodideManager(new PyodideManager());
-  }, []);
+    console.log(`LoadPage.useEffect() -> pyodideManager`);
+    console.log(pyodideManager);
 
-  console.log(`pyodideManager`);
-  console.log(pyodideManager);
+    // Setting pyodide manager
+    if (!pyodideManager) {
+      let newManager = new PyodideManager();
+
+      console.log('Setting new pyodideManager');
+      setPyodideManager(newManager);
+
+      (window as any).pyodideManager = newManager;
+    }
+  }, []);
 
   const [csvUrl, setCsvUrl] = useState(
     'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
@@ -38,13 +45,22 @@ export default function LoadPage() {
 
     setSourceUrl(csvUrl);
 
-    const df = pyodide.pyimport('df');
+    let df;
 
-    setDataFrame(df);
+    try {
+      df = pyodide.pyimport('df');
 
-    // TODO: Remove code in production
-    // For debugging purposes only
-    (window as any).df = df;
+      setDataFrame(df);
+
+      // TODO: Remove code in production
+      // For debugging purposes only
+      (window as any).df = df;
+    } catch (ex) {
+      console.log('Errow while using pyimport');
+      console.error(ex);
+    }
+
+    (window as any).router = router;
 
     router.push('/transform');
   };

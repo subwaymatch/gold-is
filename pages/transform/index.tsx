@@ -1,20 +1,18 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { useStore } from 'store';
+import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
 import generateSummaryCode from 'python/generate-summary.py';
-
-declare let pyodide: any;
 
 const dfSelector = (state) => state.dataFrame;
 
 export default function TransformPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [summary, setSummary] = useState<any>(null);
-  const pyodideManager = useStore((state) => state.pyodideManager);
-  const df = useStore(dfSelector);
+  const pyodideManager = usePyodideStore((state) => state.pyodideManager);
+  const df = usePyodideStore(dfSelector);
   const router = useRouter();
 
   useEffect(() => {

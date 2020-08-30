@@ -33,7 +33,9 @@ export default function Layout({ children, fluid }: LayoutProps) {
         <meta name="msapplication-TileColor" content="#eeeeee" />
         <meta name="theme-color" content="#ffffff" />
 
-        <script src="https://pyodide-cdn2.iodide.io/v0.15.0/full/pyodide.js"></script>
+        {typeof window !== 'undefined' && !(window as any).isPyodideLoaded && (
+          <script src="/scripts/pyodide.full.0.15.0.js" />
+        )}
       </Head>
 
       <Header />

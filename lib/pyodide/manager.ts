@@ -9,9 +9,12 @@ type RunCodeOptions = {
 
 class PyodideManager {
   isLoaded: boolean;
+  initialGlobalKeys: string[];
+  pyodide: any;
 
   constructor() {
     this.isLoaded = false;
+    this.initialGlobalKeys = [];
 
     // Only run if in browser
     if (typeof window !== 'undefined') {
@@ -30,8 +33,16 @@ class PyodideManager {
     return new Promise((resolve, reject) => {
       window.languagePluginLoader
         .then(async () => {
+          this.pyodide = window.pyodide;
+
+          this.initialGlobalKeys = this.pyodide.globals;
+
+          console.log(`pyodideManager.initialGlobalKeys`);
+          console.log(this.initialGlobalKeys);
+
           // Intercept Python stdout & stderr to StringIO
-          window.pyodide.runPython(`import io, sys
+          this.pyodide.runPython(`import io, sys
+import pyodide
 sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()`);
 
@@ -42,13 +53,22 @@ sys.stderr = io.StringIO()`);
           resolve();
         })
         .catch((err) => {
+          console.error(err);
           reject(err);
         });
     });
   }
 
   async loadPackages(packages) {
-    await window.pyodide.loadPackage(packages);
+    await this.pyodide.loadPackage(packages);
+  }
+
+  async getLoadedPackages() {
+    if (!this.isLoaded) {
+      await this.loadPyodide();
+    }
+
+    return Object.keys(this.pyodide.loadedPackages);
   }
 
   async loadCsvFromUrl(url) {
@@ -62,8 +82,9 @@ sys.stderr = io.StringIO()`);
 
     const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
 
+    console.log(`loadCsvFromUrl(proxiedUrl=${proxiedUrl})`);
+
     const codeResult = await this.runCode(`import pandas as pd
-import pyodide
 
 df_original = None
 df = None
@@ -84,25 +105,25 @@ except:
       await this.loadPyodide();
     }
 
-    console.log(window.pyodide.loadedPackages);
+    console.log(`loadedPackages: ${Object.keys(this.pyodide.loadedPackages)}`);
 
     // Assign default options
     options = Object.assign(
       {
-        reset: true,
+        reset: false,
       },
       options
     );
 
     try {
       if (options.reset === true) {
-        window.pyodide.runPython(`sys.stdout = io.StringIO()
+        this.pyodide.runPython(`sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()`);
       }
 
-      const output = window.pyodide.runPython(code);
-      const stdout = window.pyodide.runPython('sys.stdout.getvalue()');
-      const stderr = window.pyodide.runPython('sys.stderr.getvalue()');
+      const output = this.pyodide.runPython(code);
+      const stdout = this.pyodide.runPython('sys.stdout.getvalue()');
+      const stderr = this.pyodide.runPython('sys.stderr.getvalue()');
 
       return {
         hasError: false,
