@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 export default function Header() {
   return (
     <header className={cx('headerWrapper')}>
-      <div className={cx('logoImageWrapper')}>
+      <div className={cx('logoWrapper')}>
         <Link href="/">
           <a>
             <motion.img
@@ -42,25 +42,36 @@ export default function Header() {
               src={LogoImage}
               className={cx('logoImage')}
             />
+
+            <span className={cx('siteTitle')}>Gold</span>
           </a>
         </Link>
       </div>
 
-      <Container>
-        <Row>
-          <Col md={3}>
+      <Row>
+        <Col md={{ span: 8, offset: 4 }}>
+          <div className={cx('headerMenu')}>
             <Link href="/load">
-              <a className={cx('menuItem')}>Load File Test</a>
+              <a className={cx('menuItem')}>Start Digging →</a>
             </Link>
-          </Col>
 
-          <Col md={3}>
+            <Link href="/">
+              <a className={cx('menuItem')}>About</a>
+            </Link>
+
             <Link href="/monaco-example">
               <a className={cx('menuItem')}>Monaco Example</a>
             </Link>
-          </Col>
-        </Row>
-      </Container>
+
+            <a
+              href="https://github.com/subwaymatch/gold-is"
+              className={cx('menuItem')}
+            >
+              GitHub
+            </a>
+          </div>
+        </Col>
+      </Row>
     </header>
   );
 }

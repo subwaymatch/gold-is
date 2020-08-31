@@ -30,27 +30,27 @@ export default function SelectPage() {
     if (!df) {
       router.push('/load');
       return;
+    } else {
+      (async () => {
+        const overviewCodeResult = await pyodideManager.runCode(
+          generateOverviewCode
+        );
+
+        console.log(overviewCodeResult);
+
+        setOverview(overviewCodeResult.output);
+
+        const columnsSummaryCodeResult = await pyodideManager.runCode(
+          generateColumnsSummary
+        );
+
+        setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
+
+        console.log(columnsSummaryCodeResult);
+      })();
+
+      setDfHtml(df.head(10).to_html());
     }
-
-    (async () => {
-      const overviewCodeResult = await pyodideManager.runCode(
-        generateOverviewCode
-      );
-
-      console.log(overviewCodeResult);
-
-      setOverview(overviewCodeResult.output);
-
-      const columnsSummaryCodeResult = await pyodideManager.runCode(
-        generateColumnsSummary
-      );
-
-      setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
-
-      console.log(columnsSummaryCodeResult);
-    })();
-
-    setDfHtml(df.head(10).to_html());
   }, []);
 
   return (

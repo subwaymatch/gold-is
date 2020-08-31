@@ -19,54 +19,62 @@ export default function ColumnSummary({
   return (
     <div className={cx('columnBox')}>
       <Row>
-        <Col md={12}>
+        <Col md={6}>
           <h3>{columnName}</h3>
         </Col>
       </Row>
 
       <Row>
         <Col md={6}>
-          <DisplayItem label="distinct_count" value={summary.distinct_count} />
+          <DisplayItem label="Data Type" value={summary.data_type} />
+
+          <DisplayItem label="Distinct Count" value={summary.distinct_count} />
 
           <DisplayItem
-            label="unique_percentage"
+            label="Unique %"
             value={toPercentage(summary.unique_percentage)}
           />
-          <DisplayItem label="missing_count" value={summary.missing_count} />
           <DisplayItem
-            label="missing_percentage"
+            label="Missing Values Count"
+            value={summary.missing_count}
+          />
+          <DisplayItem
+            label="Missing Values %"
             value={toPercentage(summary.missing_percentage)}
           />
-          <DisplayItem label="infinite_count" value={summary.infinite_count} />
+          <DisplayItem
+            label="Infinite Values Count"
+            value={summary.infinite_count}
+          />
 
           <DisplayItem
-            label="infinite_percentage"
+            label="Infinite Values %"
             value={toPercentage(summary.infinite_percentage)}
           />
         </Col>
 
         <Col md={6}>
           {typeof summary.mean === 'number' && (
-            <DisplayItem label="mean" value={formatNumber(summary.mean)} />
+            <DisplayItem label="Mean" value={formatNumber(summary.mean)} />
           )}
 
           {typeof summary.min === 'number' && (
-            <DisplayItem label="min" value={formatNumber(summary.min)} />
+            <DisplayItem label="Min" value={formatNumber(summary.min)} />
           )}
 
           {typeof summary.max === 'number' && (
-            <DisplayItem label="max" value={formatNumber(summary.max)} />
+            <DisplayItem label="Max" value={formatNumber(summary.max)} />
           )}
 
-          <DisplayItem label="zero_count" value={summary.zero_count} />
+          <DisplayItem label="Zeros" value={summary.zero_count} />
 
           <DisplayItem
-            label="zero_percentage"
+            label="Zeros %"
             value={toPercentage(summary.zero_percentage)}
           />
 
           <DisplayItem
-            label="memory_usage"
+            label="Column Memory Usage"
             value={toKiloBytes(summary.memory_usage)}
           />
         </Col>

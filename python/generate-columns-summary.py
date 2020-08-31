@@ -1,6 +1,6 @@
 import numpy as np
 
-data_type = df.dtypes
+data_type = df.dtypes.astype(str)
 distinct_count = df.nunique()
 unique_percentage = distinct_count / df.shape[0]
 is_unique = distinct_count == df.shape[0]
@@ -16,7 +16,7 @@ zero_count = df.isin([0]).sum()
 zero_percentage = zero_count / df.shape[0]
 
 columns_summary = pd.DataFrame({
-    'type': data_type,
+    'data_type': data_type,
     'distinct_count': distinct_count,
     'unique_percentage': unique_percentage,
     'is_unique': is_unique,
@@ -33,5 +33,4 @@ columns_summary = pd.DataFrame({
 })
 
 columns_summary = columns_summary.transpose()
-
 columns_summary

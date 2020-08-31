@@ -1,14 +1,20 @@
+@use 'sass:color';
+@import 'styles/variables';
+
 .displayItem {
   display: flex;
   align-items: center;
   border-top: 1px solid rgba(black, 6%);
   font-size: 1.05rem;
+  letter-spacing: -0.01rem;
 
   .label {
     flex: 3;
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
+    color: $color-dark-brown;
+    color: color.mix($color-dark-brown, $color-primary, 80%);
 
     .iconWrapper {
       margin-right: 0.5rem;

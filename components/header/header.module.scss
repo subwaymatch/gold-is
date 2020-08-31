@@ -3,20 +3,45 @@
 
 .headerWrapper {
   position: relative;
-  border-bottom: 1px solid #ebebeb;
 
-  .logoImageWrapper {
+  .logoWrapper {
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    width: 5rem;
-    line-height: 0;
+    top: -3rem;
+    left: -3rem;
+
+    & > a {
+      display: flex;
+      align-items: center;
+    }
+
+    .logoImage {
+      width: 10rem;
+    }
+
+    .siteTitle {
+      display: block;
+      margin-top: 1rem;
+      margin-left: 1.5rem;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 1rem;
+      text-transform: uppercase;
+      color: color.scale($color-primary, $lightness: -30%);
+    }
+  }
+
+  .headerMenu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 1rem;
   }
 
   .menuItem {
-    display: block;
-    padding: 1rem 0;
-    font-size: 1.1rem;
+    display: inline-block;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.01rem;
     color: $color-secondary;
 
     &:hover {

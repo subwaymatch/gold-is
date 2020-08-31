@@ -5,6 +5,7 @@ export interface PyodideEnabledWindow extends Window {
 }
 
 export type TColumnSummary = {
+  data_type: string;
   distinct_count: number;
   unique_percentage: number;
   missing_count: number;
