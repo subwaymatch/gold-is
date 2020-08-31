@@ -3,7 +3,7 @@ import DisplayItem from './display-item';
 import styles from './column-summary.module.scss';
 import classNames from 'classnames/bind';
 import { TColumnSummary } from 'typings/pyodide';
-import { toPercentage, toKiloBytes } from 'lib/utils';
+import { toPercentage, toKiloBytes, formatNumber } from 'lib/utils';
 
 const cx = classNames.bind(styles);
 
@@ -46,11 +46,17 @@ export default function ColumnSummary({
         </Col>
 
         <Col md={6}>
-          <DisplayItem label="mean" value={summary.mean} />
+          {typeof summary.mean === 'number' && (
+            <DisplayItem label="mean" value={formatNumber(summary.mean)} />
+          )}
 
-          <DisplayItem label="min" value={summary.min} />
+          {typeof summary.min === 'number' && (
+            <DisplayItem label="min" value={formatNumber(summary.min)} />
+          )}
 
-          <DisplayItem label="max" value={summary.max} />
+          {typeof summary.max === 'number' && (
+            <DisplayItem label="max" value={formatNumber(summary.max)} />
+          )}
 
           <DisplayItem label="zero_count" value={summary.zero_count} />
 

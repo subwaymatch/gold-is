@@ -6,7 +6,7 @@ import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
 import generateOverviewCode from 'python/generate-overview.py';
 import generateColumnsSummary from 'python/generate-columns-summary.py';
-import styles from './transform.module.scss';
+import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
 import ColumnSummary from 'components/data-summary/column-summary';
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 const dfSelector = (state) => state.dataFrame;
 
-export default function TransformPage() {
+export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
   const [columnsSummary, setColumnsSummary] = useState(null);

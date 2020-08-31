@@ -1,14 +1,14 @@
 .displayItem {
   display: flex;
   align-items: center;
-  border-top: 1px solid rgba(black, 10%);
+  border-top: 1px solid rgba(black, 6%);
   font-size: 1.05rem;
 
   .label {
     flex: 3;
     display: flex;
     align-items: center;
-    padding: 0.2rem 0;
+    padding: 0.5rem 0;
 
     .iconWrapper {
       margin-right: 0.5rem;

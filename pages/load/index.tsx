@@ -58,7 +58,7 @@ export default function LoadPage() {
 
     (window as any).router = router;
 
-    router.push('/transform');
+    router.push('/select');
   };
 
   return isWaiting ? (
