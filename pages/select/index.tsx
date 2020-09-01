@@ -44,7 +44,9 @@ export default function SelectPage() {
 
   return (
     <Layout fluid>
-      <StepsDisplay currentIndex={1} />
+      <Container>
+        <StepsDisplay currentIndex={1} />
+      </Container>
 
       <div className={cx('fluidWrapper')}>
         <Container>

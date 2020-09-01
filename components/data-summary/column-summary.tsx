@@ -4,6 +4,11 @@ import styles from './column-summary.module.scss';
 import classNames from 'classnames/bind';
 import { TColumnSummary } from 'typings/pyodide';
 import { toPercentage, toKiloBytes, formatNumber } from 'lib/utils';
+import dynamic from 'next/dynamic';
+
+const ColumnPlots = dynamic(import('./column-plots'), {
+  ssr: false,
+});
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +16,11 @@ type ColumnSummaryProps = {
   columnName: string;
   summary: TColumnSummary;
 };
+
+var x = [];
+for (var i = 0; i < 500; i++) {
+  x[i] = Math.random();
+}
 
 export default function ColumnSummary({
   columnName,
@@ -79,6 +89,8 @@ export default function ColumnSummary({
           />
         </Col>
       </Row>
+
+      <ColumnPlots />
     </div>
   );
 }
