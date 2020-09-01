@@ -3,6 +3,7 @@
 
 .headerWrapper {
   position: relative;
+  border-bottom: 4px dotted color.scale($color-secondary, $lightness: 92%);
 
   .logoWrapper {
     position: absolute;
@@ -20,7 +21,7 @@
 
     .siteTitle {
       display: block;
-      margin-top: 1rem;
+      margin-top: 0.64rem;
       margin-left: 1.5rem;
       font-size: 2rem;
       font-weight: 900;
@@ -41,8 +42,8 @@
     display: inline-flex;
     align-items: center;
     padding: 1.2rem 1.5rem;
-    font-size: 1.3rem;
-    letter-spacing: -0.01rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.02rem;
 
     .icon {
       color: color.scale($color-secondary, $lightness: 60%);
@@ -52,16 +53,6 @@
     .label {
       color: $color-secondary;
       display: inline-block;
-      position: relative;
-
-      .underline {
-        position: absolute;
-        z-index: -1;
-        bottom: -4px;
-        width: 100%;
-        height: 2px;
-        background-color: rgba($color-secondary, 10%);
-      }
     }
 
     &:hover {
@@ -71,11 +62,6 @@
 
       .label {
         color: color.scale($color-secondary, $lightness: -50%);
-
-        .underline {
-          height: 4px;
-          background-color: $color-gold;
-        }
       }
     }
   }
