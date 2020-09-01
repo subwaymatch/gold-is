@@ -1,6 +1,12 @@
 @use 'sass:color';
 @import 'styles/variables';
 
+.fluidWrapper {
+  background: color.scale($color-tertiary, $lightness: 95%);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
 .loadSourceComponent {
   .urlInput,
   .dropBox,
@@ -15,46 +21,77 @@
     outline: none;
   }
 
+  label {
+    font-size: 1.4rem;
+    letter-spacing: -0.01rem;
+    color: color.scale($color-tertiary, $lightness: 40%);
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
   .urlInput {
     width: 100%;
     font-weight: 500;
-    color: color.scale($color-tertiary, $lightness: 50%);
-    box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 12%);
+    color: color.scale($color-tertiary, $lightness: 30%);
+    box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 10%);
 
     &:focus,
     &:hover {
-      color: color.scale($color-tertiary, $lightness: 20%);
-      box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 32%);
+      color: color.scale($color-tertiary, $lightness: 10%);
+      box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 20%);
     }
   }
 
-  .dropBox {
-    font-weight: 500;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    color: $color-tertiary;
-    background: color.scale($color-tertiary, $lightness: 80%);
-    margin-top: 3rem;
+  .dropBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .orDisplay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -1rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 8rem;
+      color: $color-tertiary;
+      background-color: white;
+
+      color: color.scale($color-tertiary, $lightness: -20%);
+      background-color: $color-tertiary;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .dropBox {
+      width: 100%;
+      font-weight: 500;
+      margin-top: 2rem;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      color: color.scale($color-tertiary, $lightness: 30%);
+      background: color.scale($color-tertiary, $lightness: 90%);
+      border: 1px solid color.scale($color-tertiary, $lightness: 70%);
+    }
   }
 
   .nextButton {
     font-weight: 700;
-    color: $color-dark-brown;
     display: block;
     margin-top: 3rem;
     width: 100%;
     cursor: pointer;
-    background-color: $color-gold;
-    box-shadow: 0 0.5rem 1rem rgba($color-secondary, 8%);
+    color: white;
+    background-color: $color-tertiary;
+    box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 20%);
 
     &:hover {
-      background-color: color.scale(
-        $color-gold,
-        $lightness: -3%,
-        $saturation: -3%
-      );
-
-      box-shadow: 0 0.5rem 1rem rgba($color-secondary, 12%);
+      background-color: color.scale($color-tertiary, $lightness: -5%);
+      box-shadow: 0 0.5rem 2rem rgba($color-tertiary, 40%);
     }
 
     &:disabled {

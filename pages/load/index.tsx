@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames/bind';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
@@ -64,31 +64,46 @@ export default function LoadPage() {
   return isWaiting ? (
     <LoadingOverlay callback={loadCsvFromUrl} />
   ) : (
-    <Layout>
-      <StepsDisplay currentIndex={0} />
+    <Layout fluid>
+      <Container>
+        <StepsDisplay currentIndex={0} />
+      </Container>
 
-      <Row className={styles.loadSourceComponent}>
-        <Col>
-          <input
-            type="text"
-            className={cx('urlInput')}
-            onChange={(e) => setCsvUrl(e.target.value)}
-            value={csvUrl}
-          />
+      <div className={cx('fluidWrapper')}>
+        <Container>
+          <Row className={styles.loadSourceComponent}>
+            <Col>
+              <label>URL to your CSV file</label>
+              <input
+                type="text"
+                className={cx('urlInput')}
+                onChange={(e) => setCsvUrl(e.target.value)}
+                value={csvUrl}
+              />
 
-          <div className={styles.dropBox}>Select or Drag your file here</div>
+              <div className={styles.dropBoxWrapper}>
+                <div className={styles.orDisplay}>
+                  <span>OR</span>
+                </div>
 
-          <button
-            className={cx('nextButton')}
-            disabled={!pyodideManager}
-            onClick={() => {
-              setIsWaiting(true);
-            }}
-          >
-            Start Digging →
-          </button>
-        </Col>
-      </Row>
+                <div className={styles.dropBox}>
+                  Select or Drag your file here
+                </div>
+              </div>
+
+              <button
+                className={cx('nextButton')}
+                disabled={!pyodideManager}
+                onClick={() => {
+                  setIsWaiting(true);
+                }}
+              >
+                Start Digging →
+              </button>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </Layout>
   );
 }

@@ -3,6 +3,8 @@ import LogoImage from 'images/gold-logo-02@2x.png';
 import classNames from 'classnames/bind';
 import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
+import { GiDigDug } from 'react-icons/gi';
+import { FiGithub } from 'react-icons/fi';
 
 import styles from './header.module.scss';
 
@@ -52,22 +54,24 @@ export default function Header() {
         <Col md={{ span: 8, offset: 4 }}>
           <div className={cx('headerMenu')}>
             <Link href="/load">
-              <a className={cx('menuItem')}>Start Digging →</a>
-            </Link>
-
-            <Link href="/">
-              <a className={cx('menuItem')}>About</a>
-            </Link>
-
-            <Link href="/monaco-example">
-              <a className={cx('menuItem')}>Monaco Example</a>
+              <a className={cx('menuItem', 'menuItemStart')}>
+                <GiDigDug className={cx('icon')} />
+                <div className={cx('label')}>
+                  <div className={cx('underline')} />
+                  Start Digging
+                </div>
+              </a>
             </Link>
 
             <a
               href="https://github.com/subwaymatch/gold-is"
-              className={cx('menuItem')}
+              className={cx('menuItem', 'menuItemGithub')}
             >
-              GitHub
+              <FiGithub className={cx('icon')} />
+              <div className={cx('label')}>
+                <div className={cx('underline')} />
+                GitHub
+              </div>
             </a>
           </div>
         </Col>

@@ -25,16 +25,18 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
         {steps.map((step, index) => (
           <Col key={index}>
             <Link href={step.href}>
-              <a
+              <div
                 className={cx(styles.stepItem, {
                   active: index === currentIndex,
                 })}
               >
-                <div className={styles.numberCircle}>
-                  <span className={styles.numberLabel}>{index + 1}</span>
-                </div>
-                <span className={styles.label}>{step.label}</span>
-              </a>
+                <a>
+                  <div className={styles.numberCircle}>
+                    <span className={styles.numberLabel}>{index + 1}</span>
+                  </div>
+                  <span className={styles.label}>{step.label}</span>
+                </a>
+              </div>
             </Link>
           </Col>
         ))}

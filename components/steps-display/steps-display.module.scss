@@ -10,33 +10,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-weight: 700;
-  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
   .numberCircle {
     display: flex;
-    color: $color-secondary;
-    background-color: $color-light-beige;
+    color: color.scale($color-tertiary, $lightness: 40%, $saturation: -90%);
+    background-color: color.scale(
+      $color-tertiary,
+      $lightness: 85%,
+      $saturation: -80%
+    );
+
     align-items: center;
     justify-content: center;
     width: 3.6rem;
     height: 3.6rem;
     border-radius: 3.6rem;
-    font-size: 1.5rem;
+    margin-right: 1rem;
   }
 
   .label {
-    color: color.scale($color-secondary, $lightness: 30%);
-    margin-top: 0.5rem;
+    color: color.scale($color-tertiary, $lightness: 70%, $saturation: -80%);
   }
 
   &.active {
     .numberCircle {
-      background-color: $color-gold;
+      color: white;
+      background-color: $color-tertiary;
     }
 
     .label {
-      color: $color-dark-brown;
+      color: color.scale($color-tertiary, $lightness: -80%);
     }
   }
 }
