@@ -1,132 +1,82 @@
-import styles from './ResultsPage.module.scss';
-import classNames from 'classnames/bind';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
-import { AiOutlineFileDone } from 'react-icons/ai';
-// @ts-ignore
-import { VscSymbolBoolean } from 'react-icons/vsc';
-import { BsGridFill } from 'react-icons/bs';
+import StepsDisplay from 'components/steps-display';
+import generateOverviewCode from 'python/generate-overview.py';
+import generateColumnsSummary from 'python/generate-columns-summary.py';
+import styles from './results-page.module.scss';
+import classNames from 'classnames/bind';
+import DipslayItem from 'components/data-summary/display-item';
+import ColumnSummary from 'components/data-summary/column-summary';
+import { toPercentage, toKiloBytes } from 'lib/utils';
 
 const cx = classNames.bind(styles);
 
-export default function ResultsPage() {
+const dfSelector = (state) => state.dataFrame;
+
+export default function SelectPage() {
+  const [dfHtml, setDfHtml] = useState('');
+  const [overview, setOverview] = useState<any>(null);
+  const [columnsSummary, setColumnsSummary] = useState(null);
+  const pyodideManager = usePyodideStore((state) => state.pyodideManager);
+  const df = usePyodideStore(dfSelector);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!df) {
+      router.push('/load');
+      return;
+    } else {
+      (async () => {
+        const overviewCodeResult = await pyodideManager.runCode(
+          generateOverviewCode
+        );
+
+        console.log(overviewCodeResult);
+
+        setOverview(overviewCodeResult.output);
+
+        const columnsSummaryCodeResult = await pyodideManager.runCode(
+          generateColumnsSummary
+        );
+
+        setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
+
+        console.log(columnsSummaryCodeResult);
+      })();
+
+      setDfHtml(df.head(10).to_html());
+    }
+  }, []);
+
   return (
     <Layout fluid>
-      <div className={cx('pageWrapper', 'fluid', 'resultsPage')}>
-        <header className={cx('resultsHeader')}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <h1>Titanic Dataset</h1>
-                <div className={cx('sourceName')}>
-                  <AiOutlineFileDone className={cx('icon')} />
-                  <span>titanic_survival_dataset.csv</span>
+      <StepsDisplay currentIndex={2} />
+
+      <div className={cx('fluidWrapper')}>
+        <Container>
+          <Row>
+            <Col>
+              <h2>Columns Information</h2>
+            </Col>
+          </Row>
+
+          {columnsSummary &&
+            Object.keys(columnsSummary).map((columnName) => {
+              const columnSummary = columnsSummary[columnName];
+
+              return (
+                <div key={columnName}>
+                  <ColumnSummary
+                    columnName={columnName}
+                    summary={columnSummary}
+                  />
                 </div>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <nav className={cx('resultsTabs')}>
-                <a
-                  className={cx('tabItem', 'active')}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Summary
-                </a>
-                <a
-                  className={cx('tabItem')}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Columns
-                </a>
-                <a
-                  className={cx('tabItem')}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Preprocessing
-                </a>
-              </nav>
-            </div>
-          </div>
-        </div>
-
-        <div className={cx('resultsContentWrapper')}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <h2>Overview</h2>
-                <div className={cx('box')}>
-                  <div className="row">
-                    <div className="col-6">
-                      <h3>Dataset Statistics</h3>
-
-                      <div className={cx('item')}>
-                        <span>Number of Columns</span>
-                        <span>12</span>
-                      </div>
-
-                      <div className={cx('item')}>
-                        <span>Number of Rows</span>
-                        <span>891</span>
-                      </div>
-
-                      <div className={cx('item')}>
-                        <span>Missing Cells</span>
-                        <span>866</span>
-                      </div>
-
-                      <div className={cx('item')}>
-                        <span>Missing Cells (%)</span>
-                        <span>8.1%</span>
-                      </div>
-
-                      <div className={cx('item')}>
-                        <span>Duplicate Rows</span>
-                        <span>0</span>
-                      </div>
-
-                      <div className={cx('item')}>
-                        <span>Duplicate Rows (%)</span>
-                        <span>0.0%</span>
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <h3>Variable Types</h3>
-
-                      <div className={cx('item')}>
-                        <span>
-                          <BsGridFill className={cx('icon')} />
-                          Categorical
-                        </span>
-
-                        <span>6</span>
-                      </div>
-                      <div className={cx('item')}>
-                        <span>
-                          <span className={cx('icon')}>123</span>
-                          Numeric
-                        </span>
-
-                        <span>5</span>
-                      </div>
-                      <div className={cx('item')}>
-                        <span>
-                          <VscSymbolBoolean className={cx('icon')} /> Boolean
-                        </span>
-
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              );
+            })}
+        </Container>
       </div>
     </Layout>
   );

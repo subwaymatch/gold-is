@@ -11,7 +11,7 @@ type LayoutProps = {
 
 export default function Layout({ children, className, fluid }: LayoutProps) {
   return (
-    <div className={classNames('wrapper', className)}>
+    <>
       <Head>
         <title>Gold.is</title>
         <link rel="icon" href="/favicon.ico" />
@@ -48,12 +48,12 @@ export default function Layout({ children, className, fluid }: LayoutProps) {
       <Header />
 
       {fluid ? (
-        children
+        <main className={className}>{children}</main>
       ) : (
-        <main>
+        <main className={className}>
           <Container>{children}</Container>
         </main>
       )}
-    </div>
+    </>
   );
 }

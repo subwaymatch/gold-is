@@ -23,7 +23,7 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
     <div className={styles.stepsDisplay}>
       <Row>
         {steps.map((step, index) => (
-          <Col key={index}>
+          <Col md={4} key={index}>
             <Link href={step.href}>
               <div
                 className={cx(styles.stepItem, {

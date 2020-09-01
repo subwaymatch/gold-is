@@ -19,11 +19,8 @@ const dfSelector = (state) => state.dataFrame;
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
-  const [columnsSummary, setColumnsSummary] = useState(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
-  const dropColumns = usePyodideStore((state) => state.dropColumns);
-  const addDropColumn = usePyodideStore((state) => state.addDropColumn);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,14 +36,6 @@ export default function SelectPage() {
         console.log(overviewCodeResult);
 
         setOverview(overviewCodeResult.output);
-
-        const columnsSummaryCodeResult = await pyodideManager.runCode(
-          generateColumnsSummary
-        );
-
-        setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
-
-        console.log(columnsSummaryCodeResult);
       })();
 
       setDfHtml(df.head(10).to_html());
@@ -59,12 +48,6 @@ export default function SelectPage() {
 
       <div className={cx('fluidWrapper')}>
         <Container>
-          <Row>
-            <Col md={3}>Columns to drop</Col>
-
-            <Col md={9}>{String(dropColumns)}</Col>
-          </Row>
-
           <Row>
             <Col>
               <h2>First 10 Rows</h2>
@@ -108,33 +91,6 @@ export default function SelectPage() {
               )}
             </Col>
           </Row>
-
-          <Row>
-            <Col>
-              <h2>Columns Information</h2>
-            </Col>
-          </Row>
-
-          {columnsSummary &&
-            Object.keys(columnsSummary).map((columnName) => {
-              const columnSummary = columnsSummary[columnName];
-
-              return (
-                <div key={columnName}>
-                  <button
-                    onClick={() => {
-                      addDropColumn(columnName);
-                    }}
-                  >
-                    Drop {columnName}
-                  </button>
-                  <ColumnSummary
-                    columnName={columnName}
-                    summary={columnSummary}
-                  />
-                </div>
-              );
-            })}
         </Container>
       </div>
     </Layout>

@@ -4,11 +4,13 @@
 .headerWrapper {
   position: relative;
   border-bottom: 4px dotted color.scale($color-secondary, $lightness: 92%);
+  margin-left: 15px;
+  margin-right: 15px;
 
   .logoWrapper {
     position: absolute;
     top: -3rem;
-    left: -3rem;
+    left: -4rem;
 
     & > a {
       display: flex;
