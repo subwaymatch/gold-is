@@ -9,7 +9,7 @@ import generateColumnsSummary from 'python/generate-columns-summary.py';
 import styles from './results-page.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
-import ColumnSummary from 'components/data-summary/column-summary';
+import ColumnSummary from 'components/data-summary/column-overview';
 import { toPercentage, toKiloBytes } from 'lib/utils';
 
 const cx = classNames.bind(styles);
@@ -19,7 +19,7 @@ const dfSelector = (state) => state.dataFrame;
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
-  const [columnsSummary, setColumnsSummary] = useState(null);
+  const [columnSummaries, setColumnSummaries] = useState(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function SelectPage() {
           generateColumnsSummary
         );
 
-        setColumnsSummary(columnsSummaryCodeResult.output.to_dict());
+        setColumnSummaries(columnsSummaryCodeResult.output.to_dict());
 
         console.log(columnsSummaryCodeResult);
       })();
@@ -65,9 +65,9 @@ export default function SelectPage() {
             </Col>
           </Row>
 
-          {columnsSummary &&
-            Object.keys(columnsSummary).map((columnName) => {
-              const columnSummary = columnsSummary[columnName];
+          {columnSummaries &&
+            Object.keys(columnSummaries).map((columnName) => {
+              const columnSummary = columnSummaries[columnName];
 
               return (
                 <div key={columnName}>

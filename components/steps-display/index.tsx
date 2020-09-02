@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Row, Col } from 'react-bootstrap';
+import { clickableVariants } from 'animations/variants';
 import styles from './steps-display.module.scss';
 import classNames from 'classnames/bind';
 
@@ -30,12 +32,16 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
                   active: index === currentIndex,
                 })}
               >
-                <a>
+                <motion.a
+                  variants={clickableVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
                   <div className={styles.numberCircle}>
                     <span className={styles.numberLabel}>{index + 1}</span>
                   </div>
                   <span className={styles.label}>{step.label}</span>
-                </a>
+                </motion.a>
               </div>
             </Link>
           </Col>

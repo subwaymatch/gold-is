@@ -1,19 +1,41 @@
 import { Row, Col } from 'react-bootstrap';
 import DisplayItem from './display-item';
-import styles from './column-summary.module.scss';
+import styles from './column-details.module.scss';
 import classNames from 'classnames/bind';
 import { TColumnSummary } from 'typings/pyodide';
 import { toPercentage, toKiloBytes, formatNumber } from 'lib/utils';
+import dynamic from 'next/dynamic';
+
+const ColumnPlots = dynamic(import('./column-plots'), {
+  ssr: false,
+});
 
 const cx = classNames.bind(styles);
 
-type ColumnSummaryProps = {
+type ColumnDetailsProps = {
+  columnName: string;
+  columnData: any;
   summary: TColumnSummary;
 };
 
-export default function ColumnSummary({ summary }: ColumnSummaryProps) {
+var x = [];
+for (var i = 0; i < 500; i++) {
+  x[i] = Math.random();
+}
+
+export default function ColumnDetails({
+  columnName,
+  columnData,
+  summary,
+}: ColumnDetailsProps) {
   return (
-    <div className={cx('columnOverview')}>
+    <div className={cx('columnBox')}>
+      <Row>
+        <Col md={6}>
+          <h3>{columnName}</h3>
+        </Col>
+      </Row>
+
       <Row>
         <Col md={6}>
           <DisplayItem label="Data Type" value={summary.data_type} />
@@ -69,6 +91,8 @@ export default function ColumnSummary({ summary }: ColumnSummaryProps) {
           />
         </Col>
       </Row>
+
+      <ColumnPlots />
     </div>
   );
 }

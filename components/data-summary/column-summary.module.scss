@@ -1,14 +1,2 @@
 @use 'sass:color';
 @import 'styles/variables';
-
-.columnBox {
-  background: white;
-  padding: 1rem 2rem;
-  margin-bottom: 1rem;
-
-  h3 {
-    color: color.scale($color-secondary, $lightness: 60%);
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-}

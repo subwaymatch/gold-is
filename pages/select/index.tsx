@@ -5,11 +5,9 @@ import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
 import generateOverviewCode from 'python/generate-overview.py';
-import generateColumnsSummary from 'python/generate-columns-summary.py';
 import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
-import ColumnSummary from 'components/data-summary/column-summary';
 import { toPercentage, toKiloBytes } from 'lib/utils';
 
 const cx = classNames.bind(styles);
