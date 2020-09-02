@@ -19,7 +19,11 @@ const dfSelector = (state) => state.dataFrame;
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
-  const [columnSummaries, setColumnSummaries] = useState(null);
+  // const [columnSummaries, setColumnSummaries] = useState(null);
+  const columnSummaries = usePyodideStore((state) => state.columnSummaries);
+  const setColumnSummaries = usePyodideStore(
+    (state) => state.setColumnSummaries
+  );
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
   const router = useRouter();
@@ -43,8 +47,6 @@ export default function SelectPage() {
         );
 
         setColumnSummaries(columnsSummaryCodeResult.output.to_dict());
-
-        console.log(columnsSummaryCodeResult);
       })();
 
       setDfHtml(df.head(10).to_html());

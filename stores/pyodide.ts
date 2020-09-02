@@ -12,6 +12,8 @@ const usePyodideStore = create((set) => ({
     set((state) => ({
       dropColumns: [columnName, ...state.dropColumns],
     })),
+  columnSummaries: null,
+  setColumnSummaries: (columnSummaries) => set({ columnSummaries }),
 }));
 
 export default usePyodideStore;
