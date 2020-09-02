@@ -8,9 +8,7 @@ import generateOverviewCode from 'python/generate-overview.py';
 import generateColumnsSummary from 'python/generate-columns-summary.py';
 import styles from './results-page.module.scss';
 import classNames from 'classnames/bind';
-import DipslayItem from 'components/data-summary/display-item';
-import ColumnSummary from 'components/data-summary/column-overview';
-import { toPercentage, toKiloBytes } from 'lib/utils';
+import ColumnOverview from 'components/data-summary/column-overview';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +17,6 @@ const dfSelector = (state) => state.dataFrame;
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
-  // const [columnSummaries, setColumnSummaries] = useState(null);
   const columnSummaries = usePyodideStore((state) => state.columnSummaries);
   const setColumnSummaries = usePyodideStore(
     (state) => state.setColumnSummaries
@@ -73,7 +70,7 @@ export default function SelectPage() {
 
               return (
                 <div key={columnName}>
-                  <ColumnSummary
+                  <ColumnOverview
                     columnName={columnName}
                     summary={columnSummary}
                   />

@@ -4,6 +4,16 @@ export interface PyodideEnabledWindow extends Window {
   pyodide: any;
 }
 
+export type TDataOverview = {
+  numRows: number;
+  numCols: number;
+  numMissingCells: number;
+  missingCellsPercentage: number;
+  numDuplicateRows: number;
+  duplicateRowsPercentage: number;
+  memoryUsage: number;
+};
+
 export type TColumnSummary = {
   data_type: string;
   distinct_count: number;

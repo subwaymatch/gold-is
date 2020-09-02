@@ -13,7 +13,7 @@ type ColumnSummaryProps = {
 
 export default function ColumnSummary({ summary }: ColumnSummaryProps) {
   return (
-    <div className={cx('columnOverview')}>
+    <div className={cx('columnSummary')}>
       <Row>
         <Col md={6}>
           <DisplayItem label="Data Type" value={summary.data_type} />

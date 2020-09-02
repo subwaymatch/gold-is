@@ -9,6 +9,7 @@ import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import DipslayItem from 'components/data-summary/display-item';
 import { toPercentage, toKiloBytes } from 'lib/utils';
+import { TDataOverview } from 'typings/pyodide';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ const dfSelector = (state) => state.dataFrame;
 
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
-  const [overview, setOverview] = useState<any>(null);
+  const [overview, setOverview] = useState<TDataOverview>(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore(dfSelector);
   const router = useRouter();
@@ -31,9 +32,9 @@ export default function SelectPage() {
           generateOverviewCode
         );
 
-        console.log(overviewCodeResult);
-
         setOverview(overviewCodeResult.output);
+
+        console.log(overviewCodeResult.output);
       })();
 
       setDfHtml(df.head(10).to_html());
