@@ -22,6 +22,15 @@ const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
       'There is no missing value.'
     );
 
+  const possibleKeyColumnMessage =
+    summary.unique_percentage === 1 ? (
+      <>
+        Since there are no missing values and all values are unique, this column
+        can possibly be used as <span className={styles.figure}>IDs</span> or
+        <span className={styles.figure}>indices</span>.
+      </>
+    ) : null;
+
   const statsStory = isNumeric ? (
     <p>
       Some stats of non-missing values. Mean is{' '}
@@ -29,7 +38,8 @@ const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
       minimum is{' '}
       <span className={styles.figure}>{formatNumber(summary.min)}</span>, while
       the maximum is{' '}
-      <span className={styles.figure}>{formatNumber(summary.max)}</span>.
+      <span className={styles.figure}>{formatNumber(summary.max)}</span>.{' '}
+      {possibleKeyColumnMessage}
     </p>
   ) : null;
 

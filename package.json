@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^3.6.2",
+    "@nivo/bar": "^0.62.0",
     "@nivo/heatmap": "^0.62.0",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
@@ -24,6 +25,7 @@
     "react-icons": "^3.11.0",
     "react-plotly.js": "^2.4.0",
     "sass": "^1.26.10",
+    "victory": "^35.0.8",
     "worker-plugin": "^5.0.0",
     "zustand": "^3.0.2"
   },

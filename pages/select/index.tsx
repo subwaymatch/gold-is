@@ -25,10 +25,6 @@ export default function SelectPage() {
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
   const router = useRouter();
 
-  if (df) {
-    console.log(df.columns);
-  }
-
   useEffect(() => {
     if (!df) {
       router.push('/load');
@@ -40,8 +36,6 @@ export default function SelectPage() {
         );
 
         setOverview(overviewCodeResult.output);
-
-        console.log(overviewCodeResult.output);
       })();
 
       setDfHtml(df.head(10).to_html());
@@ -97,7 +91,7 @@ export default function SelectPage() {
               <Col>
                 <SectionTitle desc="Dataset" title="Drop Columns" />
                 <p className={cx('explanation')}>
-                  Columns you select here will be dropped in the analysis
+                  Columns you select here will be excluded from the analysis
                   results.
                 </p>
 
@@ -107,7 +101,6 @@ export default function SelectPage() {
                       selected: dropColumns.includes(columnName),
                     })}
                     onClick={() => {
-                      console.log(`drop ${columnName}`);
                       if (dropColumns.includes(columnName)) {
                         removeDropColumn(columnName);
                       } else {
