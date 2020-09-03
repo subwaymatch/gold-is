@@ -1,4 +1,5 @@
 import numpy as np
+from js import df
 
 data_type = df.dtypes.astype(str)
 distinct_count = df.nunique()

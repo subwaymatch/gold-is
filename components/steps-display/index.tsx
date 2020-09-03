@@ -12,7 +12,7 @@ const steps = [
     label: 'Load Data',
     href: '/load',
   },
-  { label: 'Select', href: '/select' },
+  { label: 'Select Columns', href: '/select' },
   { label: 'Analyze', href: '/results' },
 ];
 

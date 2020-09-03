@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Container, Row, Col } from 'react-bootstrap';
 import { GiDigDug } from 'react-icons/gi';
 import { FiGithub } from 'react-icons/fi';
+import { clickableVariants } from 'animations/variants';
 
 import styles from './header.module.scss';
 
@@ -54,25 +55,33 @@ export default function Header() {
         <Col md={{ span: 8, offset: 4 }}>
           <div className={cx('headerMenu')}>
             <Link href="/load">
-              <a className={cx('menuItem', 'menuItemStart')}>
+              <motion.a
+                className={cx('menuItem', 'menuItemStart')}
+                variants={clickableVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
                 <GiDigDug className={cx('icon')} />
                 <div className={cx('label')}>
                   <div className={cx('underline')} />
                   Start Digging
                 </div>
-              </a>
+              </motion.a>
             </Link>
 
-            <a
+            <motion.a
               href="https://github.com/subwaymatch/gold-is"
               className={cx('menuItem', 'menuItemGithub')}
+              variants={clickableVariants}
+              whileHover="hover"
+              whileTap="tap"
             >
               <FiGithub className={cx('icon')} />
               <div className={cx('label')}>
                 <div className={cx('underline')} />
                 GitHub
               </div>
-            </a>
+            </motion.a>
           </div>
         </Col>
       </Row>

@@ -1,3 +1,5 @@
+from js import df
+
 overview = {}
 
 overview['numRows'] = df.shape[0]

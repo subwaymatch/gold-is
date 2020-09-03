@@ -246,7 +246,6 @@ const data = [
 ];
 
 export default function SelectPage() {
-  const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<any>(null);
   const columnSummaries = usePyodideStore((state) => state.columnSummaries);
   const setColumnSummaries = usePyodideStore(
@@ -276,8 +275,6 @@ export default function SelectPage() {
 
         setColumnSummaries(columnsSummaryCodeResult.output.to_dict());
       })();
-
-      setDfHtml(df.head(10).to_html());
     }
   }, []);
 

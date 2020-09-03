@@ -10,5 +10,43 @@
 .fluidWrapper {
   background: color.scale($color-secondary, $lightness: 95%);
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 10rem;
+}
+
+.dropColumnsSection {
+  p.explanation {
+    font-size: 1.8rem;
+    margin-top: 0.8rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .dropButton {
+    color: $color-tertiary;
+    background-color: white;
+    padding: 1.2rem 1.8rem;
+    border: 4px solid white;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 0 1rem rgba(#000, 4%);
+
+    &:hover {
+      border-color: $color-tertiary;
+    }
+
+    &.selected {
+      color: #ddd;
+      background-color: black;
+      border-color: black;
+
+      .columnName {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.bottomProceedButtonWrapper {
+  margin-top: 3rem;
 }

@@ -13,14 +13,21 @@ import FullButton from 'components/common/full-button';
 
 const cx = classNames.bind(styles);
 
-const dfSelector = (state) => state.dataFrame;
-
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
   const [overview, setOverview] = useState<TDataOverview>(null);
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
-  const df = usePyodideStore(dfSelector);
+  const dropColumns = usePyodideStore((state) => state.dropColumns);
+  const addDropColumn = usePyodideStore((state) => state.addDropColumn);
+  const removeDropColumn = usePyodideStore((state) => state.removeDropColumn);
+  const resetDropColumns = usePyodideStore((state) => state.resetDropColumns);
+  const df = usePyodideStore((state) => state.dataFrame);
+  const setDataFrame = usePyodideStore((state) => state.setDataFrame);
   const router = useRouter();
+
+  if (df) {
+    console.log(df.columns);
+  }
 
   useEffect(() => {
     if (!df) {
@@ -39,9 +46,24 @@ export default function SelectPage() {
 
       setDfHtml(df.head(10).to_html());
     }
+
+    resetDropColumns();
   }, []);
 
-  return (
+  const dropSelectedColumns = () => {
+    setDataFrame(df.drop(dropColumns, 1));
+  };
+
+  const proceedToNextPage = () => {
+    dropSelectedColumns();
+    router.push('/results');
+  };
+
+  const proceedButtonMessage =
+    !dropColumns || dropColumns.length === 0
+      ? `Proceed without Changes ⟶`
+      : `Drop ${dropColumns.length} Columns and Proceed ⟶`;
+  return df ? (
     <Layout fluid>
       <Container>
         <StepsDisplay currentIndex={1} />
@@ -52,7 +74,10 @@ export default function SelectPage() {
           <Row>
             <Col>
               <div className={cx('fluidButtonWrapper')}>
-                <FullButton onClick={() => {}} label="Proceed to Analysis ⟶" />
+                <FullButton
+                  onClick={proceedToNextPage}
+                  label={proceedButtonMessage}
+                />
               </div>
             </Col>
           </Row>
@@ -66,8 +91,47 @@ export default function SelectPage() {
               />
             </Col>
           </Row>
+
+          <div className={cx('dropColumnsSection')}>
+            <Row>
+              <Col>
+                <SectionTitle desc="Dataset" title="Drop Columns" />
+                <p className={cx('explanation')}>
+                  Columns you select here will be dropped in the analysis
+                  results.
+                </p>
+
+                {df.columns.map((columnName) => (
+                  <div
+                    className={cx('dropButton', {
+                      selected: dropColumns.includes(columnName),
+                    })}
+                    onClick={() => {
+                      console.log(`drop ${columnName}`);
+                      if (dropColumns.includes(columnName)) {
+                        removeDropColumn(columnName);
+                      } else {
+                        addDropColumn(columnName);
+                      }
+                    }}
+                    key={columnName}
+                  >
+                    <span className={cx('columnName')}>{columnName}</span>
+                    <span className={cx('indicator')}></span>
+                  </div>
+                ))}
+
+                <div className={cx('bottomProceedButtonWrapper')}>
+                  <FullButton
+                    onClick={proceedToNextPage}
+                    label={proceedButtonMessage}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Container>
       </div>
     </Layout>
-  );
+  ) : null;
 }
