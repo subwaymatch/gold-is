@@ -19,11 +19,6 @@ type ColumnDetailsProps = {
   summary: TColumnSummary;
 };
 
-var x = [];
-for (var i = 0; i < 500; i++) {
-  x[i] = Math.random();
-}
-
 export default function ColumnDetails({
   columnName,
   columnData,

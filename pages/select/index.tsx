@@ -84,7 +84,7 @@ export default function SelectPage() {
 
           <Row>
             <Col>
-              <SectionTitle desc="Dataset" title="Top 10 Rows" />
+              <SectionTitle desc="Dataset" title="First 10 Rows" />
               <div
                 className={cx('dataTableWrapper')}
                 dangerouslySetInnerHTML={{ __html: dfHtml }}

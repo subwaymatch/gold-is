@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 import styles from './column-data-sample.module.scss';
+import SectionTitle from 'components/common/section-title';
 
 export default function ColumnDataSample({ columnData }) {
   const [sampleSize, setSampleSize] = useState(20);
@@ -9,11 +10,15 @@ export default function ColumnDataSample({ columnData }) {
 
   const reSample = () => setSample(_.sampleSize(columnData, sampleSize));
 
+  useEffect(() => {
+    reSample();
+  }, []);
+
   return (
     <div className={styles.columnDataSample}>
       <Row>
-        <Col md={6}>
-          <h3>Sample Values</h3>
+        <Col md={12}>
+          <SectionTitle desc="Column" title="Sample" />
         </Col>
 
         <Col md={6}>
@@ -23,7 +28,7 @@ export default function ColumnDataSample({ columnData }) {
               <input
                 className={styles.numSampleInput}
                 id="numSampleInput"
-                type="text"
+                type="number"
                 value={sampleSize}
                 onChange={(e) => setSampleSize(Number.parseInt(e.target.value))}
               />
@@ -34,11 +39,13 @@ export default function ColumnDataSample({ columnData }) {
       </Row>
 
       <Row>
-        <Col>{String(sample)}</Col>
-      </Row>
-
-      <Row>
-        <Col>{}</Col>
+        <div className={styles.sampleValuesWrapper}>
+          {sample.map((v, index) => (
+            <div key={index} className={styles.sampleValue}>
+              {v}
+            </div>
+          ))}
+        </div>
       </Row>
     </div>
   );

@@ -5,6 +5,6 @@ import { ResponsiveHeatMap } from '@nivo/heatmap';
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-const MyResponsiveHeatMap = ({ data /* see data tab */ }) => <div>Heatmap</div>;
+const MyResponsiveHeatMap = ({ data /* see data tab */ }) => null;
 
 export default MyResponsiveHeatMap;
