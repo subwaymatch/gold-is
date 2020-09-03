@@ -9,8 +9,7 @@
 
 .loadSourceComponent {
   .urlInput,
-  .dropBox,
-  .nextButton {
+  .dropBox {
     font-family: $font-sans-serif;
     font-size: 1.8rem;
     letter-spacing: -0.03rem;
@@ -76,28 +75,6 @@
       color: color.scale($color-tertiary, $lightness: 30%);
       background: color.scale($color-tertiary, $lightness: 90%);
       border: 1px solid color.scale($color-tertiary, $lightness: 70%);
-    }
-  }
-
-  .nextButton {
-    font-weight: 700;
-    display: block;
-    margin-top: 3rem;
-    width: 100%;
-    cursor: pointer;
-    color: white;
-    background-color: $color-tertiary;
-    box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 20%);
-
-    &:hover {
-      background-color: color.scale($color-tertiary, $lightness: -5%);
-      box-shadow: 0 0.5rem 2rem rgba($color-tertiary, 40%);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      background-color: #eee;
-      box-shadow: none;
     }
   }
 }

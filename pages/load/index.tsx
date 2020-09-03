@@ -8,6 +8,7 @@ import StepsDisplay from 'components/steps-display';
 import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import usePyodideStore from 'stores/pyodide';
+import FullButton from 'components/common/full-button';
 
 declare let pyodide: any;
 
@@ -99,15 +100,13 @@ export default function LoadPage() {
                 </div>
               </div>
 
-              <button
-                className={cx('nextButton')}
+              <FullButton
+                label="Start Digging →"
                 disabled={!pyodideManager || !csvUrl}
                 onClick={() => {
                   setIsWaiting(true);
                 }}
-              >
-                Start Digging →
-              </button>
+              />
             </Col>
           </Row>
         </Container>

@@ -1,0 +1,33 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.fullButton {
+  font-weight: 700;
+  display: block;
+  margin-top: 3rem;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  background-color: $color-tertiary;
+  box-shadow: 0 0.5rem 1rem rgba($color-tertiary, 20%);
+
+  font-family: $font-sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: -0.03rem;
+  text-align: center;
+  padding: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+
+  &:hover {
+    background-color: color.scale($color-tertiary, $lightness: -5%);
+    box-shadow: 0 0.5rem 2rem rgba($color-tertiary, 40%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: color.scale($color-tertiary, $lightness: 50%);
+    box-shadow: none;
+  }
+}
