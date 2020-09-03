@@ -7,9 +7,8 @@ import StepsDisplay from 'components/steps-display';
 import generateOverviewCode from 'python/generate-overview.py';
 import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
-import DipslayItem from 'components/data-summary/display-item';
-import { toPercentage, toKiloBytes } from 'lib/utils';
 import { TDataOverview } from 'typings/pyodide';
+import SectionTitle from 'components/common/section-title';
 
 const cx = classNames.bind(styles);
 
@@ -51,7 +50,7 @@ export default function SelectPage() {
         <Container>
           <Row>
             <Col>
-              <h2>First 10 Rows</h2>
+              <SectionTitle desc="Dataset" title="Top 10 Rows" />
               <div
                 className={cx('dataTableWrapper')}
                 dangerouslySetInnerHTML={{ __html: dfHtml }}

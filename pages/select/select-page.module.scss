@@ -3,11 +3,12 @@
 
 .dataTableWrapper {
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
+  margin-top: 3rem;
 }
 
 .fluidWrapper {
   background: color.scale($color-secondary, $lightness: 95%);
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
