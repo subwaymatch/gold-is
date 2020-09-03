@@ -16,22 +16,33 @@ const steps = [
   { label: 'Analyze', href: '/results' },
 ];
 
-const StepItem = ({ number, label, active, clickable }) => (
-  <motion.div
-    className={cx(styles.stepItem, {
-      active,
-      clickable,
-    })}
-    variants={clickable ? clickableVariants : {}}
-    whileHover="hover"
-    whileTap="tap"
-  >
-    <div className={styles.numberCircle}>
-      <span className={styles.numberLabel}>{number}</span>
+const StepItem = ({ number, label, active, clickable, href }) =>
+  href && clickable ? (
+    <Link href={href}>
+      <motion.a
+        className={cx('stepItem', {
+          active,
+          clickable,
+        })}
+        variants={clickable ? clickableVariants : {}}
+        whileHover="hover"
+        whileTap="tap"
+        href={href}
+      >
+        <div className={styles.numberCircle}>
+          <span className={styles.numberLabel}>{number}</span>
+        </div>
+        <span className={styles.label}>{label}</span>
+      </motion.a>
+    </Link>
+  ) : (
+    <div className={cx('stepItem')}>
+      <div className={styles.numberCircle}>
+        <span className={styles.numberLabel}>{number}</span>
+      </div>
+      <span className={styles.label}>{label}</span>
     </div>
-    <span className={styles.label}>{label}</span>
-  </motion.div>
-);
+  );
 
 type StepsDisplayProps = {
   currentIndex: number;
@@ -43,23 +54,13 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
       <Row>
         {steps.map((step, index) => (
           <Col md={4} key={index}>
-            {index > currentIndex ? (
-              <StepItem
-                number={index + 1}
-                label={step.label}
-                active={index === currentIndex}
-                clickable={index <= currentIndex}
-              />
-            ) : (
-              <Link href={step.href}>
-                <StepItem
-                  number={index + 1}
-                  label={step.label}
-                  active={index === currentIndex}
-                  clickable={index <= currentIndex}
-                />
-              </Link>
-            )}
+            <StepItem
+              number={index + 1}
+              label={step.label}
+              active={index === currentIndex}
+              clickable={index <= currentIndex}
+              href={step.href}
+            />
           </Col>
         ))}
       </Row>

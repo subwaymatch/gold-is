@@ -5,7 +5,7 @@ const cx = classNames.bind(styles);
 
 type FullButtonProps = {
   label: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick: () => void;
   className?: string;
 };

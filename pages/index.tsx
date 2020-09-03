@@ -23,7 +23,9 @@ export default function Home() {
         <Container>
           <Row>
             <Col>
-              <p className={cx('hero')}>Find the gold in your dataset.</p>
+              <p className={cx('hero')}>
+                Let us tell you a story about your dataset.
+              </p>
             </Col>
           </Row>
         </Container>

@@ -100,15 +100,17 @@ export default function LoadPage() {
                 </div>
               </div>
 
-              <FullButton
-                label="Start Digging →"
-                disabled={!pyodideManager || !csvUrl}
-                onClick={() => {
-                  // Normally, you would directly call a function to start loading the data
-                  // However, the main UI will freeze and loading screen won't be displayed without using this wierd workaround where the loading component is first rendered, and then data starts to load
-                  setIsWaiting(true);
-                }}
-              />
+              <div className={styles.proceedButtonWrapper}>
+                <FullButton
+                  label="Start Digging →"
+                  disabled={!pyodideManager || !csvUrl}
+                  onClick={() => {
+                    // Normally, you would directly call a function to start loading the data
+                    // However, the main UI will freeze and loading screen won't be displayed without using this wierd workaround where the loading component is first rendered, and then data starts to load
+                    setIsWaiting(true);
+                  }}
+                />
+              </div>
             </Col>
           </Row>
         </Container>

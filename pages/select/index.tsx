@@ -9,6 +9,7 @@ import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import { TDataOverview } from 'typings/pyodide';
 import SectionTitle from 'components/common/section-title';
+import FullButton from 'components/common/full-button';
 
 const cx = classNames.bind(styles);
 
@@ -48,6 +49,14 @@ export default function SelectPage() {
 
       <div className={cx('fluidWrapper')}>
         <Container>
+          <Row>
+            <Col>
+              <div className={cx('fluidButtonWrapper')}>
+                <FullButton onClick={() => {}} label="Proceed to Analysis ⟶" />
+              </div>
+            </Col>
+          </Row>
+
           <Row>
             <Col>
               <SectionTitle desc="Dataset" title="Top 10 Rows" />
