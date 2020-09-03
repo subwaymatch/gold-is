@@ -17,10 +17,14 @@
   }
 
   .selectMessage {
-    margin-top: 2.4rem;
-    border-top: 1px solid $color-secondary;
+    font-weight: 600;
+    margin-top: 1.7rem;
     padding-top: 1rem;
     display: inline-block;
     color: $color-secondary;
+  }
+
+  .exampleItemLink {
+    display: block;
   }
 }

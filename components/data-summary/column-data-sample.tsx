@@ -42,7 +42,7 @@ export default function ColumnDataSample({ columnData }) {
         <div className={styles.sampleValuesWrapper}>
           {sample.map((v, index) => (
             <div key={index} className={styles.sampleValue}>
-              {v}
+              {String(v)}
             </div>
           ))}
         </div>
