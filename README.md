@@ -35,11 +35,18 @@
 
 ## Screenshots
 
-![goldis-homepage](https://user-images.githubusercontent.com/1064036/92139164-fce5f500-edd4-11ea-99a0-9065fac66406.png)
-![goldis-load-data](https://user-images.githubusercontent.com/1064036/92139167-fd7e8b80-edd4-11ea-81bf-cd17ccffa408.png)
-![goldis-select-columns](https://user-images.githubusercontent.com/1064036/92139174-ff484f00-edd4-11ea-805c-497d8bbd709a.png)
-![goldis-result-index](https://user-images.githubusercontent.com/1064036/92139171-feafb880-edd4-11ea-8853-8d0c39fd5685.png)
-![goldis-result-column-details](https://user-images.githubusercontent.com/1064036/92139168-fd7e8b80-edd4-11ea-87b5-0a1e0d37e6d9.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/1064036/92139164-fce5f500-edd4-11ea-99a0-9065fac66406.png" alt="Homepage Screenshot" width="720" />
+  <br /><br /><br />
+  <img src="https://user-images.githubusercontent.com/1064036/92139167-fd7e8b80-edd4-11ea-81bf-cd17ccffa408.png" alt="Load Data Page Screenshot" width="720" />
+  <br /><br /><br />
+  <img src="https://user-images.githubusercontent.com/1064036/92139174-ff484f00-edd4-11ea-805c-497d8bbd709a.png" alt="Select Columns Page Screenshot" width="720" />
+  <br /><br /><br />
+  <img src="https://user-images.githubusercontent.com/1064036/92139171-feafb880-edd4-11ea-8853-8d0c39fd5685.png" alt="Results Page Screenshot" width="720" />
+  <br /><br /><br />
+  <img src="https://user-images.githubusercontent.com/1064036/92139168-fd7e8b80-edd4-11ea-87b5-0a1e0d37e6d9.png" alt="Column Details Screenshot" width="720" />
+  <br /><br />
+</p>
 
 ## Deployment
 
