@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 export default function ColumnPlots({ columnName, data, summary }) {
   console.log(summary);
   console.log(data);
+
+  useEffect(() => {}, []);
 
   return (
     <>
