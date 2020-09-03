@@ -82,8 +82,6 @@ sys.stderr = io.StringIO()`);
 
     const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
 
-    console.log(`loadCsvFromUrl(proxiedUrl=${proxiedUrl})`);
-
     const codeResult = await this.runCode(`import pandas as pd
 
 df_original = None
@@ -93,11 +91,11 @@ try:
   df_original = pd.read_csv(pyodide.open_url('${proxiedUrl}'))
   df = df_original.copy()
 except:
+  df = pd.DataFrame({})
   print('Error opening URL')
 `);
 
     (window as any).codeResult = codeResult;
-    console.log(codeResult);
   }
 
   async runCode(code: string, options?: RunCodeOptions) {

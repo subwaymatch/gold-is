@@ -2,8 +2,10 @@ import styles from './column-details.module.scss';
 import classNames from 'classnames/bind';
 import { TColumnSummary } from 'typings/pyodide';
 import dynamic from 'next/dynamic';
+import ColumnStory from './column-story';
 import ColumnSummary from './column-summary';
 import ColumnDataSample from './column-data-sample';
+import { Container } from 'react-bootstrap';
 
 const ColumnPlots = dynamic(import('./column-plots'), {
   ssr: false,
@@ -29,15 +31,19 @@ export default function ColumnDetails({
 }: ColumnDetailsProps) {
   return (
     <div className={cx('columnBox')}>
-      <ColumnSummary summary={summary} />
+      <ColumnStory columnName={columnName} summary={summary} />
 
-      <ColumnDataSample columnData={columnData} />
+      <Container>
+        <ColumnSummary summary={summary} />
 
-      <ColumnPlots
-        columnName={columnName}
-        data={columnData}
-        summary={summary}
-      />
+        <ColumnDataSample columnData={columnData} />
+
+        <ColumnPlots
+          columnName={columnName}
+          data={columnData}
+          summary={summary}
+        />
+      </Container>
     </div>
   );
 }

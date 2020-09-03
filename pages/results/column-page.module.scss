@@ -5,7 +5,7 @@
 }
 
 .columnDetailPageHeader {
-  padding: 1.6rem 0;
+  padding: 1.6rem 0 0.6rem 0;
 
   .backLink {
     color: $color-secondary;
@@ -15,8 +15,9 @@
   }
 
   h2 {
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 1.1;
+    margin-top: 3rem;
 
     span {
       display: inline-block;
@@ -24,11 +25,12 @@
 
     .titleDivider {
       color: $color-primary;
+      color: #ddd;
       padding: 0 1rem;
     }
 
     .titleDesc {
-      color: $color-primary;
+      color: #ddd;
     }
   }
 }

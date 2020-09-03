@@ -40,24 +40,21 @@ export default function ColumnDetailsPage() {
                 <h2>
                   <span className={cx('titleDesc')}>Column</span>
                   <span className={cx('titleDivider')}>/</span>
-                  <span className={cx('titleColumnName')}>{columnName}</span>
+                  <span className={cx('titleColumnName')}>Story</span>
                 </h2>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
-      <div className={cx('fluidWrapper')}>
-        <Container>
-          {columnData && columnSummary ? (
-            <ColumnDetails
-              columnName={columnName}
-              columnData={columnData}
-              summary={columnSummary}
-            />
-          ) : null}
-        </Container>
-      </div>
+
+      {columnData && columnSummary ? (
+        <ColumnDetails
+          columnName={columnName}
+          columnData={columnData}
+          summary={columnSummary}
+        />
+      ) : null}
     </Layout>
   );
 }
