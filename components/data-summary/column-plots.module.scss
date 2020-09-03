@@ -1,0 +1,25 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.plotWrapper {
+  position: relative;
+
+  .plotHeader {
+    position: relative;
+    top: 3rem;
+
+    h3 {
+      font-size: 3rem;
+      color: $color-tertiary;
+    }
+
+    p {
+      color: #777;
+      font-size: 1.5rem;
+    }
+  }
+
+  .plotBoundary {
+    max-height: 700px;
+  }
+}
