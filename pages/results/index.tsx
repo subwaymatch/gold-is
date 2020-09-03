@@ -11,6 +11,7 @@ import classNames from 'classnames/bind';
 import ColumnOverview from 'components/data-summary/column-overview';
 import MyResponsiveHeatMap from 'components/visualizations/heatmap';
 import DatasetStory from 'components/data-summary/dataset-story';
+import SectionTitle from 'components/common/section-title';
 
 const cx = classNames.bind(styles);
 
@@ -286,13 +287,21 @@ export default function SelectPage() {
         <StepsDisplay currentIndex={2} />
       </Container>
 
+      <Container>
+        <Row>
+          <Col>
+            <div className={cx('storyDivider')} />
+          </Col>
+        </Row>
+      </Container>
+
       <DatasetStory overview={overview} />
 
       <div className={cx('fluidWrapper')}>
         <Container>
           <Row>
             <Col>
-              <h2>Columns Information</h2>
+              <SectionTitle desc="Dataset" title="Columns" />
             </Col>
           </Row>
 
@@ -305,6 +314,7 @@ export default function SelectPage() {
                   <ColumnOverview
                     columnName={columnName}
                     summary={columnSummary}
+                    className={cx('columnOverview')}
                   />
                 </div>
               );

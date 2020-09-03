@@ -2,13 +2,31 @@
 @import 'styles/variables';
 
 .columnBox {
-  background: white;
-  padding: 1rem 2rem;
-  margin-bottom: 1rem;
+  padding: 1.2rem 2rem;
+  margin-bottom: 2.5rem;
 
-  h3 {
-    color: color.scale($color-secondary, $lightness: 60%);
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  .columnBoxHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.4rem;
+
+    h3 {
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    .viewDetailsLink {
+      color: #333;
+      display: inline-block;
+      background: white;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10rem;
+
+      &:hover {
+        color: #fff;
+        background-color: #333;
+      }
+    }
   }
 }

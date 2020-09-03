@@ -11,27 +11,35 @@ const cx = classNames.bind(styles);
 type ColumnOverviewProps = {
   columnName: string;
   summary: TColumnSummary;
+  className?: string;
 };
 
 export default function ColumnOverview({
   columnName,
   summary,
+  className,
 }: ColumnOverviewProps) {
   const detailLinkQueryString = qs.stringify({
     name: columnName,
   });
 
   return (
-    <div className={cx('columnBox')}>
+    <div
+      className={cx('columnBox', {
+        [className]: !!className,
+      })}
+    >
       <Row>
-        <Col md={6}>
-          <h3>{columnName}</h3>
-        </Col>
+        <Col md={12}>
+          <div className={cx('columnBoxHeader')}>
+            <h3>{columnName}</h3>
 
-        <Col md={6}>
-          <Link href={`/results/column?${detailLinkQueryString}`}>
-            <a>View Details</a>
-          </Link>
+            <div className={cx('viewDetailsWrapper')}>
+              <Link href={`/results/column?${detailLinkQueryString}`}>
+                <a className={cx('viewDetailsLink')}>View Details 🡒</a>
+              </Link>
+            </div>
+          </div>
         </Col>
       </Row>
 
