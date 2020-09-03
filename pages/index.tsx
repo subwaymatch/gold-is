@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import Layout from 'components/Layout';
 import styles from './home-page.module.scss';
 import classNames from 'classnames/bind';
