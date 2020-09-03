@@ -1,61 +1,13 @@
 @use 'sass:color';
 @import 'styles/variables';
 
-.resultsTabs {
-  font-size: 1.2rem;
-
-  .tabItem {
-    display: inline-block;
-
-    color: #aaa;
-    margin-right: 2rem;
-    padding: 0.4rem 0;
-
-    &.active {
-      color: #000;
-      border-bottom: 4px solid $color-primary;
-    }
-  }
+.dataTableWrapper {
+  max-width: 100%;
+  overflow-x: scroll;
 }
 
 .fluidWrapper {
   background: color.scale($color-secondary, $lightness: 95%);
   padding-top: 4rem;
   padding-bottom: 4rem;
-
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: color.scale($color-secondary, $lightness: 50%);
-  }
-
-  .box {
-    background-color: #fff;
-    padding: 1rem 0.4rem;
-    border: 1px solid #e8e8e8;
-
-    h3 {
-      color: #333;
-      font-size: 1.15rem;
-      margin-bottom: 0.3rem;
-      font-weight: 700;
-    }
-
-    .item {
-      color: #444;
-      border-top: 1px solid #eee;
-      display: flex;
-      padding: 0.2rem 0;
-      font-size: 1.05rem;
-
-      span:first-child {
-        flex: 3;
-      }
-
-      span:last-child {
-        flex: 1;
-      }
-    }
-  }
 }

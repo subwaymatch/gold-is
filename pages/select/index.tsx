@@ -52,44 +52,10 @@ export default function SelectPage() {
           <Row>
             <Col>
               <h2>First 10 Rows</h2>
-              <div dangerouslySetInnerHTML={{ __html: dfHtml }} />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              {overview && (
-                <>
-                  <DipslayItem
-                    label="Number of Rows"
-                    value={overview.numRows}
-                  />
-                  <DipslayItem
-                    label="Number of Columns"
-                    value={overview.numCols}
-                  />
-                  <DipslayItem
-                    label="Missing Cells"
-                    value={overview.numMissingCells}
-                  />
-                  <DipslayItem
-                    label="Missing Cells (%)"
-                    value={toPercentage(overview.missingCellsPercentage)}
-                  />
-                  <DipslayItem
-                    label="Duplicate Rows"
-                    value={overview.numDuplicateRows}
-                  />
-                  <DipslayItem
-                    label="Duplicate Rows (%)"
-                    value={toPercentage(overview.duplicateRowsPercentage)}
-                  />
-                  <DipslayItem
-                    label="Memory Usage"
-                    value={toKiloBytes(overview.memoryUsage)}
-                  />
-                </>
-              )}
+              <div
+                className={cx('dataTableWrapper')}
+                dangerouslySetInnerHTML={{ __html: dfHtml }}
+              />
             </Col>
           </Row>
         </Container>

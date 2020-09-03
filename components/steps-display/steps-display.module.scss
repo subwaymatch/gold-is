@@ -8,14 +8,14 @@
 
 .stepItem {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   font-size: 1.6rem;
   font-weight: 600;
 
-  a {
-    display: inline-flex;
-    align-items: center;
+  cursor: not-allowed;
+
+  &.clickable {
     cursor: pointer;
   }
 
