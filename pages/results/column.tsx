@@ -7,6 +7,7 @@ import Layout from 'components/Layout';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from './column-page.module.scss';
 import classNames from 'classnames/bind';
+import SectionTitle from 'components/common/section-title';
 
 const cx = classNames.bind(styles);
 
@@ -37,11 +38,8 @@ export default function ColumnDetailsPage() {
                 <Link href="/results">
                   <a className={cx('backLink')}>⟵ Back to Results</a>
                 </Link>
-                <h2>
-                  <span className={cx('titleDesc')}>Column</span>
-                  <span className={cx('titleDivider')}>/</span>
-                  <span className={cx('titleColumnName')}>Story</span>
-                </h2>
+
+                <SectionTitle desc="Column" title="Story" />
               </div>
             </Col>
           </Row>

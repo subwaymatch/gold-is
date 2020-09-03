@@ -10,6 +10,7 @@ import styles from './results-page.module.scss';
 import classNames from 'classnames/bind';
 import ColumnOverview from 'components/data-summary/column-overview';
 import MyResponsiveHeatMap from 'components/visualizations/heatmap';
+import DatasetStory from 'components/data-summary/dataset-story';
 
 const cx = classNames.bind(styles);
 
@@ -284,6 +285,8 @@ export default function SelectPage() {
       <Container>
         <StepsDisplay currentIndex={2} />
       </Container>
+
+      <DatasetStory overview={overview} />
 
       <div className={cx('fluidWrapper')}>
         <Container>

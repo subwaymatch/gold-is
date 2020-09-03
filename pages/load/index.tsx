@@ -16,14 +16,12 @@ const cx = classNames.bind(styles);
 export default function LoadPage() {
   const router = useRouter();
 
-  const dataUrl = router.query.hasOwnProperty('dataUrl')
-    ? Array.isArray(router.query.dataUrl)
-      ? router.query.dataUrl[0]
-      : router.query.dataUrl
-    : '';
+  const [csvUrl, setCsvUrl] = useState('');
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
+  const sourceUrl = usePyodideStore((state) => state.sourceUrl);
   const setSourceUrl = usePyodideStore((state) => state.setSourceUrl);
   const setPyodideManager = usePyodideStore((state) => state.setPyodideManager);
 
@@ -36,10 +34,15 @@ export default function LoadPage() {
 
       (window as any).pyodideManager = newManager;
     }
-  }, []);
 
-  const [csvUrl, setCsvUrl] = useState(dataUrl);
-  const [isWaiting, setIsWaiting] = useState(false);
+    setCsvUrl(
+      router.query.hasOwnProperty('dataUrl')
+        ? Array.isArray(router.query.dataUrl)
+          ? router.query.dataUrl[0]
+          : router.query.dataUrl
+        : sourceUrl
+    );
+  }, []);
 
   const loadCsvFromUrl = async () => {
     await pyodideManager.loadCsvFromUrl(csvUrl);
@@ -98,7 +101,7 @@ export default function LoadPage() {
 
               <button
                 className={cx('nextButton')}
-                disabled={!pyodideManager}
+                disabled={!pyodideManager || !csvUrl}
                 onClick={() => {
                   setIsWaiting(true);
                 }}

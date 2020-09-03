@@ -1,0 +1,21 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.sectionTitle {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-top: 3rem;
+
+  span {
+    display: inline-block;
+  }
+
+  .divider {
+    color: #ddd;
+    padding: 0 1rem;
+  }
+
+  .desc {
+    color: #ddd;
+  }
+}

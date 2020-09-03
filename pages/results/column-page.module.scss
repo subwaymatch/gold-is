@@ -13,24 +13,4 @@
     font-size: 1.4rem;
     margin-bottom: 1rem;
   }
-
-  h2 {
-    font-size: 3rem;
-    line-height: 1.1;
-    margin-top: 3rem;
-
-    span {
-      display: inline-block;
-    }
-
-    .titleDivider {
-      color: $color-primary;
-      color: #ddd;
-      padding: 0 1rem;
-    }
-
-    .titleDesc {
-      color: #ddd;
-    }
-  }
 }

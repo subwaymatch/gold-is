@@ -9,6 +9,9 @@ type ColumnStoryProps = {
 };
 
 const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
+  const isNumeric =
+    summary.data_type == 'int64' || summary.data_type == 'float64';
+
   const missingValueStory =
     summary.missing_count > 0 ? (
       <>
@@ -18,6 +21,17 @@ const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
     ) : (
       'There is no missing value.'
     );
+
+  const statsStory = isNumeric ? (
+    <p>
+      Some stats of non-missing values. Mean is{' '}
+      <span className={styles.figure}>{formatNumber(summary.mean)}</span>. The
+      minimum is{' '}
+      <span className={styles.figure}>{formatNumber(summary.min)}</span>, while
+      the maximum is{' '}
+      <span className={styles.figure}>{formatNumber(summary.max)}</span>.
+    </p>
+  ) : null;
 
   return (
     <div className={styles.columnStory}>
@@ -35,6 +49,8 @@ const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
               </span>{' '}
               of the total number of rows. {missingValueStory}
             </p>
+
+            {statsStory}
           </Col>
         </Row>
       </Container>
