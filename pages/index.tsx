@@ -4,7 +4,10 @@ import Layout from 'components/Layout';
 import styles from './home-page.module.scss';
 import classNames from 'classnames/bind';
 import { Container, Row, Col } from 'react-bootstrap';
-import ChildrenBroImage from 'images/illustration-children-bro.svg';
+import ChildrenImage from 'images/illustration-children-bro.svg';
+import BoatImage from 'images/illustration-yacht-bro.svg';
+
+import ExampleDataset from 'components/example-dataset';
 
 const cx = classNames.bind(styles);
 
@@ -33,25 +36,19 @@ export default function Home() {
               </Col>
             </Row>
 
-            <div className={cx('exampleItem')}>
-              <Row>
-                <Col md={8}>
-                  <h3>World Happiness Report 2020</h3>
+            <ExampleDataset
+              title="World Happiness Report 2020"
+              description="The Happiness Score is a national average of the responses to the main life evaluation question asked in the Gallup World Poll (GWP), which uses the Cantril Ladder."
+              imageSrc={ChildrenImage}
+              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/world-happiness-report-2020.csv"
+            />
 
-                  <p>
-                    The Happiness Score is a national average of the responses
-                    to the main life evaluation question asked in the Gallup
-                    World Poll (GWP), which uses the Cantril Ladder.
-                  </p>
-
-                  <a>Select and Continue 🡒</a>
-                </Col>
-
-                <Col md={4}>
-                  <img src={ChildrenBroImage} alt="World Happiness Image" />
-                </Col>
-              </Row>
-            </div>
+            <ExampleDataset
+              title="Titanic Dataset"
+              description="The Titanic sank into the icy water in 1912. The tragic accident killed 1502 out of 2224 passengers and crew. Was women's chance of survival higher? How about passenger class? Did people with higher ticket prices have higher chances of survival?"
+              imageSrc={BoatImage}
+              dataUrl="https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+            />
           </Container>
         </div>
       </main>

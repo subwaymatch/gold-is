@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^3.6.2",
+    "@nivo/heatmap": "^0.62.0",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "framer-motion": "^2.5.1",

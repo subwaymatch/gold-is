@@ -15,6 +15,13 @@ const cx = classNames.bind(styles);
 
 export default function LoadPage() {
   const router = useRouter();
+
+  const dataUrl = router.query.hasOwnProperty('dataUrl')
+    ? Array.isArray(router.query.dataUrl)
+      ? router.query.dataUrl[0]
+      : router.query.dataUrl
+    : '';
+
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
   const setSourceUrl = usePyodideStore((state) => state.setSourceUrl);
@@ -31,9 +38,7 @@ export default function LoadPage() {
     }
   }, []);
 
-  const [csvUrl, setCsvUrl] = useState(
-    'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
-  );
+  const [csvUrl, setCsvUrl] = useState(dataUrl);
   const [isWaiting, setIsWaiting] = useState(false);
 
   const loadCsvFromUrl = async () => {

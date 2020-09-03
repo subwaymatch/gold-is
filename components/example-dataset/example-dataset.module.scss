@@ -1,0 +1,26 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.exampleItem {
+  padding: 2rem 0;
+  font-size: 1.4rem;
+
+  h3 {
+    color: color.mix($color-primary, black, 16%);
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 1.4rem;
+    color: color.scale($color-primary, $lightness: -30%, $saturation: -80%);
+  }
+
+  .selectMessage {
+    margin-top: 2.4rem;
+    border-top: 1px solid $color-secondary;
+    padding-top: 1rem;
+    display: inline-block;
+    color: $color-secondary;
+  }
+}
