@@ -52,9 +52,6 @@ export default function ColumnPlots({
         .map((pair: any[]) => ({ x: pair[0], y: pair[1] }));
 
       setFrequentPlotData(result);
-
-      console.log(columnDetailsCodeResult.output.most_frequent);
-      console.log(result);
     })();
   }, []);
 

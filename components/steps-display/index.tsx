@@ -24,7 +24,7 @@ const StepItem = ({ number, label, active, clickable, href }) =>
           active,
           clickable,
         })}
-        variants={clickable ? clickableVariants : {}}
+        variants={clickableVariants}
         whileHover="hover"
         whileTap="tap"
         href={href}

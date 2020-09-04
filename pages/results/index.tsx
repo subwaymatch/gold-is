@@ -36,8 +36,6 @@ export default function SelectPage() {
           generateOverviewCode
         );
 
-        console.log(overviewCodeResult);
-
         setOverview(overviewCodeResult.output);
 
         const columnsSummaryCodeResult = await pyodideManager.runCode(

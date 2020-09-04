@@ -23,10 +23,7 @@ class PyodideManager {
   }
 
   async loadPyodide() {
-    console.log('pyodideManager.loadPyodide()');
-
     if (this.isLoaded) {
-      console.log('pyodide already loaded');
       return;
     }
 
@@ -34,11 +31,6 @@ class PyodideManager {
       window.languagePluginLoader
         .then(async () => {
           this.pyodide = window.pyodide;
-
-          this.initialGlobalKeys = this.pyodide.globals;
-
-          console.log(`pyodideManager.initialGlobalKeys`);
-          console.log(this.initialGlobalKeys);
 
           // Intercept Python stdout & stderr to StringIO
           this.pyodide.runPython(`import io, sys

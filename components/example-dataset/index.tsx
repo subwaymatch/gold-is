@@ -22,7 +22,7 @@ export default function ExampleDataset({
   dataUrl,
 }: ExampleDatasetProps) {
   const dataUrlQueryString = qs.stringify({
-    dataUrl: dataUrl,
+    dataUrl,
   });
 
   return (

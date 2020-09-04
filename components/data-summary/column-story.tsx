@@ -10,7 +10,7 @@ type ColumnStoryProps = {
 
 const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
   const isNumeric =
-    summary.data_type == 'int64' || summary.data_type == 'float64';
+    summary.data_type === 'int64' || summary.data_type === 'float64';
 
   const missingValueStory =
     summary.missing_count > 0 ? (
@@ -27,7 +27,7 @@ const ColumnStory = ({ columnName, summary }: ColumnStoryProps) => {
       <>
         Since there are no missing values and all values are unique, this column
         can possibly be used as <span className={styles.figure}>IDs</span> or
-        <span className={styles.figure}>indices</span>.
+        <span className={styles.figure}> indices</span>.
       </>
     ) : null;
 

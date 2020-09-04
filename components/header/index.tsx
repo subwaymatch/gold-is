@@ -2,7 +2,7 @@ import Link from 'next/link';
 import LogoImage from 'images/gold-logo-02@2x.png';
 import classNames from 'classnames/bind';
 import { motion } from 'framer-motion';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { GiDigDug } from 'react-icons/gi';
 import { FiGithub } from 'react-icons/fi';
 import { clickableVariants } from 'animations/variants';
