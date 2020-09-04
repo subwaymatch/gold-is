@@ -24,11 +24,9 @@ export default function Header() {
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: 30,
                 },
                 visible: {
                   opacity: 1,
-                  y: 0,
                   rotate: [0, 360],
                   transition: {
                     delay: 0.5,

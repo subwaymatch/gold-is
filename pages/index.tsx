@@ -50,6 +50,13 @@ export default function Home() {
               imageSrc={BoatImage}
               dataUrl="https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
             />
+
+            <ExampleDataset
+              title="NBA Season 2020-20 Player Stats"
+              description=""
+              imageSrc={BoatImage}
+              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
+            />
           </Container>
         </div>
       </main>

@@ -13,8 +13,6 @@ const DatasetStory = ({ overview }: DatasetStoryProps) => {
     return null;
   }
 
-  console.log(overview);
-
   const missingValueStory =
     overview.numMissingCells > 0 ? (
       <>
