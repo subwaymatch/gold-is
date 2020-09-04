@@ -17,7 +17,8 @@ const cx = classNames.bind(styles);
 const dfSelector = (state) => state.dataFrame;
 
 export default function SelectPage() {
-  const [overview, setOverview] = useState<any>(null);
+  const dataOverview = usePyodideStore((state) => state.dataOverview);
+  const setDataOverview = usePyodideStore((state) => state.setDataOverview);
   const columnSummaries = usePyodideStore((state) => state.columnSummaries);
   const setColumnSummaries = usePyodideStore(
     (state) => state.setColumnSummaries
@@ -30,13 +31,15 @@ export default function SelectPage() {
     if (!df) {
       router.push('/load');
       return;
-    } else {
+    } else if (!dataOverview || !columnSummaries) {
+      console.log('Calculating data overview and column summaries');
+
       (async () => {
         const overviewCodeResult = await pyodideManager.runCode(
           generateOverviewCode
         );
 
-        setOverview(overviewCodeResult.output);
+        setDataOverview(overviewCodeResult.output);
 
         const columnsSummaryCodeResult = await pyodideManager.runCode(
           generateColumnsSummary
@@ -61,7 +64,7 @@ export default function SelectPage() {
         </Row>
       </Container>
 
-      <DatasetStory overview={overview} />
+      <DatasetStory overview={dataOverview} />
 
       <div className={cx('fluidWrapper')}>
         <Container>
