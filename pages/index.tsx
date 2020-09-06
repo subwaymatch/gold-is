@@ -52,12 +52,14 @@ export default function Home() {
               dataUrl="https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
             />
 
-            <ExampleDataset
-              title="NBA Season 2020-20 Player Stats"
-              description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
-              imageSrc={BasketballImage}
-              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
-            />
+            {false && (
+              <ExampleDataset
+                title="NBA Season 2020-20 Player Stats"
+                description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
+                imageSrc={BasketballImage}
+                dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
+              />
+            )}
           </Container>
         </div>
       </main>
