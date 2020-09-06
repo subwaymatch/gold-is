@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
 import generateOverviewCode from 'python/generate-overview.py';
-import generateColumnsSummary from 'python/generate-columns-summary.py';
+import generateColumnsSummaryCode from 'python/generate-columns-summary.py';
 import styles from './results-page.module.scss';
 import classNames from 'classnames/bind';
 import ColumnOverview from 'components/data-summary/column-overview';
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 const dfSelector = (state) => state.dataFrame;
 
-export default function SelectPage() {
+export default function ResultsPage() {
   const dataOverview = usePyodideStore((state) => state.dataOverview);
   const setDataOverview = usePyodideStore((state) => state.setDataOverview);
   const columnSummaries = usePyodideStore((state) => state.columnSummaries);
@@ -42,7 +42,7 @@ export default function SelectPage() {
         setDataOverview(overviewCodeResult.output);
 
         const columnsSummaryCodeResult = await pyodideManager.runCode(
-          generateColumnsSummary
+          generateColumnsSummaryCode
         );
 
         setColumnSummaries(columnsSummaryCodeResult.output.to_dict());

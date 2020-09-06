@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import classNames from 'classnames/bind';
 import { Row, Col, Container } from 'react-bootstrap';
+import createDataFrameCode from 'python/create-dataframe-from-csv-string.py';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
@@ -47,49 +48,39 @@ export default function LoadPage() {
     );
   }, []);
 
-  const loadCsvFromUrlAsText = async (url) => {
+  const getCsvStringFromUrl = async (url) => {
     const corsProxyUrl = getCorsProxyUrl(url);
 
-    fetch(corsProxyUrl)
-      .then(async (response) => {
-        const text = await response.text();
+    return new Promise((resolve, reject) => {
+      fetch(corsProxyUrl)
+        .then(async (response) => {
+          const text = await response.text();
 
-        console.log(`response.status=${response.status}`);
+          if (response.status >= 400 && response.status < 600) {
+            toast.error('Fetching the CSV file failed. ' + text);
+            reject();
+          } else {
+            (window as any).csv_string = text;
+            resolve();
+          }
+        })
+        .catch((err) => {
+          console.error(err);
 
-        if (response.status >= 400 && response.status < 600) {
-          toast.error('Fetching the CSV file failed. ' + text);
-        } else {
-          (window as any).csv_string = text;
-        }
+          toast.error('Fetching the CSV file failed. ' + err.message);
 
-        return text;
-      })
-      .catch((err) => {
-        console.error(err);
-
-        toast.error('Fetching the CSV file failed. ' + err.message);
-      });
+          reject();
+        });
+    });
   };
 
-  const loadCsvFromUrl = async () => {
-    await pyodideManager.loadCsvFromUrl(csvUrl);
+  const loadCsvStringToDataFrame = async () => {
+    const loadCodeResult = await pyodideManager.runCode(createDataFrameCode);
+
+    setDataFrame(loadCodeResult.output);
+    (window as any).df = loadCodeResult.output;
 
     setSourceUrl(csvUrl);
-
-    let df;
-
-    try {
-      df = pyodide.pyimport('df');
-
-      setDataFrame(df);
-
-      // TODO: Remove code in production
-      // For debugging purposes only
-      (window as any).df = df;
-    } catch (ex) {
-      console.log('Errow while importing existing dataframe');
-      console.error(ex);
-    }
 
     (window as any).router = router;
 
@@ -97,7 +88,7 @@ export default function LoadPage() {
   };
 
   return isWaiting ? (
-    <LoadingOverlay callback={loadCsvFromUrl} />
+    <LoadingOverlay callback={loadCsvStringToDataFrame} />
   ) : (
     <Layout fluid>
       <Container>
@@ -145,7 +136,7 @@ export default function LoadPage() {
                     // Normally, you would directly call a function to start loading the data
                     // However, the main UI will freeze and loading screen won't be displayed without using this wierd workaround where the loading component is first rendered, and then data starts to load
 
-                    await loadCsvFromUrlAsText(csvUrl);
+                    await getCsvStringFromUrl(csvUrl);
 
                     setIsWaiting(true);
                   }}

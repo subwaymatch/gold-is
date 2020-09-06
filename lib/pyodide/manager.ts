@@ -1,5 +1,4 @@
 import { PyodideEnabledWindow } from 'typings/pyodide';
-import qs from 'qs';
 
 declare let window: PyodideEnabledWindow;
 
@@ -61,33 +60,6 @@ sys.stderr = io.StringIO()`);
     }
 
     return Object.keys(this.pyodide.loadedPackages);
-  }
-
-  async loadCsvFromUrl(url) {
-    if (!this.isLoaded) {
-      await this.loadPyodide();
-    }
-
-    const urlQueryString = qs.stringify({
-      url,
-    });
-
-    const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
-
-    const codeResult = await this.runCode(`import pandas as pd
-
-df_original = None
-df = None
-
-try:
-  df_original = pd.read_csv(pyodide.open_url('${proxiedUrl}'))
-  df = df_original.copy()
-except:
-  df = pd.DataFrame({})
-  print('Error opening URL')
-`);
-
-    (window as any).codeResult = codeResult;
   }
 
   async runCode(code: string, options?: RunCodeOptions) {
