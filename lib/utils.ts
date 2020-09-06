@@ -1,3 +1,15 @@
+import qs from 'qs';
+
+export const getCorsProxyUrl = (url) => {
+  const urlQueryString = qs.stringify({
+    url,
+  });
+
+  const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
+
+  return proxiedUrl;
+};
+
 export const formatNumber = (
   val: number | string,
   precision: number = 2

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 import classNames from 'classnames/bind';
 import { Row, Col, Container } from 'react-bootstrap';
 import Layout from 'components/Layout';
@@ -9,6 +10,7 @@ import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import usePyodideStore from 'stores/pyodide';
 import FullButton from 'components/common/full-button';
+import { getCorsProxyUrl } from 'lib/utils';
 
 declare let pyodide: any;
 
@@ -45,6 +47,30 @@ export default function LoadPage() {
     );
   }, []);
 
+  const loadCsvFromUrlAsText = async (url) => {
+    const corsProxyUrl = getCorsProxyUrl(url);
+
+    fetch(corsProxyUrl)
+      .then(async (response) => {
+        const text = await response.text();
+
+        console.log(`response.status=${response.status}`);
+
+        if (response.status >= 400 && response.status < 600) {
+          toast.error('Fetching the CSV file failed. ' + text);
+        } else {
+          (window as any).csv_string = text;
+        }
+
+        return text;
+      })
+      .catch((err) => {
+        console.error(err);
+
+        toast.error('Fetching the CSV file failed. ' + err.message);
+      });
+  };
+
   const loadCsvFromUrl = async () => {
     await pyodideManager.loadCsvFromUrl(csvUrl);
 
@@ -79,6 +105,17 @@ export default function LoadPage() {
       </Container>
 
       <div className={cx('fluidWrapper')}>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Container>
           <Row className={styles.loadSourceComponent}>
             <Col>
@@ -104,9 +141,12 @@ export default function LoadPage() {
                 <FullButton
                   label="Start Digging →"
                   disabled={!pyodideManager || !csvUrl}
-                  onClick={() => {
+                  onClick={async () => {
                     // Normally, you would directly call a function to start loading the data
                     // However, the main UI will freeze and loading screen won't be displayed without using this wierd workaround where the loading component is first rendered, and then data starts to load
+
+                    await loadCsvFromUrlAsText(csvUrl);
+
                     setIsWaiting(true);
                   }}
                 />
