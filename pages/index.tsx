@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { Container, Row, Col } from 'react-bootstrap';
 import ChildrenImage from 'images/illustration-children-bro.svg';
 import BoatImage from 'images/illustration-yacht-bro.svg';
+import BasketballImage from 'images/illustration-basketball-bro.svg';
 
 import ExampleDataset from 'components/example-dataset';
 
@@ -53,8 +54,8 @@ export default function Home() {
 
             <ExampleDataset
               title="NBA Season 2020-20 Player Stats"
-              description=""
-              imageSrc={BoatImage}
+              description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
+              imageSrc={BasketballImage}
               dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
             />
           </Container>

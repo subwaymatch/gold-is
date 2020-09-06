@@ -4,10 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
-import generateOverviewCode from 'python/generate-overview.py';
 import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
-import { TDataOverview } from 'typings/pyodide';
 import SectionTitle from 'components/common/section-title';
 import FullButton from 'components/common/full-button';
 
@@ -15,12 +13,13 @@ const cx = classNames.bind(styles);
 
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
-  const [overview, setOverview] = useState<TDataOverview>(null);
-  const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const dropColumns = usePyodideStore((state) => state.dropColumns);
   const addDropColumn = usePyodideStore((state) => state.addDropColumn);
   const removeDropColumn = usePyodideStore((state) => state.removeDropColumn);
   const resetDropColumns = usePyodideStore((state) => state.resetDropColumns);
+  const setColumnSummaries = usePyodideStore(
+    (state) => state.setColumnSummaries
+  );
   const df = usePyodideStore((state) => state.dataFrame);
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
   const router = useRouter();
@@ -30,14 +29,6 @@ export default function SelectPage() {
       router.push('/load');
       return;
     } else {
-      (async () => {
-        const overviewCodeResult = await pyodideManager.runCode(
-          generateOverviewCode
-        );
-
-        setOverview(overviewCodeResult.output);
-      })();
-
       setDfHtml(df.head(10).to_html());
     }
 
@@ -50,6 +41,7 @@ export default function SelectPage() {
 
   const proceedToNextPage = () => {
     dropSelectedColumns();
+    setColumnSummaries(null);
     router.push('/results');
   };
 
