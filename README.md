@@ -55,6 +55,13 @@ To build,
 $ yarn build
 ```
 
+## To-do Items
+
+- **Increase URL Import File Size Limit**: Currently, CSV file download via URL is capped at 5MB. This is due to a payload limit on Vercel.
+- **Example Datasets**: Add more example datasets.
+- **Correlation between Columns**: Add visualizations to display relationships between different columns.
+- **Web Workers*: Use web workers to run Python (pyodide). This is dependent on the bug fix of a [known issue](https://github.com/iodide-project/pyodide/issues/441).
+
 
 ## Screenshots
 
@@ -74,6 +81,7 @@ $ yarn build
 ## Acknowledgements
 
 - **Jeongmin Lee**: Project manager / data analyst
+- This project is heavily inspired by [Pandas Profiling](https://github.com/pandas-profiling/pandas-profiling).
 
 ## Deployment
 
