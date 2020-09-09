@@ -2,7 +2,8 @@
 <img width="700" alt="gold-logo-with-text@2x" src="https://user-images.githubusercontent.com/1064036/92136228-6237e700-edd1-11ea-81be-fdddfe379b01.png">
   <br /><br />
   <a href="https://deepscan.io/dashboard#view=project&tid=10181&pid=13321&bid=220060" title="Deepscan"><img src="https://deepscan.io/api/teams/10181/projects/13321/branches/220060/badge/grade.svg" alt="Deepscan Badge" /></a>
-<a href="https://app.codacy.com/manual/subwaymatch/gold-is?utm_source=github.com&utm_medium=referral&utm_content=subwaymatch/gold-is&utm_campaign=Badge_Grade_Dashboard" title="Codacy"><img src="https://api.codacy.com/project/badge/Grade/5e7a9e7935534e57a9a49d716ff3338a" alt="Codacy Badge" /></a>
+  <a href="https://app.codacy.com/manual/subwaymatch/gold-is?utm_source=github.com&utm_medium=referral&utm_content=subwaymatch/gold-is&utm_campaign=Badge_Grade_Dashboard" title="Codacy"><img src="https://api.codacy.com/project/badge/Grade/5e7a9e7935534e57a9a49d716ff3338a" alt="Codacy Badge" /></a>
+  <a href="https://opensource.org/licenses/MIT" title="MIT License"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 </p>
 
 
