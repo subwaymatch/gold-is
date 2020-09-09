@@ -11,6 +11,8 @@
 
 [Gold.is](https://gold.is) aims to tell you what your data looks like in plain human language.
 
+![image](https://user-images.githubusercontent.com/1064036/92619021-9ce4c800-f286-11ea-9984-78a52a4e48c4.png)
+
 ## Features
 
 - :crystal_ball: No need to run a backend server to run Jupyter notebooks or Python - [Gold.is](https://gold.is) uses [Pyodide](https://github.com/iodide-project/pyodide) to run Python 3.8 in the browser.
@@ -30,9 +32,29 @@
 - ~~[Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are used to run Python scripts in non-main threads. You need to use a browser that supports Web Workers. You can check the browser support at [https://caniuse.com/#feat=webworkers](https://caniuse.com/#feat=webworkers).~~
 - Due to a [known issue](https://github.com/iodide-project/pyodide/issues/441) with Pyodide, web workers are not being used at the moment. This will cause the browser to freeze when Python code is running.
 
-## Acknowledgements
+## Want to do your own thang?
 
-- **Jeongmin Lee**: Project manager / data analyst
+First, clone the repository.
+```
+$ git clone https://github.com/subwaymatch/gold-is.git
+$ cd gold-is
+```
+
+Install dependencies. I use `yarn`, but feel free to use `npm`.
+```
+$ yarn
+```
+
+Run the development server. This will launch a development server at port 3000.
+```
+$ yarn dev
+```
+
+To build,
+```
+$ yarn build
+```
+
 
 ## Screenshots
 
@@ -48,6 +70,10 @@
   <img src="https://user-images.githubusercontent.com/1064036/92139168-fd7e8b80-edd4-11ea-87b5-0a1e0d37e6d9.png" alt="Column Details Screenshot" width="720" />
   <br /><br />
 </p>
+
+## Acknowledgements
+
+- **Jeongmin Lee**: Project manager / data analyst
 
 ## Deployment
 
