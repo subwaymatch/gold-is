@@ -2,13 +2,16 @@
 <img width="700" alt="gold-logo-with-text@2x" src="https://user-images.githubusercontent.com/1064036/92136228-6237e700-edd1-11ea-81be-fdddfe379b01.png">
   <br /><br />
   <a href="https://deepscan.io/dashboard#view=project&tid=10181&pid=13321&bid=220060" title="Deepscan"><img src="https://deepscan.io/api/teams/10181/projects/13321/branches/220060/badge/grade.svg" alt="Deepscan Badge" /></a>
-<a href="https://app.codacy.com/manual/subwaymatch/gold-is?utm_source=github.com&utm_medium=referral&utm_content=subwaymatch/gold-is&utm_campaign=Badge_Grade_Dashboard" title="Codacy"><img src="https://api.codacy.com/project/badge/Grade/5e7a9e7935534e57a9a49d716ff3338a" alt="Codacy Badge" /></a>
+  <a href="https://app.codacy.com/manual/subwaymatch/gold-is?utm_source=github.com&utm_medium=referral&utm_content=subwaymatch/gold-is&utm_campaign=Badge_Grade_Dashboard" title="Codacy"><img src="https://api.codacy.com/project/badge/Grade/5e7a9e7935534e57a9a49d716ff3338a" alt="Codacy Badge" /></a>
+  <a href="https://opensource.org/licenses/MIT" title="MIT License"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 </p>
 
 
 ## What is it?
 
 [Gold.is](https://gold.is) aims to tell you what your data looks like in plain human language.
+
+![image](https://user-images.githubusercontent.com/1064036/92619021-9ce4c800-f286-11ea-9984-78a52a4e48c4.png)
 
 ## Features
 
@@ -29,9 +32,36 @@
 - ~~[Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are used to run Python scripts in non-main threads. You need to use a browser that supports Web Workers. You can check the browser support at [https://caniuse.com/#feat=webworkers](https://caniuse.com/#feat=webworkers).~~
 - Due to a [known issue](https://github.com/iodide-project/pyodide/issues/441) with Pyodide, web workers are not being used at the moment. This will cause the browser to freeze when Python code is running.
 
-## Acknowledgements
+## Want to do your own thang?
 
-- **Jeongmin Lee**: Project manager / data analyst
+First, clone the repository.
+```
+$ git clone https://github.com/subwaymatch/gold-is.git
+$ cd gold-is
+```
+
+Install dependencies. I use `yarn`, but feel free to use `npm`.
+```
+$ yarn
+```
+
+Run the development server. This will launch a development server at port 3000.
+```
+$ yarn dev
+```
+
+To build,
+```
+$ yarn build
+```
+
+## To-do Items
+
+- **Increase URL Import File Size Limit**: Currently, CSV file download via URL is capped at 5MB. This is due to a payload limit on Vercel.
+- **Example Datasets**: Add more example datasets.
+- **Correlation between Columns**: Add visualizations to display relationships between different columns.
+- **Web Workers*: Use web workers to run Python (pyodide). This is dependent on the bug fix of a [known issue](https://github.com/iodide-project/pyodide/issues/441).
+
 
 ## Screenshots
 
@@ -47,6 +77,11 @@
   <img src="https://user-images.githubusercontent.com/1064036/92139168-fd7e8b80-edd4-11ea-87b5-0a1e0d37e6d9.png" alt="Column Details Screenshot" width="720" />
   <br /><br />
 </p>
+
+## Acknowledgements
+
+- **Jeongmin Lee**: Project manager / data analyst
+- This project is heavily inspired by [Pandas Profiling](https://github.com/pandas-profiling/pandas-profiling).
 
 ## Deployment
 
