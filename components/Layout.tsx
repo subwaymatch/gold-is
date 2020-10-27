@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Header from 'components/header';
 import { Container } from 'react-bootstrap';
 import { isMobile } from 'react-device-detect';
+import LogoImage from 'images/gold-logo-02@2x.png';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -9,17 +10,32 @@ type LayoutProps = {
   fluid?: boolean;
 };
 
-function MobileUnsupportedLayout() {
+function UnsupportedScreen() {
   return (
-    <div>
-      <h1>Mobile is not supported.</h1>
-    </div>
+    <>
+      <Head>
+        <title>Gold.is - Mobile Device Unsupported</title>
+      </Head>
+
+      <div
+        style={{
+          padding: '3rem',
+          fontSize: '1.8rem',
+          lineHeight: '1.6',
+        }}
+      >
+        <img src={LogoImage} alt="Gold.is Logo" />
+        <p style={{ marginTop: '1rem' }}>
+          Gold.is is not supported on a mobile device.
+        </p>
+      </div>
+    </>
   );
 }
 
 export default function Layout({ children, className, fluid }: LayoutProps) {
   return isMobile ? (
-    <MobileUnsupportedLayout />
+    <UnsupportedScreen />
   ) : (
     <>
       <Head>
