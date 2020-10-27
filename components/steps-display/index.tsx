@@ -53,7 +53,7 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
     <div className={styles.stepsDisplay}>
       <Row>
         {steps.map((step, index) => (
-          <Col md={4} key={index}>
+          <Col xs={4} key={index}>
             <StepItem
               number={index + 1}
               label={step.label}

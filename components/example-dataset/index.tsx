@@ -28,7 +28,7 @@ export default function ExampleDataset({
   return (
     <div className={cx('exampleItem')}>
       <Row>
-        <Col md={8}>
+        <Col xs={8}>
           <Link href={`/load?${dataUrlQueryString}`}>
             <motion.a
               className={cx('exampleItemLink')}
@@ -45,7 +45,7 @@ export default function ExampleDataset({
           </Link>
         </Col>
 
-        <Col md={4}>
+        <Col xs={4}>
           <img src={imageSrc} alt={title} />
         </Col>
       </Row>

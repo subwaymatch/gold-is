@@ -15,7 +15,7 @@ export default function ColumnSummary({ summary }: ColumnSummaryProps) {
   return (
     <div className={cx('columnSummary')}>
       <Row>
-        <Col md={6}>
+        <Col xs={6}>
           <DisplayItem label="Data Type" value={summary.data_type} />
 
           <DisplayItem label="Distinct Count" value={summary.distinct_count} />
@@ -43,7 +43,7 @@ export default function ColumnSummary({ summary }: ColumnSummaryProps) {
           />
         </Col>
 
-        <Col md={6}>
+        <Col xs={6}>
           {typeof summary.mean === 'number' && (
             <DisplayItem label="Mean" value={formatNumber(summary.mean)} />
           )}

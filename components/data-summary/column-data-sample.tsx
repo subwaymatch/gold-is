@@ -17,11 +17,11 @@ export default function ColumnDataSample({ columnData }) {
   return (
     <div className={styles.columnDataSample}>
       <Row>
-        <Col md={12}>
+        <Col xs={12}>
           <SectionTitle desc="Column" title="Sample" />
         </Col>
 
-        <Col md={6}>
+        <Col xs={6}>
           <div className={styles.numSampleWrapper}>
             <label>
               <span className={styles.numSampleLabel}>Number of Sample</span>

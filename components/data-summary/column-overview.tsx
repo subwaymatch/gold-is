@@ -30,7 +30,7 @@ export default function ColumnOverview({
       })}
     >
       <Row>
-        <Col md={12}>
+        <Col xs={12}>
           <div className={cx('columnBoxHeader')}>
             <h3>{columnName}</h3>
 

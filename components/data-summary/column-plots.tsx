@@ -68,11 +68,11 @@ export default function ColumnPlots({
             <div className={cx('plotWrapper')}>
               <div className={cx('plotHeader')}>
                 <Row>
-                  <Col md={4}>
+                  <Col xs={4}>
                     <h3>Histogram</h3>
                   </Col>
 
-                  <Col md={8}>
+                  <Col xs={8}>
                     <p>
                       A frequency distribution shows how often each different
                       value in a set of data occurs. A histogram is the most
@@ -95,11 +95,11 @@ export default function ColumnPlots({
             <div className={cx('plotWrapper')}>
               <div className={cx('plotHeader')}>
                 <Row>
-                  <Col md={4}>
+                  <Col xs={4}>
                     <h3>Box Plot</h3>
                   </Col>
 
-                  <Col md={8}>
+                  <Col xs={8}>
                     <p>
                       A box plot (also known as box and whisker plot) is a type
                       of chart often used in explanatory data analysis to
@@ -126,11 +126,11 @@ export default function ColumnPlots({
             <div className={cx('plotWrapper')}>
               <div className={cx('plotHeader')}>
                 <Row>
-                  <Col md={4}>
+                  <Col xs={4}>
                     <h3>Most Frequent</h3>
                   </Col>
 
-                  <Col md={8}>
+                  <Col xs={8}>
                     <p>
                       This plot lists the most frequent values encountered in
                       this column. X-axis represents the count.

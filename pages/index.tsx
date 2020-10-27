@@ -33,7 +33,7 @@ export default function Home() {
         <div className={cx('section', 'examples')}>
           <Container>
             <Row>
-              <Col md={12}>
+              <Col xs={12}>
                 <h2>Example Datasets</h2>
               </Col>
             </Row>

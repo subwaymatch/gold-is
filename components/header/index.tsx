@@ -50,7 +50,7 @@ export default function Header() {
       </div>
 
       <Row>
-        <Col md={{ span: 8, offset: 4 }}>
+        <Col xs={{ span: 8, offset: 4 }}>
           <div className={cx('headerMenu')}>
             <Link href="/load">
               <motion.a
