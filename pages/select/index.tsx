@@ -42,7 +42,7 @@ export default function SelectPage() {
   const proceedToNextPage = () => {
     dropSelectedColumns();
     setColumnSummaries(null);
-    router.push('/results');
+    router.push('/results').then(() => window.scrollTo(0, 0));
   };
 
   const proceedButtonMessage =

@@ -36,7 +36,7 @@ export default function Layout({ children, className, fluid }: LayoutProps) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#eeeeee" />
         <meta name="theme-color" content="#ffffff" />
-        <meta name="viewport" content="width=1200" />
+        <meta name="viewport" content="width=1600" />
 
         {/* Only load Pyodide if in browser and haven't been loaded yet */}
         {typeof window !== 'undefined' &&
