@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Header from 'components/header';
 import { Container } from 'react-bootstrap';
+import { isMobile } from 'react-device-detect';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,8 +9,18 @@ type LayoutProps = {
   fluid?: boolean;
 };
 
-export default function Layout({ children, className, fluid }: LayoutProps) {
+function MobileUnsupportedLayout() {
   return (
+    <div>
+      <h1>Mobile is not supported.</h1>
+    </div>
+  );
+}
+
+export default function Layout({ children, className, fluid }: LayoutProps) {
+  return isMobile ? (
+    <MobileUnsupportedLayout />
+  ) : (
     <>
       <Head>
         <title>Gold.is</title>
