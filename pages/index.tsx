@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ChildrenImage from 'images/illustration-children-bro.svg';
 import BoatImage from 'images/illustration-yacht-bro.svg';
 import BasketballImage from 'images/illustration-basketball-bro.svg';
+import HousesImage from 'images/illustration-houses-bro.svg';
 
 import ExampleDataset from 'components/example-dataset';
 
@@ -52,14 +53,19 @@ export default function Home() {
               dataUrl="https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
             />
 
-            {false && (
-              <ExampleDataset
-                title="NBA Season 2020-20 Player Stats"
-                description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
-                imageSrc={BasketballImage}
-                dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
-              />
-            )}
+            <ExampleDataset
+              title="New York Airbnb Data 2019"
+              description="Since 2008, guests and hosts have used Airbnb to expand on traveling possibilities and present more unique, personalized way of experiencing the world. This dataset describes the listing activity and metrics in NYC, NY for 2019."
+              imageSrc={HousesImage}
+              dataUrl="https://github.com/gold-is/sample-datasets/raw/main/AB_NYC_2019.csv"
+            />
+
+            <ExampleDataset
+              title="NBA Season 2020-20 Player Stats"
+              description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
+              imageSrc={BasketballImage}
+              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
+            />
           </Container>
         </div>
       </main>

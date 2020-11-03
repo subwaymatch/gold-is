@@ -2,7 +2,6 @@ const withImages = require('next-images');
 const WorkerPlugin = require('worker-plugin');
 
 module.exports = withImages({
-  env: {},
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!isServer) {
       config.plugins.push(

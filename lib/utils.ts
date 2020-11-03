@@ -5,7 +5,13 @@ export const getCorsProxyUrl = (url) => {
     url,
   });
 
-  const proxiedUrl = `/api/proxy/csv?${urlQueryString}`;
+  const proxyUrl = process.env.CORS_PROXY_URL
+    ? process.env.CORS_PROXY_URL
+    : '/api/proxy/csv';
+
+  const proxiedUrl = `${proxyUrl}?${urlQueryString}`;
+
+  console.log(proxiedUrl);
 
   return proxiedUrl;
 };
