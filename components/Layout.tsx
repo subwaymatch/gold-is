@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Header from 'components/header';
 import { Container } from 'react-bootstrap';
-import { isMobile, isIE } from 'react-device-detect';
+import { isMobile, isIE, isEdge, isLegacyEdge } from 'react-device-detect';
 import UnsupportedDevice from 'components/landing-unsupported/UnsupportedDevice';
 import UnsupportedBrowser from 'components/landing-unsupported/UnsupportedBrowser';
 
@@ -14,7 +14,7 @@ type LayoutProps = {
 export default function Layout({ children, className, fluid }: LayoutProps) {
   if (isMobile) {
     return <UnsupportedDevice />;
-  } else if (isIE) {
+  } else if (isIE || isEdge || isLegacyEdge) {
     return <UnsupportedBrowser />;
   } else {
     return (
