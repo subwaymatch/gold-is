@@ -84,20 +84,28 @@ export default function LoadPage() {
     const reader = new FileReader();
 
     reader.onabort = () => {
-      console.log('file reading was aborted');
+      console.log('File reading was aborted');
+      toast.error('File reading was aborted');
     };
     reader.onerror = () => {
-      console.log('file reading has failed');
+      console.log('File reading has failed');
+      toast.error('File reading has failed');
     };
     reader.onload = () => {
       // Do whatever you want with the file contents
-      const binaryStr = reader.result;
-      console.log(binaryStr);
+      const fileStr = reader.result;
 
-      setCsvString(binaryStr);
+      toast.success(`Successfully loaded ${file.name}`);
+
+      setCsvString(fileStr as string);
       setIsDroppedFileLoaded(true);
     };
-    reader.readAsText(file);
+
+    try {
+      reader.readAsText(file);
+    } catch (ex) {
+      toast.error(`Failed reading file: ${ex.message}`);
+    }
   }, []);
 
   const {
