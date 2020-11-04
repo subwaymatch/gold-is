@@ -24,6 +24,7 @@ export default function LoadPage() {
   const [csvUrl, setCsvUrl] = useState('');
   const [csvString, setCsvString] = useState('');
   const [isDroppedFileLoaded, setIsDroppedFileLoaded] = useState(false);
+  const [droppedFileName, setDroppedFileName] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
 
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
@@ -98,6 +99,7 @@ export default function LoadPage() {
 
       toast.success(`Successfully loaded ${file.name}`);
 
+      setDroppedFileName(file.name);
       setCsvString(fileStr as string);
       setIsDroppedFileLoaded(true);
     };
@@ -157,23 +159,35 @@ export default function LoadPage() {
         <Container>
           <Row className={styles.loadSourceComponent}>
             <Col>
-              <label>URL to your CSV file</label>
-              <input
-                type="text"
-                className={cx('urlInput')}
-                onChange={(e) => setCsvUrl(e.target.value)}
-                value={csvUrl}
-              />
+              {!isDroppedFileLoaded && (
+                <>
+                  <label>URL to your CSV file</label>
+                  <input
+                    type="text"
+                    className={cx('urlInput')}
+                    onChange={(e) => setCsvUrl(e.target.value)}
+                    value={csvUrl}
+                    disabled={isDroppedFileLoaded}
+                  />
+                </>
+              )}
 
               <div className={styles.dropBoxWrapper} {...getRootProps()}>
                 <input {...getInputProps()} />
 
-                <div className={styles.orDisplay}>
-                  <span>OR</span>
-                </div>
+                {!isDroppedFileLoaded && (
+                  <div className={styles.orDisplay}>
+                    <span>OR</span>
+                  </div>
+                )}
 
                 <div className={styles.dropBox}>
-                  Select or Drag your file here
+                  {isDroppedFileLoaded
+                    ? 'Click or drop your file here to change'
+                    : 'Select or drop your file here'}
+                  {isDroppedFileLoaded && (
+                    <span className={styles.fileName}>{droppedFileName}</span>
+                  )}
                 </div>
               </div>
 

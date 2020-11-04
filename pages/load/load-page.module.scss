@@ -72,6 +72,14 @@
       color: color.scale($color-tertiary, $lightness: 30%);
       background: color.scale($color-tertiary, $lightness: 90%);
       border: 1px solid color.scale($color-tertiary, $lightness: 70%);
+      cursor: pointer;
+    }
+
+    .fileName {
+      color: color.scale($color-tertiary, $lightness: -30%);
+      font-size: 1.2rem;
+      font-family: $font-monospace;
+      display: block;
     }
   }
 
