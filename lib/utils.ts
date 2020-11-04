@@ -25,15 +25,22 @@ export const formatNumber = (
 ): string | null => {
   console.log(`formatNumber, type=${typeof val}, val=${val}`);
 
-  if (Number.isNaN(val)) {
+  if (Number.isNaN(val) || typeof val === 'function') {
     return null;
   } else if (typeof val === 'string') {
     return val;
   } else if (Number.isInteger(val)) {
-    precision = 0;
-    return val.toFixed(precision);
+    return val.toFixed(0);
   } else {
-    return null;
+    let formattedVal = null;
+
+    try {
+      formattedVal = val.toFixed(precision);
+      return formattedVal;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
 };
 
