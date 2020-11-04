@@ -22,6 +22,7 @@
     "react-dropzone": "^11.1.0",
     "react-icons": "^3.11.0",
     "react-toastify": "^6.0.8",
+    "request": "^2.88.2",
     "sass": "^1.26.10",
     "victory": "^35.0.8",
     "worker-plugin": "^5.0.0",

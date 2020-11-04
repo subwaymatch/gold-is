@@ -8,7 +8,6 @@ import createDataFrameCode from 'python/create-dataframe-from-csv-string.py';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
-import LoadFromDragAndDrop from 'components/load/load-from-drag-and-drop';
 import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import usePyodideStore from 'stores/pyodide';
@@ -61,7 +60,9 @@ export default function LoadPage() {
           const text = await response.text();
 
           if (response.status >= 400 && response.status < 600) {
-            toast.error('Fetching the CSV file failed. ' + text);
+            toast.error(
+              `Fetching the CSV file failed. HTTP Status ${response.status}`
+            );
             reject();
           } else {
             setCsvString(text);
