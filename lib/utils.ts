@@ -14,8 +14,6 @@ export const getCorsProxyUrl = (url) => {
 
   const proxiedUrl = `${proxyUrl}?${urlQueryString}`;
 
-  console.log(proxiedUrl);
-
   return proxiedUrl;
 };
 
@@ -38,7 +36,6 @@ export const formatNumber = (
       formattedVal = val.toFixed(precision);
       return formattedVal;
     } catch (e) {
-      console.error(e);
       return null;
     }
   }
