@@ -11,7 +11,7 @@
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
     "framer-motion": "^2.5.1",
-    "next": "9.5.2",
+    "next": "10.0.0",
     "next-images": "^1.4.1",
     "qs": "^6.9.4",
     "raw-loader": "^4.0.1",

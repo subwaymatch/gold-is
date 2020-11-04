@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import classNames from 'classnames/bind';
@@ -7,6 +8,7 @@ import createDataFrameCode from 'python/create-dataframe-from-csv-string.py';
 import Layout from 'components/Layout';
 import LoadingOverlay from 'components/loading-overlay';
 import StepsDisplay from 'components/steps-display';
+import LoadFromDragAndDrop from 'components/load/load-from-drag-and-drop';
 import PyodideManager from 'lib/pyodide/manager';
 import styles from './load-page.module.scss';
 import usePyodideStore from 'stores/pyodide';
@@ -21,6 +23,8 @@ export default function LoadPage() {
   const router = useRouter();
 
   const [csvUrl, setCsvUrl] = useState('');
+  const [csvString, setCsvString] = useState('');
+  const [isDroppedFileLoaded, setIsDroppedFileLoaded] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
 
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
@@ -60,7 +64,8 @@ export default function LoadPage() {
             toast.error('Fetching the CSV file failed. ' + text);
             reject();
           } else {
-            (window as any).csv_string = text;
+            setCsvString(text);
+
             resolve();
           }
         })
@@ -74,7 +79,40 @@ export default function LoadPage() {
     });
   };
 
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+
+    reader.onabort = () => {
+      console.log('file reading was aborted');
+    };
+    reader.onerror = () => {
+      console.log('file reading has failed');
+    };
+    reader.onload = () => {
+      // Do whatever you want with the file contents
+      const binaryStr = reader.result;
+      console.log(binaryStr);
+
+      setCsvString(binaryStr);
+      setIsDroppedFileLoaded(true);
+    };
+    reader.readAsText(file);
+  }, []);
+
+  const {
+    acceptedFiles,
+    fileRejections,
+    getRootProps,
+    getInputProps,
+  } = useDropzone({
+    onDrop,
+    accept: '.csv',
+  });
+
   const loadCsvStringToDataFrame = async () => {
+    (window as any).csv_string = csvString;
+
     const loadCodeResult = await pyodideManager.runCode(createDataFrameCode);
 
     setDataFrame(loadCodeResult.output);
@@ -118,7 +156,9 @@ export default function LoadPage() {
                 value={csvUrl}
               />
 
-              <div className={styles.dropBoxWrapper}>
+              <div className={styles.dropBoxWrapper} {...getRootProps()}>
+                <input {...getInputProps()} />
+
                 <div className={styles.orDisplay}>
                   <span>OR</span>
                 </div>
@@ -131,12 +171,16 @@ export default function LoadPage() {
               <div className={styles.proceedButtonWrapper}>
                 <FullButton
                   label="Start Digging →"
-                  disabled={!pyodideManager || !csvUrl}
+                  disabled={
+                    !pyodideManager || (!csvUrl && !isDroppedFileLoaded)
+                  }
                   onClick={async () => {
                     // Normally, you would directly call a function to start loading the data
                     // However, the main UI will freeze and loading screen won't be displayed without using this wierd workaround where the loading component is first rendered, and then data starts to load
 
-                    await getCsvStringFromUrl(csvUrl);
+                    if (!isDroppedFileLoaded) {
+                      await getCsvStringFromUrl(csvUrl);
+                    }
 
                     setIsWaiting(true);
                   }}

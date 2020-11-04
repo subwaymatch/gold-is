@@ -45,6 +45,8 @@ export default function ResultsPage() {
           generateColumnsSummaryCode
         );
 
+        window.columnsSummaryCodeResult = columnsSummaryCodeResult;
+
         setColumnSummaries(columnsSummaryCodeResult.output.to_dict());
       })();
     }

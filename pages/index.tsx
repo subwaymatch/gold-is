@@ -43,28 +43,21 @@ export default function Home() {
               title="World Happiness Report 2020"
               description="The Happiness Score is a national average of the responses to the main life evaluation question asked in the Gallup World Poll (GWP), which uses the Cantril Ladder."
               imageSrc={ChildrenImage}
-              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/world-happiness-report-2020.csv"
+              dataUrl="https://github.com/gold-is/sample-datasets/raw/main/world_happiness_report_2020_cleaned.csv"
             />
 
             <ExampleDataset
               title="Titanic Dataset"
               description="The Titanic sank into the icy water in 1912. The tragic accident killed 1502 out of 2224 passengers and crew. Was women's chance of survival higher? How about passenger class? Did people with higher ticket prices have higher chances of survival?"
               imageSrc={BoatImage}
-              dataUrl="https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+              dataUrl="https://raw.githubusercontent.com/gold-is/sample-datasets/main/titanic.csv"
             />
 
             <ExampleDataset
               title="New York Airbnb Data 2019"
               description="Since 2008, guests and hosts have used Airbnb to expand on traveling possibilities and present more unique, personalized way of experiencing the world. This dataset describes the listing activity and metrics in NYC, NY for 2019."
               imageSrc={HousesImage}
-              dataUrl="https://github.com/gold-is/sample-datasets/raw/main/AB_NYC_2019.csv"
-            />
-
-            <ExampleDataset
-              title="NBA Season 2020-20 Player Stats"
-              description="Are there specific attributes of basketball players who perform extraordinarily well? Use this dataset to find out. Scoring stats, free throws, rebounds, blocks, assists, minutes, number of games are all included."
-              imageSrc={BasketballImage}
-              dataUrl="https://gold-is.s3-us-west-2.amazonaws.com/datasets/NBA-players-stats-per-season.csv"
+              dataUrl="https://github.com/gold-is/sample-datasets/raw/main/AirBnB_NYC_2019.csv"
             />
           </Container>
         </div>
