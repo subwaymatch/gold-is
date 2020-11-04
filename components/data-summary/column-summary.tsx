@@ -12,9 +12,6 @@ type ColumnSummaryProps = {
 };
 
 export default function ColumnSummary({ summary }: ColumnSummaryProps) {
-  console.log('ColumnSummary);');
-  console.log(summary);
-
   return (
     <div className={cx('columnSummary')}>
       <Row>
