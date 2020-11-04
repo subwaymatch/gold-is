@@ -81,9 +81,13 @@ export default function LoadPage() {
     });
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles, fileRejections) => {
     const file = acceptedFiles[0];
     const reader = new FileReader();
+
+    if (acceptedFiles.length == 0 && fileRejections.length > 0) {
+      toast.error('Invalid file: ' + fileRejections[0].errors[0].message);
+    }
 
     reader.onabort = () => {
       console.log('File reading was aborted');
@@ -110,6 +114,12 @@ export default function LoadPage() {
       toast.error(`Failed reading file: ${ex.message}`);
     }
   }, []);
+
+  const resetDropFile = (e) => {
+    setDroppedFileName('');
+    setCsvString('');
+    setIsDroppedFileLoaded(false);
+  };
 
   const {
     acceptedFiles,
@@ -190,6 +200,15 @@ export default function LoadPage() {
                   )}
                 </div>
               </div>
+
+              {isDroppedFileLoaded && (
+                <button
+                  className={styles.resetDropFileButton}
+                  onClick={resetDropFile}
+                >
+                  ⌦ Clear File Selection
+                </button>
+              )}
 
               <div className={styles.proceedButtonWrapper}>
                 <FullButton
