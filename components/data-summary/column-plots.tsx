@@ -5,6 +5,7 @@ import generateColumnDetails from 'python/generate-column-details.py';
 import styles from './column-plots.module.scss';
 import classNames from 'classnames/bind';
 import {
+  VictoryAxis,
   VictoryChart,
   VictoryBoxPlot,
   VictoryHistogram,
@@ -112,11 +113,13 @@ export default function ColumnPlots({
               </div>
 
               <div className={cx('plotBoundary')}>
-                <VictoryChart horizontal domainPadding={10}>
+                <VictoryChart horizontal domainPadding={30}>
                   <VictoryBoxPlot
                     horizontal
                     data={[{ x: columnName, y: nonNullData }]}
                   />
+
+                  <VictoryAxis dependentAxis />
                 </VictoryChart>
               </div>
             </div>
@@ -140,8 +143,19 @@ export default function ColumnPlots({
               </div>
 
               <div className={cx('plotBoundary')}>
-                <VictoryChart horizontal domainPadding={10}>
-                  <VictoryBar horizontal data={frequentPlotData} />
+                <VictoryChart horizontal domainPadding={40}>
+                  <VictoryBar
+                    horizontal
+                    data={frequentPlotData}
+                    style={{
+                      labels: {
+                        fontSize: 8,
+                      },
+                    }}
+                    labels={({ datum }) => `${datum.x}`}
+                  />
+
+                  <VictoryAxis dependentAxis />
                 </VictoryChart>
               </div>
             </div>
