@@ -18,6 +18,7 @@ export default function UnsupportedBrowser() {
         <p style={{ marginTop: '1rem', textAlign: 'center' }}>
           <img src={LogoImage} width="600" alt="Gold.is Logo" />
           <br />
+          <br />
           Gold.is is not supported on this browser.
         </p>
       </div>

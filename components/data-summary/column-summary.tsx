@@ -48,11 +48,11 @@ export default function ColumnSummary({ summary }: ColumnSummaryProps) {
             <DisplayItem label="Mean" value={formatNumber(summary.mean)} />
           )}
 
-          {typeof summary.min === 'number' && (
+          {typeof summary.min === 'number' && !Number.isNaN(summary.min) && (
             <DisplayItem label="Min" value={formatNumber(summary.min)} />
           )}
 
-          {typeof summary.max === 'number' && (
+          {typeof summary.max === 'number' && !Number.isNaN(summary.max) && (
             <DisplayItem label="Max" value={formatNumber(summary.max)} />
           )}
 
