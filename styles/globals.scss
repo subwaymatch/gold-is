@@ -74,18 +74,29 @@ table {
   th,
   td {
     border: none;
-    padding: 0.3rem 0.6rem;
+    padding: 0.4rem 1rem;
     text-align: left;
   }
 
   thead {
     th,
     td {
-      border-bottom: 1px solid rgba(black, 6%);
+      color: #666;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 
   tbody {
+    tr {
+      th,
+      td {
+        border-bottom: 1px solid #e3e3e3;
+      }
+    }
+
     tr:nth-child(odd) {
       th,
       td {

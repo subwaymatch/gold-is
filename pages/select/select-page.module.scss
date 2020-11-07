@@ -7,16 +7,11 @@
   margin-top: 3rem;
 
   table {
-    thead {
-      th {
-        padding-top: 0.5rem;
-        padding-bottom: 1rem;
-      }
-    }
-
     tbody {
       th {
         color: $color-tertiary;
+        font-size: 1.2rem;
+        font-family: monospace;
       }
 
       tr:nth-child(odd) {
@@ -27,7 +22,7 @@
 
       tr:nth-child(even) {
         td {
-          color: #888;
+          color: #777;
         }
       }
     }
@@ -50,13 +45,13 @@
   .dropButton {
     color: $color-tertiary;
     background-color: white;
-    padding: 1.2rem 1.8rem;
+    padding: 1rem 1.5rem;
     border: 4px solid white;
     border-radius: 0.5rem;
     margin-top: 1.5rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     cursor: pointer;
-    box-shadow: 0 0 1rem rgba(#000, 4%);
+    box-shadow: 0 0 1rem rgba(#000, 3%);
 
     &:hover {
       border-color: $color-tertiary;
