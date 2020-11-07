@@ -70,9 +70,14 @@
       padding-top: 5rem;
       padding-bottom: 5rem;
       color: color.scale($color-tertiary, $lightness: 30%);
-      background: color.scale($color-tertiary, $lightness: 90%);
+      background-color: color.scale($color-tertiary, $lightness: 90%);
       border: 1px solid color.scale($color-tertiary, $lightness: 70%);
       cursor: pointer;
+
+      &:hover {
+        color: color.scale($color-tertiary, $lightness: 20%);
+        background-color: color.scale($color-tertiary, $lightness: 85%);
+      }
     }
 
     .fileName {

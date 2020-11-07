@@ -5,6 +5,33 @@
   max-width: 100%;
   overflow-x: auto;
   margin-top: 3rem;
+
+  table {
+    thead {
+      th {
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+      }
+    }
+
+    tbody {
+      th {
+        color: $color-tertiary;
+      }
+
+      tr:nth-child(odd) {
+        td {
+          color: #555;
+        }
+      }
+
+      tr:nth-child(even) {
+        td {
+          color: #888;
+        }
+      }
+    }
+  }
 }
 
 .fluidWrapper {
