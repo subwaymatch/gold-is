@@ -37,7 +37,7 @@
 
 .dropColumnsSection {
   p.explanation {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-top: 0.8rem;
     margin-bottom: 2.4rem;
   }
@@ -45,10 +45,10 @@
   .dropButton {
     color: $color-tertiary;
     background-color: white;
-    padding: 1rem 1.5rem;
-    border: 4px solid white;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid white;
     border-radius: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 0.6rem;
     font-size: 1.6rem;
     cursor: pointer;
     box-shadow: 0 0 1rem rgba(#000, 3%);

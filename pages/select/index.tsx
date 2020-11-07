@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-tomorrow';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
@@ -82,11 +85,17 @@ export default function SelectPage() {
             <Row>
               <Col>
                 <SectionTitle desc="Dataset" title="Drop Columns" />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={4}>
                 <p className={cx('explanation')}>
                   Columns you select here will be excluded from the analysis
                   results.
                 </p>
-
+              </Col>
+              <Col xs={8}>
                 {df.columns.map((columnName) => (
                   <div
                     className={cx('dropButton', {
@@ -114,6 +123,40 @@ export default function SelectPage() {
                 </div>
               </Col>
             </Row>
+
+            <div className={cx('codeEditorSection')}>
+              <Row>
+                <Col>
+                  <SectionTitle desc="Dataset" title="Use Your Own Code" />
+
+                  <AceEditor
+                    placeholder="Placeholder Text"
+                    mode="python"
+                    theme="tomorrow"
+                    name="dfEditor"
+                    onLoad={() => {}}
+                    onChange={() => {}}
+                    fontSize={20}
+                    showPrintMargin={true}
+                    showGutter={true}
+                    highlightActiveLine={true}
+                    value={`import pandas as pd
+import numpy as np`}
+                    setOptions={{
+                      enableBasicAutocompletion: false,
+                      enableLiveAutocompletion: false,
+                      enableSnippets: false,
+                      showLineNumbers: true,
+                      tabSize: 2,
+                    }}
+                    style={{
+                      width: '100%',
+                      lineHeight: '1.6',
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
           </div>
         </Container>
       </div>
