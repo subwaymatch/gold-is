@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 import { Container, Row, Col } from 'react-bootstrap';
 import ChildrenImage from 'images/illustration-children-bro.svg';
 import BoatImage from 'images/illustration-yacht-bro.svg';
-import BasketballImage from 'images/illustration-basketball-bro.svg';
 import HousesImage from 'images/illustration-houses-bro.svg';
 
 import ExampleDataset from 'components/example-dataset';

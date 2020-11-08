@@ -120,8 +120,8 @@ export default function LoadPage() {
   };
 
   const {
-    acceptedFiles,
-    fileRejections,
+    // acceptedFiles,
+    // fileRejections,
     getRootProps,
     getInputProps,
   } = useDropzone({
