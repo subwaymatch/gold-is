@@ -37,30 +37,29 @@
 
 .dropColumnsSection {
   p.explanation {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-top: 0.8rem;
     margin-bottom: 2.4rem;
   }
 
   .dropButton {
-    color: $color-tertiary;
+    color: $color-secondary;
     background-color: white;
-    padding: 0.8rem 1.2rem;
-    border: 2px solid white;
+    padding: 0.9rem 1.3rem;
     border-radius: 0.5rem;
     margin-top: 0.6rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 0 1rem rgba(#000, 3%);
 
     &:hover {
-      border-color: $color-tertiary;
+      text-decoration: line-through;
+      box-shadow: 0 0 1rem rgba(#000, 12%);
     }
 
     &.selected {
-      color: #ddd;
-      background-color: black;
-      border-color: black;
+      color: white;
+      background-color: $color-secondary;
 
       .columnName {
         text-decoration: line-through;

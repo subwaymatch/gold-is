@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import AceEditor from 'react-ace';
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/theme-tomorrow';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
@@ -11,6 +9,11 @@ import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import SectionTitle from 'components/common/section-title';
 import FullButton from 'components/common/full-button';
+
+const CodeEditor = dynamic(() => import('components/code-editor'), {
+  loading: () => <p>Loading Code Editor...</p>,
+  ssr: false,
+});
 
 const cx = classNames.bind(styles);
 
@@ -89,13 +92,18 @@ export default function SelectPage() {
             </Row>
 
             <Row>
-              <Col xs={4}>
+              <Col xs={6}>
                 <p className={cx('explanation')}>
                   Columns you select here will be excluded from the analysis
-                  results.
+                  results 🡒
                 </p>
+
+                <FullButton
+                  onClick={proceedToNextPage}
+                  label={proceedButtonMessage}
+                />
               </Col>
-              <Col xs={8}>
+              <Col xs={6}>
                 {df.columns.map((columnName) => (
                   <div
                     className={cx('dropButton', {
@@ -114,13 +122,6 @@ export default function SelectPage() {
                     <span className={cx('indicator')}></span>
                   </div>
                 ))}
-
-                <div className={cx('bottomProceedButtonWrapper')}>
-                  <FullButton
-                    onClick={proceedToNextPage}
-                    label={proceedButtonMessage}
-                  />
-                </div>
               </Col>
             </Row>
 
@@ -129,31 +130,7 @@ export default function SelectPage() {
                 <Col>
                   <SectionTitle desc="Dataset" title="Use Your Own Code" />
 
-                  <AceEditor
-                    placeholder="Placeholder Text"
-                    mode="python"
-                    theme="tomorrow"
-                    name="dfEditor"
-                    onLoad={() => {}}
-                    onChange={() => {}}
-                    fontSize={20}
-                    showPrintMargin={true}
-                    showGutter={true}
-                    highlightActiveLine={true}
-                    value={`import pandas as pd
-import numpy as np`}
-                    setOptions={{
-                      enableBasicAutocompletion: false,
-                      enableLiveAutocompletion: false,
-                      enableSnippets: false,
-                      showLineNumbers: true,
-                      tabSize: 2,
-                    }}
-                    style={{
-                      width: '100%',
-                      lineHeight: '1.6',
-                    }}
-                  />
+                  <CodeEditor />
                 </Col>
               </Row>
             </div>
