@@ -85,16 +85,14 @@ export default function LoadPage() {
     const file = acceptedFiles[0];
     const reader = new FileReader();
 
-    if (acceptedFiles.length == 0 && fileRejections.length > 0) {
+    if (acceptedFiles.length === 0 && fileRejections.length > 0) {
       toast.error('Invalid file: ' + fileRejections[0].errors[0].message);
     }
 
     reader.onabort = () => {
-      console.log('File reading was aborted');
       toast.error('File reading was aborted');
     };
     reader.onerror = () => {
-      console.log('File reading has failed');
       toast.error('File reading has failed');
     };
     reader.onload = () => {

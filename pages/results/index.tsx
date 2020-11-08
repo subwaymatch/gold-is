@@ -32,8 +32,6 @@ export default function ResultsPage() {
       router.push('/load');
       return;
     } else if (!dataOverview || !columnSummaries) {
-      console.log('Calculating data overview and column summaries');
-
       (async () => {
         const overviewCodeResult = await pyodideManager.runCode(
           generateOverviewCode

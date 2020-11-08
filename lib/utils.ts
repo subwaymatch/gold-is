@@ -21,8 +21,6 @@ export const formatNumber = (
   val: number | string,
   precision: number = 2
 ): string | null => {
-  console.log(`formatNumber, type=${typeof val}, val=${val}`);
-
   if (Number.isNaN(val) || typeof val === 'function') {
     return null;
   } else if (typeof val === 'string') {
