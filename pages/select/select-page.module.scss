@@ -35,6 +35,26 @@
   padding-bottom: 10rem;
 }
 
+.randomizeBtn {
+  color: $color-secondary;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid color.scale($color-secondary, $lightness: 80%);
+  border-radius: 10rem;
+  padding: 1.2rem 1.8rem;
+  margin-top: 3.4rem;
+  cursor: pointer;
+
+  .reactIcon {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+}
+
 .dropColumnsSection {
   p.explanation {
     font-size: 1.6rem;

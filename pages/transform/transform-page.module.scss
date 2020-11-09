@@ -1,0 +1,8 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.fluidWrapper {
+  background: color.scale($color-secondary, $lightness: 95%);
+  padding-top: 2rem;
+  padding-bottom: 10rem;
+}

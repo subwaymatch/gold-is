@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { RiShuffleLine } from 'react-icons/ri';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
@@ -9,11 +9,6 @@ import styles from './select-page.module.scss';
 import classNames from 'classnames/bind';
 import SectionTitle from 'components/common/section-title';
 import FullButton from 'components/common/full-button';
-
-const CodeEditor = dynamic(() => import('components/code-editor'), {
-  loading: () => <p>Loading Code Editor...</p>,
-  ssr: false,
-});
 
 const cx = classNames.bind(styles);
 
@@ -48,7 +43,11 @@ export default function SelectPage() {
   const proceedToNextPage = () => {
     dropSelectedColumns();
     setColumnSummaries(null);
-    router.push('/results').then(() => window.scrollTo(0, 0));
+    router.push('/transform').then(() => window.scrollTo(0, 0));
+  };
+
+  const randomizeDfHtml = (numSamples: number = 10) => {
+    setDfHtml(df.sample(numSamples).to_html());
   };
 
   const proceedButtonMessage =
@@ -76,7 +75,21 @@ export default function SelectPage() {
 
           <Row>
             <Col>
-              <SectionTitle desc="Dataset" title="First 10 Rows" />
+              <Row>
+                <Col xs={9}>
+                  <SectionTitle desc="Dataset" title="First 10 Rows" />
+                </Col>
+
+                <Col xs={3}>
+                  <div
+                    className={styles.randomizeBtn}
+                    onClick={() => randomizeDfHtml(10)}
+                  >
+                    <RiShuffleLine className={styles.reactIcon} /> Randomize
+                  </div>
+                </Col>
+              </Row>
+
               <div
                 className={cx('dataTableWrapper')}
                 dangerouslySetInnerHTML={{ __html: dfHtml }}
@@ -92,17 +105,6 @@ export default function SelectPage() {
             </Row>
 
             <Row>
-              <Col xs={6}>
-                <p className={cx('explanation')}>
-                  Columns you select here will be excluded from the analysis
-                  results 🡒
-                </p>
-
-                <FullButton
-                  onClick={proceedToNextPage}
-                  label={proceedButtonMessage}
-                />
-              </Col>
               <Col xs={6}>
                 {df.columns.map((columnName) => (
                   <div
@@ -123,17 +125,19 @@ export default function SelectPage() {
                   </div>
                 ))}
               </Col>
+
+              <Col xs={6}>
+                <p className={cx('explanation')}>
+                  Columns you select here will be excluded from the analysis
+                  results 🡒
+                </p>
+
+                <FullButton
+                  onClick={proceedToNextPage}
+                  label={proceedButtonMessage}
+                />
+              </Col>
             </Row>
-
-            <div className={cx('codeEditorSection')}>
-              <Row>
-                <Col>
-                  <SectionTitle desc="Dataset" title="Use Your Own Code" />
-
-                  <CodeEditor />
-                </Col>
-              </Row>
-            </div>
           </div>
         </Container>
       </div>

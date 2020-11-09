@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ChildrenImage from 'images/illustration-children-bro.svg';
 import BoatImage from 'images/illustration-yacht-bro.svg';
 import HousesImage from 'images/illustration-houses-bro.svg';
+import OfficeImage from 'images/illustration-office-bro.svg';
 
 import ExampleDataset from 'components/example-dataset';
 
@@ -57,6 +58,13 @@ export default function Home() {
               description="Since 2008, guests and hosts have used Airbnb to expand on traveling possibilities and present more unique, personalized way of experiencing the world. This dataset describes the listing activity and metrics in NYC, NY for 2019."
               imageSrc={HousesImage}
               dataUrl="https://github.com/gold-is/sample-datasets/raw/main/AirBnB_NYC_2019.csv"
+            />
+
+            <ExampleDataset
+              title="City of Chicago Employees Salary"
+              description="This dataset is a listing of all current City of Chicago employees, complete with full names, departments, positions, employment status (part-time or full-time), frequency of hourly employee –where applicable—and annual salaries or hourly rate."
+              imageSrc={OfficeImage}
+              dataUrl="https://github.com/gold-is/sample-datasets/blob/main/chicago-payroll-2020.csv?raw=true"
             />
           </Container>
         </div>
