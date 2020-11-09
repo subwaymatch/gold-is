@@ -12,8 +12,9 @@ const steps = [
     label: 'Load Data',
     href: '/load',
   },
-  { label: 'Select Columns', href: '/select' },
-  { label: 'Analyze', href: '/results' },
+  { label: 'Select', href: '/select' },
+  { label: 'Transform', href: '/transform' },
+  { label: 'Result', href: '/results' },
 ];
 
 const StepItem = ({ number, label, active, clickable, href }) =>
@@ -53,7 +54,7 @@ export default function StepsDisplay({ currentIndex }: StepsDisplayProps) {
     <div className={styles.stepsDisplay}>
       <Row>
         {steps.map((step, index) => (
-          <Col xs={4} key={index}>
+          <Col xs={3} key={index}>
             <StepItem
               number={index + 1}
               label={step.label}

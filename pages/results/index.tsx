@@ -53,7 +53,7 @@ export default function ResultsPage() {
   return (
     <Layout fluid>
       <Container>
-        <StepsDisplay currentIndex={2} />
+        <StepsDisplay currentIndex={3} />
       </Container>
 
       <Container>
