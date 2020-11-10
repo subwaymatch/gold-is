@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import qs from 'qs';
 import { motion } from 'framer-motion';
 import { clickableVariants } from 'animations/variants';
+import { MdChevronRight } from 'react-icons/md';
 
 const cx = classNames.bind(styles);
 
@@ -40,7 +41,10 @@ export default function ExampleDataset({
 
               <p className={cx('description')}>{description}</p>
 
-              <span className={cx('selectMessage')}>Select and Continue 🡒</span>
+              <div className={cx('selectButton')}>
+                <span>Select and Continue</span>
+                <MdChevronRight className={styles.reactIcon} />
+              </div>
             </motion.a>
           </Link>
         </Col>

@@ -3,8 +3,9 @@ import Layout from 'components/Layout';
 import styles from './home-page.module.scss';
 import classNames from 'classnames/bind';
 import { Container, Row, Col } from 'react-bootstrap';
+import OverviewImage from 'images/gold-overview-screenshot.png';
 import ChildrenImage from 'images/illustration-children-bro.svg';
-import BoatImage from 'images/illustration-yacht-bro.svg';
+import IcebergImage from 'images/illustration-iceberg-bro.svg';
 import HousesImage from 'images/illustration-houses-bro.svg';
 import OfficeImage from 'images/illustration-office-bro.svg';
 
@@ -24,9 +25,15 @@ export default function Home() {
         <Container>
           <Row>
             <Col>
-              <p className={cx('hero')}>
-                Let us tell you a story about your dataset.
-              </p>
+              <div className={styles.heroWrapper}>
+                <p className={styles.hero}>
+                  Let us tell you a story about your dataset ↓
+                </p>
+
+                <div className={styles.overviewImageWrapper}>
+                  <img src={OverviewImage} alt="Gold Overview Results" />
+                </div>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -49,7 +56,7 @@ export default function Home() {
             <ExampleDataset
               title="Titanic Dataset"
               description="The Titanic sank into the icy water in 1912. The tragic accident killed 1502 out of 2224 passengers and crew. Was women's chance of survival higher? How about passenger class? Did people with higher ticket prices have higher chances of survival?"
-              imageSrc={BoatImage}
+              imageSrc={IcebergImage}
               dataUrl="https://raw.githubusercontent.com/gold-is/sample-datasets/main/titanic.csv"
             />
 

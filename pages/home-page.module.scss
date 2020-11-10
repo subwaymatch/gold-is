@@ -2,12 +2,29 @@
 @import 'styles/variables';
 
 .homePage {
+  .heroWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   p.hero {
+    color: color.scale($color-secondary, $lightness: -15%);
     text-align: center;
-    font-size: 6rem;
-    line-height: 1.3;
-    font-weight: 800;
-    padding: 5rem 0;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-top: 6rem;
+    letter-spacing: -0.05rem;
+  }
+
+  .overviewImageWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+
+    img {
+    }
   }
 
   h2 {
@@ -15,13 +32,13 @@
   }
 
   .examples {
-    background-color: color.scale($color-primary, $lightness: 92%);
+    background-color: color.scale($color-light-beige, $lightness: 30%);
     padding: 4rem 0;
 
     h2 {
-      color: color.scale($color-primary, $lightness: -28%);
+      color: $color-secondary;
       padding-bottom: 1rem;
-      border-bottom: 1px solid $color-primary;
+      border-bottom: 1px solid $color-secondary;
       margin-bottom: 1rem;
     }
   }
