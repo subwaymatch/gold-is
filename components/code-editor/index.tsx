@@ -5,12 +5,16 @@ import 'ace-builds/src-noconflict/theme-tomorrow';
 import styles from './code-editor.module.scss';
 
 type CodeEditorProps = {
-  templateCode: string;
+  value: string;
+  onChange: (value) => void;
   onRun: (string) => void;
 };
 
-export default function CodeEditor({ templateCode, onRun }: CodeEditorProps) {
-  const [userCode, setUserCode] = useState(templateCode);
+export default function CodeEditor({
+  value,
+  onChange,
+  onRun,
+}: CodeEditorProps) {
   const [lastRunCode, setLastRunCode] = useState('-');
 
   return (
@@ -22,12 +26,12 @@ export default function CodeEditor({ templateCode, onRun }: CodeEditorProps) {
           theme="tomorrow"
           name="dfEditor"
           onLoad={() => {}}
-          onChange={setUserCode}
+          onChange={onChange}
           fontSize={20}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
-          value={userCode}
+          value={value}
           setOptions={{
             enableBasicAutocompletion: false,
             enableLiveAutocompletion: false,
@@ -45,7 +49,7 @@ export default function CodeEditor({ templateCode, onRun }: CodeEditorProps) {
       <div className={styles.controlsWrapper}>
         <button
           onClick={() => {
-            onRun(userCode);
+            onRun(value);
           }}
         >
           Run Code

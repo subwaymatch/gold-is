@@ -2,14 +2,12 @@ import { MdAdd } from 'react-icons/md';
 import styles from './column-transform-box.module.scss';
 
 type ColumnTransformBoxProps = {
-  columnName: string;
   title: string;
   description: string;
   onClick: () => void;
 };
 
 export default function ColumnTransformBox({
-  columnName,
   title,
   description,
   onClick,
@@ -20,7 +18,14 @@ export default function ColumnTransformBox({
       <p className={styles.description}>{description}</p>
       <div className={styles.runButton}>
         <MdAdd className={styles.reactIcon} />
-        <span>Add Code</span>
+        <span
+          onClick={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
+          Add Code
+        </span>
       </div>
     </div>
   );

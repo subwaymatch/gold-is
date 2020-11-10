@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
@@ -24,8 +25,9 @@ export default function SelectPage() {
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore((state) => state.dataFrame);
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
-  const [dfHtml, setDfHtml] = useState('');
   const [preTransformSummary, setPreTransformSummary] = useState(null);
+  const [editorCode, setEditorCode] = useState(templateCode);
+  const [dfHtml, setDfHtml] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -52,6 +54,31 @@ export default function SelectPage() {
     console.log(preTransformSummaryCodeResult);
   };
 
+  const addRemoveOutlierOp = (columnName) => {
+    const codeToAdd = `col_mean = df['${columnName}'].mean()
+col_std_dev = df['${columnName}'].std()
+num_std_devs = 2
+
+df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
+        & (df['${columnName}'] < col_mean + col_std_dev * num_std_devs)]`;
+
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    toast.success(
+      `Successfully added code to remove outliers from the ${columnName} column`
+    );
+  };
+
+  const filterRangeOp = (columnName) => {
+    const codeToAdd = `df = df[(df['${columnName}'] > ${preTransformSummary[columnName].min}) & (df['${columnName}'] < ${preTransformSummary[columnName].max})]`;
+
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    toast.success(
+      `Successfully added code to filter rows by range using the ${columnName} column`
+    );
+  };
+
   const onCodeEditorRun = async (userCode) => {
     console.log('onCodeEditorRun');
     console.log(userCode);
@@ -71,6 +98,18 @@ export default function SelectPage() {
       </Container>
 
       <div className={styles.fluidWrapper}>
+        <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
         <Container>
           <div className={styles.transformSection}>
             <Row>
@@ -100,7 +139,6 @@ export default function SelectPage() {
                     <Col xs={6}>
                       {columnSummary.missing_count > 0 && (
                         <ColumnTransformBox
-                          columnName={columnName}
                           title="Drop Rows with Missing Values"
                           description={`There are ${columnSummary.missing_count} rows where the values are missing (NaN). Select this option to drop rows with missing values.`}
                           onClick={() => {}}
@@ -109,7 +147,6 @@ export default function SelectPage() {
 
                       {columnSummary.missing_count > 0 && (
                         <ColumnTransformBox
-                          columnName={columnName}
                           title="Fill Rows with Missing Values"
                           description={`There are ${columnSummary.missing_count} rows where the values are missing (NaN). Select this option to fill NaN rows with zero or another value.`}
                           onClick={() => {}}
@@ -119,20 +156,22 @@ export default function SelectPage() {
                       {(columnSummary.data_type == 'int64' ||
                         columnSummary.data_type == 'float64') && (
                         <ColumnTransformBox
-                          columnName={columnName}
                           title="Remove Outliers"
                           description="Outliers can skew mean and make your box plots go wild. Select this option to remove outliers."
-                          onClick={() => {}}
+                          onClick={() => {
+                            addRemoveOutlierOp(columnName);
+                          }}
                         />
                       )}
 
                       {(columnSummary.data_type == 'int64' ||
                         columnSummary.data_type == 'float64') && (
                         <ColumnTransformBox
-                          columnName={columnName}
                           title="Filter Range"
                           description="What if you only want to select a specific range? Select this option to add a filter."
-                          onClick={() => {}}
+                          onClick={() => {
+                            filterRangeOp(columnName);
+                          }}
                         />
                       )}
                     </Col>
@@ -145,7 +184,6 @@ export default function SelectPage() {
             <Row>
               <Col>
                 <SectionTitle desc="Dataset" title="Custom Code" />
-
                 <div className={styles.dataFrameSummary}>
                   <Row>
                     <Col xs={3}>{df.shape[0]} Rows</Col>
@@ -157,7 +195,8 @@ export default function SelectPage() {
                 </div>
 
                 <CodeEditor
-                  templateCode={templateCode}
+                  value={editorCode}
+                  onChange={setEditorCode}
                   onRun={onCodeEditorRun}
                 />
               </Col>
