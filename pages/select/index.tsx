@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { RiShuffleLine } from 'react-icons/ri';
 import usePyodideStore from 'stores/pyodide';
+import styles from './select-page.module.scss';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
-import styles from './select-page.module.scss';
+import DataFrameTable from 'components/dataframe-table';
 import classNames from 'classnames/bind';
 import SectionTitle from 'components/common/section-title';
 import FullButton from 'components/common/full-button';
@@ -14,6 +15,7 @@ const cx = classNames.bind(styles);
 
 export default function SelectPage() {
   const [dfHtml, setDfHtml] = useState('');
+  const [isDfHtmlRandom, setIsDfHtmlRandom] = useState(false);
   const dropColumns = usePyodideStore((state) => state.dropColumns);
   const addDropColumn = usePyodideStore((state) => state.addDropColumn);
   const removeDropColumn = usePyodideStore((state) => state.removeDropColumn);
@@ -48,6 +50,7 @@ export default function SelectPage() {
 
   const randomizeDfHtml = (numSamples: number = 10) => {
     setDfHtml(df.sample(numSamples).to_html());
+    setIsDfHtmlRandom(true);
   };
 
   const proceedButtonMessage =
@@ -74,26 +77,30 @@ export default function SelectPage() {
           </Row>
 
           <Row>
-            <Col>
-              <Row>
-                <Col xs={9}>
-                  <SectionTitle desc="Dataset" title="First 10 Rows" />
-                </Col>
-
-                <Col xs={3}>
-                  <div
-                    className={styles.randomizeBtn}
-                    onClick={() => randomizeDfHtml(10)}
-                  >
-                    <RiShuffleLine className={styles.reactIcon} /> Randomize
-                  </div>
-                </Col>
-              </Row>
-
-              <div
-                className={cx('dataTableWrapper')}
-                dangerouslySetInnerHTML={{ __html: dfHtml }}
+            <Col xs={9}>
+              <SectionTitle
+                desc="Dataset"
+                title={isDfHtmlRandom ? '10 Random Rows' : 'First 10 Rows'}
               />
+            </Col>
+
+            <Col xs={3}>
+              <div
+                className={styles.randomizeBtn}
+                onClick={() => randomizeDfHtml(10)}
+              >
+                <RiShuffleLine className={styles.reactIcon} /> Randomize
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <DataFrameTable dfHtml={dfHtml} />
+
+              <p className={styles.dfShape}>
+                Total {df.shape[0]} Rows, {df.shape[1]} Columns
+              </p>
             </Col>
           </Row>
 
@@ -129,7 +136,7 @@ export default function SelectPage() {
               <Col xs={6}>
                 <p className={cx('explanation')}>
                   Columns you select here will be excluded from the analysis
-                  results 🡒
+                  results.
                 </p>
 
                 <FullButton

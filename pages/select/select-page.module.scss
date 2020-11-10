@@ -1,34 +1,6 @@
 @use 'sass:color';
 @import 'styles/variables';
 
-.dataTableWrapper {
-  max-width: 100%;
-  overflow-x: auto;
-  margin-top: 3rem;
-
-  table {
-    tbody {
-      th {
-        color: $color-tertiary;
-        font-size: 1.2rem;
-        font-family: monospace;
-      }
-
-      tr:nth-child(odd) {
-        td {
-          color: #555;
-        }
-      }
-
-      tr:nth-child(even) {
-        td {
-          color: #777;
-        }
-      }
-    }
-  }
-}
-
 .fluidWrapper {
   background: color.scale($color-secondary, $lightness: 95%);
   padding-top: 2rem;
@@ -46,17 +18,23 @@
   border: 1px solid color.scale($color-secondary, $lightness: 80%);
   border-radius: 10rem;
   padding: 1.2rem 1.8rem;
-  margin-top: 3.4rem;
+  margin-top: 3.6rem;
   cursor: pointer;
 
   .reactIcon {
     font-size: 1rem;
     margin-right: 1rem;
   }
+
+  &:hover {
+    color: color.scale($color-secondary, $lightness: -20%);
+    border-color: color.scale($color-secondary, $lightness: 50%);
+  }
 }
 
 .dropColumnsSection {
   p.explanation {
+    color: $color-secondary;
     font-size: 1.6rem;
     margin-top: 0.8rem;
     margin-bottom: 2.4rem;
@@ -68,6 +46,7 @@
     padding: 0.9rem 1.3rem;
     border-radius: 0.5rem;
     margin-top: 0.6rem;
+    font-family: $font-monospace;
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 0 1rem rgba(#000, 3%);

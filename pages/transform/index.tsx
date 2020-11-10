@@ -5,25 +5,45 @@ import { Container, Row, Col } from 'react-bootstrap';
 import usePyodideStore from 'stores/pyodide';
 import Layout from 'components/Layout';
 import StepsDisplay from 'components/steps-display';
-import styles from './transform-page.module.scss';
-import classNames from 'classnames/bind';
+import DataFrameTable from 'components/dataframe-table';
 import SectionTitle from 'components/common/section-title';
 import FullButton from 'components/common/full-button';
+import styles from './transform-page.module.scss';
 
 const CodeEditor = dynamic(() => import('components/code-editor'), {
   loading: () => <p>Loading Code Editor...</p>,
   ssr: false,
 });
 
-const cx = classNames.bind(styles);
+const templateCode = `
+# Edit df DataFrame as you wish
+# Note that the operations must be in-place
+df`;
 
 export default function SelectPage() {
+  const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore((state) => state.dataFrame);
-
+  const setDf = usePyodideStore((state) => state.setDataFrame);
+  const [dfHtml, setDfHtml] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    setDfHtml(df.head(10).to_html());
+  }, []);
 
   const proceedToNextPage = () => {
     router.push('/results').then(() => window.scrollTo(0, 0));
+  };
+
+  const onCodeEditorRun = async (userCode) => {
+    console.log('onCodeEditorRun');
+    console.log(userCode);
+
+    const userCodeResult = await pyodideManager.runCode(userCode + '\n\ndf');
+    setDfHtml(userCodeResult.output.head(10).to_html());
+    setDf(userCodeResult.output);
+
+    console.log(userCodeResult);
   };
 
   return df ? (
@@ -32,14 +52,35 @@ export default function SelectPage() {
         <StepsDisplay currentIndex={2} />
       </Container>
 
-      <div className={cx('fluidWrapper')}>
+      <div className={styles.fluidWrapper}>
         <Container>
-          <div className={cx('codeEditorSection')}>
+          <div className={styles.transformSection}>
             <Row>
               <Col>
-                <SectionTitle desc="Dataset" title="Use Your Own Code" />
+                <SectionTitle desc="Dataset" title="Transformations" />
+              </Col>
+            </Row>
+          </div>
 
-                <CodeEditor />
+          <div className={styles.codeEditorSection}>
+            <Row>
+              <Col>
+                <SectionTitle desc="Dataset" title="Custom Code" />
+
+                <CodeEditor
+                  templateCode={templateCode}
+                  onRun={onCodeEditorRun}
+                />
+              </Col>
+            </Row>
+          </div>
+
+          <div className={styles.dataTableSection}>
+            <Row>
+              <Col>
+                <SectionTitle desc="Dataset" title="First 10 Rows" />
+
+                <DataFrameTable dfHtml={dfHtml} />
               </Col>
             </Row>
           </div>
