@@ -1,3 +1,31 @@
+@use 'sass:color';
+@import 'styles/variables';
+
 .aceWrapper {
   border: 1px solid #e5e5e5;
+}
+
+.runButton {
+  font-size: 1.4rem;
+  color: white;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-tertiary;
+  cursor: pointer;
+  padding: 1.2rem 2rem;
+  border-radius: 10rem;
+  border: 1px solid color.scale($color-tertiary, $lightness: -20%);
+  margin-top: 1rem;
+
+  .reactIcon {
+    color: white;
+    margin-right: 0.4rem;
+  }
+
+  &:hover {
+    background-color: color.scale($color-tertiary, $lightness: -10%);
+    border-color: color.scale($color-tertiary, $lightness: -30%);
+  }
 }

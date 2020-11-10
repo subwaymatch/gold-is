@@ -24,3 +24,20 @@
     padding-bottom: 2rem;
   }
 }
+
+.codeEditorSection {
+  .dataFrameSummary {
+    font-size: 1.6rem;
+    color: color.scale($color-secondary, $lightness: 30%);
+    margin-bottom: 1rem;
+
+    .count {
+      color: color.scale($color-secondary);
+      font-weight: 600;
+    }
+  }
+}
+
+.dataTableSection {
+  margin-bottom: 3rem;
+}

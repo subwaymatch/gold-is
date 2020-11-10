@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-tomorrow';
+import { MdPlayArrow } from 'react-icons/md';
 import styles from './code-editor.module.scss';
 
 type CodeEditorProps = {
@@ -48,11 +49,13 @@ export default function CodeEditor({
 
       <div className={styles.controlsWrapper}>
         <button
+          className={styles.runButton}
           onClick={() => {
             onRun(value);
           }}
         >
-          Run Code
+          <MdPlayArrow />
+          <span>Run Code</span>
         </button>
       </div>
     </div>

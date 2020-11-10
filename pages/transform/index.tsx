@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import usePyodideStore from 'stores/pyodide';
@@ -33,6 +33,7 @@ export default function SelectPage() {
   const [editorCode, setEditorCode] = useState(templateCode);
   const [dfHtml, setDfHtml] = useState('');
   const router = useRouter();
+  const codeEditorRef = useRef(null);
 
   useEffect(() => {
     if (!df) {
@@ -58,6 +59,43 @@ export default function SelectPage() {
     console.log(preTransformSummaryCodeResult);
   };
 
+  const onTransformationOpSelected = (message) => {
+    codeEditorRef.current.scrollIntoView();
+    toast.success(message);
+  };
+
+  const dropColumnOp = (columnName) => {
+    const codeToAdd = `df = df.drop(columns=['${columnName}'])`;
+
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    onTransformationOpSelected(
+      `Successfully added code to drop the ${columnName} column`
+    );
+  };
+
+  const dropMissingOp = (columnName) => {
+    const codeToAdd = `df = df.dropna(subset=['${columnName}'])`;
+
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    onTransformationOpSelected(
+      `Successfully added code to drop rows where the values for ${columnName} column are missing`
+    );
+  };
+
+  const fillMissingOp = (columnName, isNumeric) => {
+    const codeToAdd = `df['${columnName}'] = df['${columnName}'].fillna(${
+      isNumeric ? 0 : `'Value to fill'`
+    })`;
+
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    onTransformationOpSelected(
+      `Successfully added code to fill in missing values from the ${columnName} column`
+    );
+  };
+
   const addRemoveOutlierOp = (columnName) => {
     const codeToAdd = `col_mean = df['${columnName}'].mean()
 col_std_dev = df['${columnName}'].std()
@@ -68,7 +106,7 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
 
     setEditorCode(editorCode + '\n\n' + codeToAdd);
 
-    toast.success(
+    onTransformationOpSelected(
       `Successfully added code to remove outliers from the ${columnName} column`
     );
   };
@@ -78,15 +116,23 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
 
     setEditorCode(editorCode + '\n\n' + codeToAdd);
 
-    toast.success(
+    onTransformationOpSelected(
       `Successfully added code to filter rows by range using the ${columnName} column`
     );
   };
 
-  const onCodeEditorRun = async (userCode) => {
-    console.log('onCodeEditorRun');
-    console.log(userCode);
+  const logTransformationOp = (columnName) => {
+    const codeToAdd = `with np.errstate(divide='ignore'):
+    df['${columnName}'] = np.log(df['${columnName}'])`;
 
+    setEditorCode(editorCode + '\n\n' + codeToAdd);
+
+    onTransformationOpSelected(
+      `Successfully added code to apply a log transform to the ${columnName} column`
+    );
+  };
+
+  const onCodeEditorRun = async (userCode) => {
     const userCodeResult = await pyodideManager.runCode(userCode + '\n\ndf');
     setDataFrame(userCodeResult.output);
     setDfHtml(userCodeResult.output.head(10).to_html());
@@ -95,9 +141,9 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
     setDataOverview(null);
     setColumnSummaries(null);
 
-    (window as any).df = userCodeResult.output;
-
-    console.log(userCodeResult);
+    toast.success(
+      'Code run successfully. 👻 Note that running the same code multiple times may have unexpected side effects.'
+    );
   };
 
   return df ? (
@@ -109,7 +155,7 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
       <div className={styles.fluidWrapper}>
         <ToastContainer
           position="top-center"
-          autoClose={4000}
+          autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -134,7 +180,12 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
             </Row>
 
             {preTransformSummary &&
+              preTransformSummary &&
               df.columns.map((columnName) => {
+                if (!preTransformSummary.hasOwnProperty(columnName)) {
+                  return null;
+                }
+
                 const columnSummary = preTransformSummary[columnName];
 
                 console.log(columnSummary);
@@ -146,11 +197,21 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                     </Col>
 
                     <Col xs={6}>
+                      <ColumnTransformBox
+                        title="Drop Column"
+                        description={`Select this option to drop the column ${columnName}.`}
+                        onClick={() => {
+                          dropColumnOp(columnName);
+                        }}
+                      />
+
                       {columnSummary.missing_count > 0 && (
                         <ColumnTransformBox
                           title="Drop Rows with Missing Values"
                           description={`There are ${columnSummary.missing_count} rows where the values are missing (NaN). Select this option to drop rows with missing values.`}
-                          onClick={() => {}}
+                          onClick={() => {
+                            dropMissingOp(columnName);
+                          }}
                         />
                       )}
 
@@ -158,7 +219,13 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                         <ColumnTransformBox
                           title="Fill Rows with Missing Values"
                           description={`There are ${columnSummary.missing_count} rows where the values are missing (NaN). Select this option to fill NaN rows with zero or another value.`}
-                          onClick={() => {}}
+                          onClick={() => {
+                            fillMissingOp(
+                              columnName,
+                              columnSummary.data_type == 'int64' ||
+                                columnSummary.data_type == 'float64'
+                            );
+                          }}
                         />
                       )}
 
@@ -183,23 +250,36 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                           }}
                         />
                       )}
+
+                      {(columnSummary.data_type == 'int64' ||
+                        columnSummary.data_type == 'float64') && (
+                        <ColumnTransformBox
+                          title="Log Transformation"
+                          description="A skewed distribution (e.g., long tail) can hinder your model's performance. Logarithm naturally reduces the dynamic range of a variable. Select this option to apply a log transformation."
+                          onClick={() => {
+                            logTransformationOp(columnName);
+                          }}
+                        />
+                      )}
                     </Col>
                   </Row>
                 );
               })}
           </div>
 
-          <div className={styles.codeEditorSection}>
+          <div ref={codeEditorRef} className={styles.codeEditorSection}>
             <Row>
               <Col>
                 <SectionTitle desc="Dataset" title="Custom Code" />
+
                 <div className={styles.dataFrameSummary}>
                   <Row>
-                    <Col xs={3}>{df.shape[0]} Rows</Col>
-
-                    <Col xs={3}>{df.shape[1]} Columns</Col>
-
-                    <Col xs={6}></Col>
+                    <Col>
+                      The DataFrame currently has{' '}
+                      <span className={styles.count}>{df.shape[0]}</span> Rows
+                      and <span className={styles.count}>{df.shape[1]}</span>{' '}
+                      Columns.
+                    </Col>
                   </Row>
                 </div>
 
