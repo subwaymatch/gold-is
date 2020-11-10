@@ -32,6 +32,17 @@
   }
 }
 
+.dataFrameSummary {
+  font-size: 1.6rem;
+  color: color.scale($color-secondary, $lightness: 30%);
+  margin-bottom: 1rem;
+
+  .count {
+    color: color.scale($color-secondary);
+    font-weight: 600;
+  }
+}
+
 .dropColumnsSection {
   p.explanation {
     color: $color-secondary;

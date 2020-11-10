@@ -96,11 +96,17 @@ export default function SelectPage() {
 
           <Row>
             <Col>
-              <DataFrameTable dfHtml={dfHtml} />
+              <div className={styles.dataFrameSummary}>
+                The DataFrame currently has{' '}
+                <span className={styles.count}>{df.shape[0]}</span> Rows and{' '}
+                <span className={styles.count}>{df.shape[1]}</span> Columns.
+              </div>
+            </Col>
+          </Row>
 
-              <p className={styles.dfShape}>
-                Total {df.shape[0]} Rows, {df.shape[1]} Columns
-              </p>
+          <Row>
+            <Col>
+              <DataFrameTable dfHtml={dfHtml} />
             </Col>
           </Row>
 

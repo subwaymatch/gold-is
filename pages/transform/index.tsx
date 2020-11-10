@@ -55,8 +55,6 @@ export default function SelectPage() {
     );
 
     setPreTransformSummary(preTransformSummaryCodeResult.output);
-
-    console.log(preTransformSummaryCodeResult);
   };
 
   const onTransformationOpSelected = (message) => {
@@ -187,8 +185,6 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                 }
 
                 const columnSummary = preTransformSummary[columnName];
-
-                console.log(columnSummary);
 
                 return (
                   <Row className={styles.columnTransformRow} key={columnName}>
