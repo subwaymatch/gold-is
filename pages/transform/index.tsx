@@ -178,7 +178,6 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
             </Row>
 
             {preTransformSummary &&
-              preTransformSummary &&
               df.columns.map((columnName) => {
                 if (!preTransformSummary.hasOwnProperty(columnName)) {
                   return null;
