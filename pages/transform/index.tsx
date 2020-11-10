@@ -218,15 +218,15 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                           onClick={() => {
                             fillMissingOp(
                               columnName,
-                              columnSummary.data_type == 'int64' ||
-                                columnSummary.data_type == 'float64'
+                              columnSummary.data_type === 'int64' ||
+                                columnSummary.data_type === 'float64'
                             );
                           }}
                         />
                       )}
 
-                      {(columnSummary.data_type == 'int64' ||
-                        columnSummary.data_type == 'float64') && (
+                      {(columnSummary.data_type === 'int64' ||
+                        columnSummary.data_type === 'float64') && (
                         <ColumnTransformBox
                           title="Remove Outliers"
                           description="Outliers can skew mean and make your box plots go wild. Select this option to remove outliers."
@@ -236,8 +236,8 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                         />
                       )}
 
-                      {(columnSummary.data_type == 'int64' ||
-                        columnSummary.data_type == 'float64') && (
+                      {(columnSummary.data_type === 'int64' ||
+                        columnSummary.data_type === 'float64') && (
                         <ColumnTransformBox
                           title="Filter Range"
                           description="What if you only want to select a specific range? Select this option to add a filter."
@@ -247,8 +247,8 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
                         />
                       )}
 
-                      {(columnSummary.data_type == 'int64' ||
-                        columnSummary.data_type == 'float64') && (
+                      {(columnSummary.data_type === 'int64' ||
+                        columnSummary.data_type === 'float64') && (
                         <ColumnTransformBox
                           title="Log Transformation"
                           description="A skewed distribution (e.g., long tail) can hinder your model's performance. Logarithm naturally reduces the dynamic range of a variable. Select this option to apply a log transformation."
