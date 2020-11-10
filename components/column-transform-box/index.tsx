@@ -5,7 +5,7 @@ type ColumnTransformBoxProps = {
   columnName: string;
   title: string;
   description: string;
-  onClick: () => {};
+  onClick: () => void;
 };
 
 export default function ColumnTransformBox({
