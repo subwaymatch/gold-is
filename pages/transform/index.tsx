@@ -25,6 +25,10 @@ export default function SelectPage() {
   const pyodideManager = usePyodideStore((state) => state.pyodideManager);
   const df = usePyodideStore((state) => state.dataFrame);
   const setDataFrame = usePyodideStore((state) => state.setDataFrame);
+  const setDataOverview = usePyodideStore((state) => state.setDataOverview);
+  const setColumnSummaries = usePyodideStore(
+    (state) => state.setColumnSummaries
+  );
   const [preTransformSummary, setPreTransformSummary] = useState(null);
   const [editorCode, setEditorCode] = useState(templateCode);
   const [dfHtml, setDfHtml] = useState('');
@@ -87,6 +91,11 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
     setDataFrame(userCodeResult.output);
     setDfHtml(userCodeResult.output.head(10).to_html());
     updatePreTransformSummary();
+
+    setDataOverview(null);
+    setColumnSummaries(null);
+
+    (window as any).df = userCodeResult.output;
 
     console.log(userCodeResult);
   };
