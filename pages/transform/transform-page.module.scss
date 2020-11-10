@@ -6,3 +6,21 @@
   padding-top: 2rem;
   padding-bottom: 10rem;
 }
+
+.transformSection {
+  p.explanation {
+    font-size: 1.6rem;
+    color: $color-tertiary;
+    margin-bottom: 3rem;
+  }
+
+  .columnName {
+    font-size: 1.6rem;
+    font-family: $font-monospace;
+    color: $color-dark-brown;
+    display: block;
+    border-top: 1px solid color.scale($color-secondary, $lightness: 60%);
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+}

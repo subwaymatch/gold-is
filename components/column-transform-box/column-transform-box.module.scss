@@ -1,0 +1,45 @@
+@use 'sass:color';
+@import 'styles/variables';
+
+.columnTransformBox {
+  border-top: 1px solid color.scale($color-secondary, $lightness: 60%);
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+
+  h3 {
+    color: $color-dark-brown;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  p.description {
+    font-size: 1.2rem;
+    margin-top: 0.4rem;
+    color: $color-secondary;
+  }
+
+  .runButton {
+    font-size: 1.1rem;
+    color: $color-secondary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 10rem;
+    border: 1px solid color.scale($color-primary, $lightness: -30%);
+    margin-top: 1rem;
+
+    .reactIcon {
+      color: $color-secondary;
+      margin-right: 0.4rem;
+    }
+
+    &:hover {
+      color: $color-dark-brown;
+      background-color: color.scale($color-primary, $lightness: -15%);
+      border-color: color.scale($color-primary, $lightness: -40%);
+    }
+  }
+}
