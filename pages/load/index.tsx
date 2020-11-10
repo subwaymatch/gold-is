@@ -43,13 +43,22 @@ export default function LoadPage() {
       (window as any).pyodideManager = newManager;
     }
 
-    setCsvUrl(
-      router.query.hasOwnProperty('dataUrl')
-        ? Array.isArray(router.query.dataUrl)
-          ? router.query.dataUrl[0]
-          : router.query.dataUrl
-        : sourceUrl
-    );
+    const csvUrl = router.query.hasOwnProperty('dataUrl')
+      ? Array.isArray(router.query.dataUrl)
+        ? router.query.dataUrl[0]
+        : router.query.dataUrl
+      : sourceUrl;
+
+    setCsvUrl(csvUrl);
+
+    if (csvUrl) {
+      toast.info(
+        <p>
+          To proceed with the URL in the input box, click on the{' '}
+          <strong>Start Digging →</strong> button at the bottom.
+        </p>
+      );
+    }
   }, []);
 
   const getCsvStringFromUrl = async (url) => {
