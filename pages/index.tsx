@@ -8,6 +8,7 @@ import ChildrenImage from 'images/illustration-children-bro.svg';
 import IcebergImage from 'images/illustration-iceberg-bro.svg';
 import HousesImage from 'images/illustration-houses-bro.svg';
 import OfficeImage from 'images/illustration-office-bro.svg';
+import DocumentFoldersImage from 'images/illustration-hr-documents-bro.svg';
 
 import ExampleDataset from 'components/example-dataset';
 
@@ -72,6 +73,13 @@ export default function Home() {
               description="This dataset is a listing of all current City of Chicago employees, complete with full names, departments, positions, employment status (part-time or full-time), frequency of hourly employee –where applicable—and annual salaries or hourly rate."
               imageSrc={OfficeImage}
               dataUrl="https://github.com/gold-is/sample-datasets/blob/main/chicago-payroll-2020.csv?raw=true"
+            />
+
+            <ExampleDataset
+              title="IBM HR Analytics Employee Attrition &amp; Performance"
+              description="This is a fictional data set created by IBM data scientists."
+              imageSrc={DocumentFoldersImage}
+              dataUrl="https://github.com/gold-is/sample-datasets/raw/main/IBM-HR-analytics-employee-attributes.csv"
             />
           </Container>
         </div>
