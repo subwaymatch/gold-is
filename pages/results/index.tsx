@@ -43,8 +43,6 @@ export default function ResultsPage() {
           generateColumnsSummaryCode
         );
 
-        (window as any).columnsSummaryCodeResult = columnsSummaryCodeResult;
-
         setColumnSummaries(columnsSummaryCodeResult.output.to_dict());
       })();
     }

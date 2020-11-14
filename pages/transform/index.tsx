@@ -40,9 +40,6 @@ export default function SelectPage() {
       router.push('/load');
       return;
     } else {
-      console.log(df);
-      console.log(df.columns);
-
       updatePreTransformSummary();
       setDfHtml(df.head(10).to_html());
     }
@@ -136,8 +133,6 @@ df = df[(df['${columnName}'] > col_mean - col_std_dev * num_std_devs)
   const onCodeEditorRun = async (userCode) => {
     const userCodeResult = await pyodideManager.runCode(userCode + '\n\ndf');
     setDataFrame(userCodeResult.output);
-
-    (window as any).df_transformed = userCodeResult.output;
 
     setDfHtml(userCodeResult.output.head(10).to_html());
     updatePreTransformSummary();

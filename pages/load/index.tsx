@@ -39,8 +39,6 @@ export default function LoadPage() {
       let newManager = new PyodideManager();
 
       setPyodideManager(newManager);
-
-      (window as any).pyodideManager = newManager;
     }
 
     const csvUrl = router.query.hasOwnProperty('dataUrl')
@@ -139,18 +137,14 @@ export default function LoadPage() {
   });
 
   const loadCsvStringToDataFrame = async () => {
+    // csv_string is passed to Python through a global variable
     (window as any).csv_string = csvString;
 
     const loadCodeResult = await pyodideManager.runCode(createDataFrameCode);
 
     setDataFrame(loadCodeResult.output);
 
-    console.log('setting df_loaded');
-    (window as any).df_loaded = loadCodeResult.output;
-
     setSourceUrl(csvUrl);
-
-    (window as any).router = router;
 
     router.push('/select');
   };

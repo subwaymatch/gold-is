@@ -30,20 +30,6 @@ export default function ColumnDetailsPage() {
     if (!columnName || !dataFrame) {
       router.push('/results');
     }
-
-    console.log('columnData');
-    console.log(columnData);
-
-    console.log('columnSummary');
-    console.log(columnSummary);
-
-    console.log('dataFrame');
-    console.log(dataFrame);
-
-    console.log('dataFrame.columns');
-    console.log(dataFrame.columns);
-
-    (window as any).d = dataFrame;
   }, []);
 
   return (
