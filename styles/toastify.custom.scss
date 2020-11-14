@@ -37,6 +37,7 @@
 .Toastify__toast--info {
 }
 .Toastify__toast--success {
+  background-color: color.scale(#20e78f, $lightness: -12%);
 }
 .Toastify__toast--warning {
 }

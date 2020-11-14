@@ -26,6 +26,9 @@ export default function ColumnDetailsPage() {
     if (!columnName || !dataFrame) {
       router.push('/results');
     }
+
+    console.log(columnData);
+    console.log(columnSummary);
   }, []);
 
   return (

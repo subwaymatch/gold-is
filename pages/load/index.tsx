@@ -52,7 +52,7 @@ export default function LoadPage() {
     setCsvUrl(csvUrl);
 
     if (csvUrl) {
-      toast.info(
+      toast.success(
         <p>
           To proceed with the URL in the input box, click on the{' '}
           <strong>Start Digging →</strong> button at the bottom.
