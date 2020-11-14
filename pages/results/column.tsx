@@ -19,7 +19,11 @@ export default function ColumnDetailsPage() {
   let columnName = Array.isArray(router.query.name)
     ? router.query.name[0]
     : router.query.name;
-  let columnData = dataFrame ? dataFrame[columnName] : null;
+  let columnData = dataFrame
+    ? typeof dataFrame[columnName] === 'function'
+      ? dataFrame[columnName].tolist()
+      : dataFrame[columnName]
+    : null;
   let columnSummary = columnSummaries ? columnSummaries[columnName] : null;
 
   useEffect(() => {
@@ -27,8 +31,19 @@ export default function ColumnDetailsPage() {
       router.push('/results');
     }
 
+    console.log('columnData');
     console.log(columnData);
+
+    console.log('columnSummary');
     console.log(columnSummary);
+
+    console.log('dataFrame');
+    console.log(dataFrame);
+
+    console.log('dataFrame.columns');
+    console.log(dataFrame.columns);
+
+    (window as any).d = dataFrame;
   }, []);
 
   return (

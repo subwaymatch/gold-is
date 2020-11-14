@@ -144,7 +144,9 @@ export default function LoadPage() {
     const loadCodeResult = await pyodideManager.runCode(createDataFrameCode);
 
     setDataFrame(loadCodeResult.output);
-    (window as any).df = loadCodeResult.output;
+
+    console.log('setting df_loaded');
+    (window as any).df_loaded = loadCodeResult.output;
 
     setSourceUrl(csvUrl);
 

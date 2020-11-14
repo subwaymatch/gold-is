@@ -33,11 +33,11 @@ export default function ColumnDetails({
 
         <ColumnDataSample columnData={columnData} />
 
-        {/* <ColumnPlots
+        <ColumnPlots
           columnName={columnName}
           data={columnData}
           summary={summary}
-        /> */}
+        />
       </Container>
     </div>
   );
