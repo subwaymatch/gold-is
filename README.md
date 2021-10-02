@@ -11,6 +11,12 @@
 
 [Gold.is](https://gold.is) aims to tell you what your data looks like in plain human language.
 
+### Note on Pyodide Version
+
+This app runs [Pyodide](https://github.com/pyodide/pyodide) in the main thread which frequently blocks the UI. This design decision was due to a technical issue with using Web Workers in Pyodide version `0.15`. This issue has been fixed in the latest versions of Pyodide (`0.18` or higher). If you choose to build a similar app, you should run Pyodide inside a Web Worker.
+
+<br /><br />
+
 ![image](https://user-images.githubusercontent.com/1064036/92619021-9ce4c800-f286-11ea-9984-78a52a4e48c4.png)
 
 ## Features
